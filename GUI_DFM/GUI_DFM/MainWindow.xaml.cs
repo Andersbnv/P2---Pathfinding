@@ -24,5 +24,16 @@ namespace GUI_DFM
         {
             InitializeComponent();
         }
+
+        private void Button1_Click(object sender, RoutedEventArgs e)
+        {
+            route.Items.Add("AHello");
+            route.Items.Add("BHello");
+            route.Items.Add("CHello");
+            route.Items.Add("DHello");
+            route.Items.Add("EHello");
+            route.Items.Add("FHello");
+
+        }
     }
 }
