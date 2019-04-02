@@ -22,6 +22,10 @@ namespace GUI_DFM
     {
         public MainWindow()
         {
+            string filePath = @"\\vmware-host\Shared Folders\Desktop\Text.txt";
+
+            Graph testGraph = new Graph(filePath);
+
             InitializeComponent();
         }
 
