@@ -22,7 +22,7 @@ namespace GUI_DFM
     {
         public MainWindow()
         {
-            string filePath = @"\\vmware-host\Shared Folders\Desktop\Text.txt";
+            string filePath = @"C:\Users\Nikif\source\repos\Andersbnv\P2---Pathfinding\GUI_DFM\GUI_DFM\test.txt";
 
             Graph testGraph = new Graph(filePath);
 
@@ -31,16 +31,16 @@ namespace GUI_DFM
 
         private void Button1_Click(object sender, RoutedEventArgs e)
         {
-            route.Items.Add("AHello");
-            route.Items.Add("BHello");
-            route.Items.Add("CHello");
-            route.Items.Add("DHello");
-            route.Items.Add("EHello");
-            route.Items.Add("FHello");
+      
 
         }
 
         private void Route_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void Route_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
 
         }
