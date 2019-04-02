@@ -5,9 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI_DFM"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="800" Width="1400">
     <Grid>
-        <ListBox HorizontalAlignment="Left" Height="420" Margin="512,0,0,0" VerticalAlignment="Top" Width="282" Name="route"/>
-        <Button Name="Button1" Content="Button" HorizontalAlignment="Left" Margin="421,24,0,0" VerticalAlignment="Top" Width="75" Click="Button1_Click"/>
+        <ListBox HorizontalAlignment="Left" Height="772" Margin="1000,0,0,0" VerticalAlignment="Top" Width="395" Name="route"/>
+       
+        
+        <Canvas HorizontalAlignment="Left" Height="772" VerticalAlignment="Top" Width="1000" Background="#FF009ADA" Panel.ZIndex="-1">
+            <Label x:Name="Chaufør_Navn" Content="Torben Clausen" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="381,299,0,0" VerticalAlignment="Top" Height="35" Width="199" FontSize="20"/>
+            <Label Content="Nr. 105843" HorizontalAlignment="Left" Margin="50,99,0,0" HorizontalContentAlignment="Center" VerticalAlignment="Top" Width="100"/>
+            <Label Content="Rute nr. 69" HorizontalAlignment="Left" Margin="50,0,0,0" HorizontalContentAlignment="Center" VerticalAlignment="Top" Height="32" Width="282" FontSize="20" FontWeight="Bold"/>
+            <Label Content="Håndværkerkvarteret" HorizontalAlignment="Left" Margin="50,23,0,0" VerticalAlignment="Top" Height="27" Width="273"/>
+            <Button Name="Button1" Content="Tilføj Punkter" HorizontalAlignment="Left" Margin="50,319,0,0" VerticalAlignment="Top" Width="84" Click="Button1_Click"/>
+        </Canvas>
     </Grid>
 </Window>
