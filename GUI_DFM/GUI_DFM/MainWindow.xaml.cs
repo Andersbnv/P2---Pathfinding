@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
+using System.Collections.ObjectModel;
 using System.Windows.Shapes;
 
 namespace GUI_DFM
@@ -27,15 +28,16 @@ namespace GUI_DFM
 
             Graph testGraph = new Graph(filePath);
             InitializeRoute(testGraph.knudeListe);
-
-           
+            
+            
         }
 
         private void InitializeRoute(List<Vertex> sortedVertexList)
         {
+
             foreach(Vertex vertex in sortedVertexList)
             {
-                lstRoute.Items.Add(vertex.ToString());
+                lstRoute.Items.Add(vertex);
             }
         }
 
@@ -64,6 +66,10 @@ namespace GUI_DFM
         {
 
         }
-   
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

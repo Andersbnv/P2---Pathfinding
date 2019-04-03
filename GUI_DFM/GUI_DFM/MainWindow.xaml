@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="1400">
     <Grid>
-        <ListBox Name="lstRoute" HorizontalAlignment="Left" Height="772" Margin="1000,0,0,0" VerticalAlignment="Top" Width="395"  SelectionChanged="Route_SelectionChanged_1">
+        <ListBox Name="lstRoute" HorizontalAlignment="Left" Height="771" Margin="1000,0,-1.667,-0.333" VerticalAlignment="Top" Width="395"  SelectionChanged="Route_SelectionChanged_1">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="{x:Type ListBoxItem}">
                     <Setter Property="Background" Value="#d9d9d9"/>
@@ -18,12 +18,15 @@
 
 
         <Canvas HorizontalAlignment="Left" Height="772" VerticalAlignment="Top" Width="1000" Background="#FF009ADA" Panel.ZIndex="-1">
-            <Label x:Name="lblDriverName" Content="Alan Pedersen" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalAlignment="Top" Height="50" Width="400" FontSize="40" Foreground="White" FontFamily="Microsoft Sans Serif" FontWeight="Bold" Canvas.Left="300" Canvas.Top="179"/>
-            <Label x:Name="lblRouteName" Content="Rute 17, Aalborg Øst" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalAlignment="Top" Height="47" Width="400" FontSize="20" FontWeight="Bold" Canvas.Left="300" Canvas.Top="234" Foreground="White"/>
-            <Label x:Name="lblDate" Content="02/04/2019" HorizontalContentAlignment="Center" VerticalAlignment="Top" Height="41" Width="200" FontSize="20" FontWeight="Bold" Canvas.Left="400" Canvas.Top="319" Foreground="White"/>
-            <Label x:Name="lblTime" Content="14:21" HorizontalContentAlignment="Center" VerticalAlignment="Top" Height="32" Width="200" FontSize="20" Canvas.Left="400" Canvas.Top="350" Foreground="White" FontWeight="Bold"/>
-            <Button Name="btnAddPoint" Content="Tilføj punkt" HorizontalAlignment="Left" VerticalAlignment="Top" Width="180" Click="BtnAddPoint_Click" Height="60" Canvas.Left="250" Canvas.Top="600" BorderBrush="White" Background="#FF009ADA" BorderThickness="4" FontSize="20" Foreground="White" FontWeight="Bold"/>
-            <Button Name="btnRemovePoint" Content="Fjern punkt" HorizontalAlignment="Left" VerticalAlignment="Top" Width="180" Click="BtnRemovePoint_Click" Height="60" Canvas.Right="250" Canvas.Top="600" Foreground="White" BorderBrush="White" Background="#FF009ADA" FontSize="20" BorderThickness="4" FontWeight="Bold"/>
+            <Label x:Name="lblDriverName" Content="Alan Pedersen" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalAlignment="Top" Height="50" Width="400" FontSize="40" Foreground="White" FontFamily="Microsoft Sans Serif" FontWeight="Bold" Canvas.Left="300" Canvas.Top="102"/>
+            <Label x:Name="lblRouteName" Content="Rute 17, Aalborg Øst" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalAlignment="Top" Height="47" Width="400" FontSize="20" FontWeight="Bold" Canvas.Left="300" Canvas.Top="157" Foreground="White"/>
+            <Label x:Name="lblDate" Content="02/04/2019" HorizontalContentAlignment="Center" VerticalAlignment="Top" Height="41" Width="200" FontSize="20" FontWeight="Bold" Canvas.Left="400" Canvas.Top="242" Foreground="White"/>
+            <Label x:Name="lblTime" Content="14:21" HorizontalContentAlignment="Center" VerticalAlignment="Top" Height="32" Width="200" FontSize="20" Canvas.Left="400" Canvas.Top="273" Foreground="White" FontWeight="Bold"/>
+            <TextBox x:Name="textBox" Height="29" Canvas.Left="268" TextWrapping="Wrap" Text="Adresse" Canvas.Top="448" Width="179" TextChanged="TextBox_TextChanged" Background="#FF009ADA" BorderBrush="White" HorizontalContentAlignment="Center" FontFamily="Microsoft Sans Serif" FontSize="20" Foreground="White" BorderThickness="0,0,0,4"/>
+            <TextBox x:Name="textBox_Copy" Height="29" Canvas.Left="471" TextWrapping="Wrap" Text="X-Koordinat" Canvas.Top="448" Width="116" TextChanged="TextBox_TextChanged" Background="#FF009ADA" BorderBrush="White" HorizontalContentAlignment="Center" FontFamily="Microsoft Sans Serif" FontSize="20" Foreground="White" BorderThickness="0,0,0,4"/>
+            <TextBox x:Name="textBox_Copy1" Height="29" Canvas.Left="610" TextWrapping="Wrap" Text="Y-Koordinat" Canvas.Top="448" Width="116" TextChanged="TextBox_TextChanged" Background="#FF009ADA" BorderBrush="White" HorizontalContentAlignment="Center" FontFamily="Microsoft Sans Serif" FontSize="20" Foreground="White" BorderThickness="0,0,0,4"/>
+            <Button x:Name="btnRemovePoint_Copy" Content="Beregn Rute" HorizontalAlignment="Left" VerticalAlignment="Top" Width="458" Click="BtnRemovePoint_Click" Height="60" Canvas.Right="250" Canvas.Top="605" Foreground="White" BorderBrush="White" Background="#FF009ADA" FontSize="20" BorderThickness="4" FontWeight="Bold" Canvas.Left="268"/>
+            <Button Name="btnAddPoint" Content="Tilføj punkt" HorizontalAlignment="Left" VerticalAlignment="Top" Width="458" Click="BtnAddPoint_Click" Height="60" Canvas.Left="268" Canvas.Top="509" BorderBrush="White" Background="#FF009ADA" BorderThickness="4" FontSize="20" Foreground="White" FontWeight="Bold"/>
         </Canvas>
     </Grid>
 </Window>
