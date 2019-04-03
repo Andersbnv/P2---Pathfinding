@@ -1,1 +1,11 @@
 Aalborg,5,10
+Esbjerg,10,20
+Randers,7,9
+Aarhus,40,40
+Odense,50,20
+Frederikshavn,60,50
+Kolding,30,90
+Skagen,20,20
+Hobro,75,19
+Gistrup,10,20
+Hinnerup,35,200

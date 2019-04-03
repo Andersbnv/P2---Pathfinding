@@ -32,7 +32,7 @@ namespace GUI_DFM
         {
             foreach (Vertex knude in knudeListe)
             {
-                Console.WriteLine("City: " + knude.adress + " X: " + knude.xCordinate + " Y: " + knude.yCordinate);
+                Console.WriteLine("City: " + knude.address + " X: " + knude.xCoordinate + " Y: " + knude.yCoordinate);
 
             }
         }

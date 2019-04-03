@@ -22,17 +22,37 @@ namespace GUI_DFM
     {
         public MainWindow()
         {
+             InitializeComponent();
             string filePath = @"C:\Users\Nikif\source\repos\Andersbnv\P2---Pathfinding\GUI_DFM\GUI_DFM\test.txt";
 
             Graph testGraph = new Graph(filePath);
+            InitializeRoute(testGraph.knudeListe);
 
-            InitializeComponent();
+           
         }
 
-        private void Button1_Click(object sender, RoutedEventArgs e)
+        private void InitializeRoute(List<Vertex> sortedVertexList)
         {
-      
+            foreach(Vertex vertex in sortedVertexList)
+            {
+                lstRoute.Items.Add(vertex.ToString());
+            }
+        }
 
+        private void BtnAddPoint_Click(object sender, RoutedEventArgs e)
+        {
+            var dialogWindow = new AddVertexWindow();
+            dialogWindow.Show();
+        }
+
+        public void AddPointToRoute(string address, int xCoordinate, int yCoordinate)
+        {
+            lstRoute.Items.Add($"{address}     X:{xCoordinate}     Y:{yCoordinate}");
+        }
+
+        private void BtnRemovePoint_Click(object sender, RoutedEventArgs e)
+        {
+            lstRoute.Items.RemoveAt(lstRoute.Items.IndexOf(lstRoute.SelectedItem));
         }
 
         private void Route_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -44,5 +64,6 @@ namespace GUI_DFM
         {
 
         }
+   
     }
 }

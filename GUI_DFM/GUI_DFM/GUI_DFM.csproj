@@ -55,7 +55,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddVertexWindow.xaml.cs">
+      <DependentUpon>AddVertexWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Vertex.cs" />
+    <Page Include="AddVertexWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

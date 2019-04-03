@@ -8,26 +8,20 @@ namespace GUI_DFM
 {
     public class Vertex
     {
-        public string adress { get; set; }
-        public double xCordinate { get; set; }
-        public double yCordinate { get; set; }
+        public string address { get; set; }
+        public double xCoordinate { get; set; }
+        public double yCoordinate { get; set; }
 
         public List<Tuple<string, double>> connectionList = new List<Tuple<string, double>>();
         public override string ToString()
         {
-            string liststring = "";
-            foreach (var item in connectionList)
-            {
-                liststring += $"\t{item.Item1} Weight:{item.Item2}\n";
-            }
-
-            return $"{adress} X:{xCordinate} Y:{yCordinate}\n{liststring}";
+            return $"{address}     X:{xCoordinate}     Y:{yCoordinate}";
         }
         public Vertex(string adress, double xCordinate, double yCordinate)
         {
-            this.adress = adress;
-            this.xCordinate = xCordinate;
-            this.yCordinate = yCordinate;
+            this.address = adress;
+            this.xCoordinate = xCordinate;
+            this.yCoordinate = yCordinate;
 
         }
         public void initializeConnectionList(List<Vertex> knudeList)
@@ -37,10 +31,10 @@ namespace GUI_DFM
             double distance = 0;
             foreach (Vertex knude in knudeList)
             {
-                xDistance = knude.xCordinate - this.xCordinate;
-                yDistance = knude.yCordinate - this.yCordinate;
+                xDistance = knude.xCoordinate - this.xCoordinate;
+                yDistance = knude.yCoordinate - this.yCoordinate;
                 distance = Math.Sqrt(xDistance * xDistance + yDistance * yDistance);
-                connectionList.Add(new Tuple<string, double>(knude.adress, distance));
+                connectionList.Add(new Tuple<string, double>(knude.address, distance));
             }
         }
 
