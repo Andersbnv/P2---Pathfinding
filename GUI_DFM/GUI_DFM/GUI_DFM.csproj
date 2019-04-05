@@ -58,6 +58,8 @@
     <Compile Include="AddVertexWindow.xaml.cs">
       <DependentUpon>AddVertexWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RouteList.cs" />
+    <Compile Include="Timer.cs" />
     <Compile Include="Vertex.cs" />
     <Page Include="AddVertexWindow.xaml">
       <SubType>Designer</SubType>

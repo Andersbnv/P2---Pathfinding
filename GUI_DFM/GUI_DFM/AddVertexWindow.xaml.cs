@@ -34,7 +34,6 @@ namespace GUI_DFM
             string address = txtAdress.Text;
             int xCoordinate = int.Parse(txtXCoordinate.Text);
             int yCoordinate = int.Parse(txtYCoordinate.Text);
-            
         }
     }
 }

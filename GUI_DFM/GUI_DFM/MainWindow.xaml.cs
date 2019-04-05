@@ -23,13 +23,11 @@ namespace GUI_DFM
     {
         public MainWindow()
         {
-             InitializeComponent();
+            InitializeComponent();
+            InitializeTimer();
             string filePath = @"C:\Users\Nikif\source\repos\Andersbnv\P2---Pathfinding\GUI_DFM\GUI_DFM\test.txt";
-
             Graph testGraph = new Graph(filePath);
             InitializeRoute(testGraph.knudeListe);
-            
-            
         }
 
         private void InitializeRoute(List<Vertex> sortedVertexList)
@@ -37,24 +35,46 @@ namespace GUI_DFM
 
             foreach(Vertex vertex in sortedVertexList)
             {
-                lstRoute.Items.Add(vertex);
+                routeListElements.Add(vertex);
             }
+            lstRoute.ItemsSource = routeListElements;
         }
 
         private void BtnAddPoint_Click(object sender, RoutedEventArgs e)
         {
-            var dialogWindow = new AddVertexWindow();
-            dialogWindow.Show();
-        }
+            bool hasInput = (txtAddress.Text.Length > 0) && (txtXCoordinate.Text.Length > 0) && (txtYCoordinate.Text.Length > 0);
 
-        public void AddPointToRoute(string address, int xCoordinate, int yCoordinate)
-        {
-            lstRoute.Items.Add($"{address}     X:{xCoordinate}     Y:{yCoordinate}");
+            if(hasInput)
+            {
+                var vertexToBeAdded = new Vertex(txtAddress.Text, int.Parse(txtXCoordinate.Text), int.Parse(txtYCoordinate.Text));
+                routeListElements.Insert(0, vertexToBeAdded);
+                txtAddress.Text = "";
+                txtXCoordinate.Text = "";
+                txtYCoordinate.Text = "";
+            }
+            else
+            {
+                MessageBox.Show("Indskriv venligst det punkt, som ønskes tilføjet til listen.");
+            }
         }
 
         private void BtnRemovePoint_Click(object sender, RoutedEventArgs e)
         {
-            lstRoute.Items.RemoveAt(lstRoute.Items.IndexOf(lstRoute.SelectedItem));
+            var selectedIndex = lstRoute.Items.IndexOf(lstRoute.SelectedItem);
+
+            if (selectedIndex < 0)
+            {
+                MessageBox.Show("Marker venligst det punkt i listen, som ønskes slettet.");
+            }
+            else
+            {
+                routeListElements.RemoveAt(selectedIndex);
+            }
+        }
+
+        private void BtnCalculateRoute_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Funktionen er ikke implementeret endnu");
         }
 
         private void Route_SelectionChanged(object sender, SelectionChangedEventArgs e)
