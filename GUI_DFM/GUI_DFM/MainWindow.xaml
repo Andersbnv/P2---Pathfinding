@@ -83,7 +83,7 @@
                     </Style>
                 </Button.Style>
             </Button>
-            <Button x:Name="btnCalculateRoute" Content="Beregn Rute" HorizontalAlignment="Left" VerticalAlignment="Top" Width="179" Click="BtnRemovePoint_Click" Height="60" Canvas.Right="250" Canvas.Top="603" Foreground="White" BorderBrush="White" Background="#FF3E758B" FontSize="20" BorderThickness="4" FontWeight="Bold" Canvas.Left="184" Cursor="Hand">
+            <Button x:Name="btnCalculateRoute" Content="Beregn Rute" HorizontalAlignment="Left" VerticalAlignment="Top" Width="179" Click="BtnCalculateRoute_Click" Height="60" Canvas.Right="250" Canvas.Top="603" Foreground="White" BorderBrush="White" Background="#FF3E758B" FontSize="20" BorderThickness="4" FontWeight="Bold" Canvas.Left="184" Cursor="Hand">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Style.Setters>
