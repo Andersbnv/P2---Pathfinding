@@ -25,7 +25,7 @@ namespace GUI_DFM
         {
             InitializeComponent();
             InitializeTimer();
-            string filePath = @"C:\Users\Nikif\source\repos\Andersbnv\P2---Pathfinding\GUI_DFM\GUI_DFM\test.txt";
+            string filePath = @"C:\Users\hansb\source\repos\Andersbnv\P2---Pathfinding\GUI_DFM\GUI_DFM\test.txt";
             Graph testGraph = new Graph(filePath);
             InitializeRoute(testGraph.knudeListe);
         }
@@ -46,7 +46,7 @@ namespace GUI_DFM
 
             if(hasInput)
             {
-                var vertexToBeAdded = new Vertex(txtAddress.Text, int.Parse(txtXCoordinate.Text), int.Parse(txtYCoordinate.Text));
+                var vertexToBeAdded = new Vertex(txtAddress.Text, Int32.Parse(txtXCoordinate.Text), Int32.Parse(txtYCoordinate.Text));
                 routeListElements.Insert(0, vertexToBeAdded);
                 txtAddress.Text = "";
                 txtXCoordinate.Text = "";
