@@ -1,11 +1,16 @@
-Aalborg,5,10
-Esbjerg,10,20
-Randers,7,9
-Aarhus,40,40
-Odense,50,20
-Frederikshavn,60,50
-Kolding,30,90
-Skagen,20,20
-Hobro,75,19
-Gistrup,10,20
-Hinnerup,35,200
+Aalborg,0,0
+Aarhus,10,10
+Randers,5,11
+Esbjerg,5,8
+Hobro,19,25
+Vejle,44,65
+Odense,55,22
+Kolding,93,12
+Skagen,65,31
+Kobenhavn,44,145
+Gistrup,5,5
+Viborg,14,66
+Skalborg,32,55
+Herning,65,43
+Mariager,22,22
+Nimtofte, 99,12
