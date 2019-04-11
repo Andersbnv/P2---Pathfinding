@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.IO;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -21,13 +22,16 @@ namespace GUI_DFM
     /// </summary>
     public partial class MainWindow : Window
     {
+        public Graph graph;
+        public string filePath = @"C:\Users\Nikif\source\repos\Andersbnv\P2---Pathfinding\GUI_DFM\GUI_DFM\test.txt";
         public MainWindow()
         {
             InitializeComponent();
             InitializeTimer();
             string filePath = @"C:\Users\Nikif\source\repos\Andersbnv\P2---Pathfinding\GUI_DFM\GUI_DFM\test.txt";
-            Graph testGraph = new Graph(filePath);
-            InitializeRoute(testGraph.knudeListe);
+            graph = new Graph(filePath);
+            InitializeRoute(graph.VertexList);
+            
         }
 
         private void InitializeRoute(List<Vertex> sortedVertexList)
@@ -39,6 +43,14 @@ namespace GUI_DFM
             }
             lstRoute.ItemsSource = routeListElements;
         }
+        private void UpdateRouteList(List<Vertex> VertexList)
+        {
+            routeListElements.Clear();
+            foreach (Vertex vertex in VertexList)
+            {
+                routeListElements.Add(vertex);
+            }
+        }
 
         private void BtnAddPoint_Click(object sender, RoutedEventArgs e)
         {
@@ -47,7 +59,10 @@ namespace GUI_DFM
             if(hasInput)
             {
                 var vertexToBeAdded = new Vertex(txtAddress.Text, int.Parse(txtXCoordinate.Text), int.Parse(txtYCoordinate.Text));
-                routeListElements.Insert(0, vertexToBeAdded);
+                graph.AddVertex(vertexToBeAdded);
+                graph.AddEdge(vertexToBeAdded);
+                UpdateRouteList(graph.VertexList);
+
                 txtAddress.Text = "";
                 txtXCoordinate.Text = "";
                 txtYCoordinate.Text = "";
@@ -60,7 +75,7 @@ namespace GUI_DFM
 
         private void BtnRemovePoint_Click(object sender, RoutedEventArgs e)
         {
-            var selectedIndex = lstRoute.Items.IndexOf(lstRoute.SelectedItem);
+            int selectedIndex = lstRoute.Items.IndexOf(lstRoute.SelectedItem);
 
             if (selectedIndex < 0)
             {
@@ -74,7 +89,9 @@ namespace GUI_DFM
 
         private void BtnCalculateRoute_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Funktionen er ikke implementeret endnu");
+            RouteAlgorithm algorithNearestNeighbour = new NearestNeighbour();
+            Route calculatedRoute = new Route(algorithNearestNeighbour, graph.VertexList.ElementAt(0), graph.VertexList);
+            UpdateRouteList(calculatedRoute.SortedRoute);
         }
 
         private void Route_SelectionChanged(object sender, SelectionChangedEventArgs e)
