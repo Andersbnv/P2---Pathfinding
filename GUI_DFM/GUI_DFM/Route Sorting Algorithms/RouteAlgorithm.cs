@@ -21,7 +21,14 @@ namespace GUI_DFM
             {
                 for (int j = 0; j < inputList.Count; j++)
                 {
-                    outputMatrix[i, j] = inputList[i].ConnectionList[j].Weight;
+                    if (j == i)
+                    {
+                        outputMatrix[i, j] = Double.PositiveInfinity;
+                    }
+                    else
+                    {
+                        outputMatrix[i, j] = inputList[i].ConnectionList[j].Weight;
+                    }
                 }
             }
             return outputMatrix;
