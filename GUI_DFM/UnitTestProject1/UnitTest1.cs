@@ -54,10 +54,10 @@ namespace UnitTest
         [TestMethod]
         public void ReduceMatrixTest()
         {
-            var testMatrix = new double[,] { { 1, 2, 3 }, { 1, 2, 3 }, { 1, 2, 3 } };
-            int rowToBeRemoved = 2;
-            int columnToBeRemoved = 2;
-            var expected = new double[,] { { 1, 3 },{ 1, 3 } };
+            var testMatrix = new double[,] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
+            int rowToBeRemoved = 1;
+            int columnToBeRemoved = 1;
+            var expected = new double[,] { { 1, 3 },{ 7, 9 } };
             var testNode = new Node(null, null, null, 0, 0) ;
 
             var actual = testNode.ReduceMatrix(testMatrix, rowToBeRemoved, columnToBeRemoved);
