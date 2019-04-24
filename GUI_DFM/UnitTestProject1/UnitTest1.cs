@@ -55,9 +55,9 @@ namespace UnitTest
         public void ReduceMatrixTest()
         {
             var testMatrix = new double[,] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
-            int rowToBeRemoved = 1;
+            int rowToBeRemoved = 0;
             int columnToBeRemoved = 1;
-            var expected = new double[,] { { 1, 3 },{ 7, 9 } };
+            var expected = new double[,] { { Double.PositiveInfinity, 6 },{ 7, 9 } };
             var testNode = new Node(null, 0, 0) ;
 
             var actual = testNode.ReduceMatrix(testMatrix, rowToBeRemoved, columnToBeRemoved);

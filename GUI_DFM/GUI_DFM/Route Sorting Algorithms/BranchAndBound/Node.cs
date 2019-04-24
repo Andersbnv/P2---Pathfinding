@@ -46,7 +46,14 @@ namespace GUI_DFM.Route_Sorting_Algorithms.BranchAndBound
                         j++;
                         columnRemoved = true;
                     }
-                    reducedMatrix[rowRemoved ? i-1 : i, columnRemoved ? j-1 : j] = originalMatrix[i, j];
+                    if (i == columnToBeRemoved && j == rowToBeRemoved)
+                    {
+                        reducedMatrix[rowRemoved ? i - 1 : i, columnRemoved ? j - 1 : j] = Double.PositiveInfinity;
+                    }
+                    else
+                    {
+                        reducedMatrix[rowRemoved ? i - 1 : i, columnRemoved ? j - 1 : j] = originalMatrix[i, j];
+                    }
                 }
             }
             return reducedMatrix;
