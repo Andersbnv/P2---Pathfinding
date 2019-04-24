@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using GUI_DFM;
 using System.Collections.Generic;
+using GUI_DFM.Route_Sorting_Algorithms.BranchAndBound;
 
 namespace UnitTest
 {
@@ -39,5 +40,30 @@ namespace UnitTest
             CollectionAssert.AreEqual(expected, actual);
             
         }
+    }
+
+    [TestClass]
+    public class BranchAndBoundAlgorithmTest
+    {
+
+    }
+    
+    [TestClass]
+    public class NodeTest
+    {
+        [TestMethod]
+        public void ReduceMatrixTest()
+        {
+            var testMatrix = new double[,] { { 1, 2, 3 }, { 1, 2, 3 }, { 1, 2, 3 } };
+            int rowToBeRemoved = 2;
+            int columnToBeRemoved = 2;
+            var expected = new double[,] { { 1, 3 },{ 1, 3 } };
+            var testNode = new Node(null, null, null, 0, 0) ;
+
+            var actual = testNode.ReduceMatrix(testMatrix, rowToBeRemoved, columnToBeRemoved);
+
+            CollectionAssert.AreEqual(expected, actual);
+        }
+
     }
 }

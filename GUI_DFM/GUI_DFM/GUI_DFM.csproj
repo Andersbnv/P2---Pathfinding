@@ -61,6 +61,8 @@
     <Compile Include="Graph Objects\Edge.cs" />
     <Compile Include="Graph Objects\Graph.cs" />
     <Compile Include="Graph Objects\Vertex.cs" />
+    <Compile Include="Route Sorting Algorithms\BranchAndBound\BranchAndBoundAlgorithm.cs" />
+    <Compile Include="Route Sorting Algorithms\BranchAndBound\Node.cs" />
     <Compile Include="Route.cs" />
     <Compile Include="RouteList.cs" />
     <Compile Include="Route Sorting Algorithms\NearestNeightbour.cs" />
