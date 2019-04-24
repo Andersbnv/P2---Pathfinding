@@ -58,7 +58,7 @@ namespace UnitTest
             int rowToBeRemoved = 1;
             int columnToBeRemoved = 1;
             var expected = new double[,] { { 1, 3 },{ 7, 9 } };
-            var testNode = new Node(null, null, null, 0, 0) ;
+            var testNode = new Node(null, 0, 0) ;
 
             var actual = testNode.ReduceMatrix(testMatrix, rowToBeRemoved, columnToBeRemoved);
 

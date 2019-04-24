@@ -13,11 +13,14 @@ namespace GUI_DFM.Route_Sorting_Algorithms.BranchAndBound
         public double[,] matrix;
         public int elementRow;
         public int elementColumn;
-        public Node(Node parentNode, List<Node> childNotes, double[,] matrix, int elementRow, int elementColumn)
+        public Node(Node parentNode, int elementRow, int elementColumn)
         {
             this.parentNode = parentNode;
-            this.childNotes = childNotes;
-            this.matrix = matrix;
+            if (parentNode != null)
+            {
+                parentNode.childNotes.Add(this);
+                matrix = ReduceMatrix(parentNode.matrix, elementRow, elementColumn);
+            }
             this.elementRow = elementRow;
             this.elementColumn = elementColumn;
         }
