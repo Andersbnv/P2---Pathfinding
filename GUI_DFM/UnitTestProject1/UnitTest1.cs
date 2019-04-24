@@ -45,7 +45,31 @@ namespace UnitTest
     [TestClass]
     public class BranchAndBoundAlgorithmTest
     {
+        [TestMethod]
+        public void BranchAndBoundTest()
+        {
+            var testMatrix = new double[,]
+            {
+                { Double.PositiveInfinity, 52, 44, 17, 81 },
+                { 52, Double.PositiveInfinity, 43, 70, 28 },
+                { 44, 43, Double.PositiveInfinity, 12, 50 },
+                { 17, 70, 12, Double.PositiveInfinity, 69 },
+                { 81, 28, 50, 69, Double.PositiveInfinity }
+            };
+            BranchAndBoundAlgorithm testAlgorithm = new BranchAndBoundAlgorithm();
+            var expected = new int[,] 
+            { 
+                { 0, 1 },
+                { 1, 4 },
+                { 2, 3 },
+                { 3, 0 },
+                { 4, 2 }
+            };
 
+            var actual = testAlgorithm.BranchAndBound(testMatrix, null, null);
+
+            CollectionAssert.AreEqual(expected, actual);
+        }
     }
     
     [TestClass]
@@ -66,4 +90,4 @@ namespace UnitTest
         }
 
     }
-}
+
