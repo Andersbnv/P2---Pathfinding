@@ -13,7 +13,7 @@ namespace GUI_DFM.Route_Sorting_Algorithms.BranchAndBound
             throw new NotImplementedException();
         }
 
-        public int [,] BranchAndBound(double[,] matrix, LowerNode currentNode, List<LowerNode> nodeList, int [,] matrixIndexes)
+        public int [,] BranchAndBound(double[,] matrix, Node currentNode, List<Node> nodeList, int [,] matrixIndexes)
         {
             if (matrix.GetLength(0) == 0 && matrix.GetLength(1) == 0)
             {
@@ -22,25 +22,39 @@ namespace GUI_DFM.Route_Sorting_Algorithms.BranchAndBound
                     if (node.childNodes.Count == 0 && currentNode.lowerBound > node.lowerBound)
                     {
                         currentNode = node;
+
                     }
-                    else return matrixIndexes;
+                    else
+                    {
+                        matrixIndexes = currentNode.GetPreviouslyVisitedVertexes(new int[0, 0]);
+                        return matrixIndexes;
+                    }
+
                 }
-                matrixIndexes = UpdateMatrixIndexes(new int[0, 0], currentNode);
-                BranchAndBound(currentNode.matrix, currentNode, nodeList, matrixIndexes);
+                matrixIndexes = currentNode.GetPreviouslyVisitedVertexes(new int[0,0]);
+                return BranchAndBound(currentNode.matrix, currentNode, nodeList, matrixIndexes);
             }
-            throw new NotImplementedException();
-        }
-
-        public int [,] UpdateMatrixIndexes(int [,] indexesToBeUpdated, Node currentNode)
-        {
-            if (currentNode.parentNode == null)
+            for (int i = 0; i < matrix.GetLength(0); i++)
             {
-                return indexesToBeUpdated;
+                if (Double.IsPositiveInfinity(matrix[0,i]))
+                {
+                }
+                else
+                {
+                    nodeList.Add(new LowerNode(currentNode, 0, i));
+                }
             }
-
-            int[,] newIndexes = new int[indexesToBeUpdated.GetLength(0)+1, 2];
-
-            return UpdateMatrixIndexes(newIndexes, currentNode.parentNode);
+            double bestLowerBound = double.MaxValue;
+            for (int i = 1; i < nodeList.Count; i++)
+            {
+                if (nodeList[i].childNodes.Count == 0 && nodeList[i].lowerBound < bestLowerBound)
+                {
+                    currentNode = nodeList[i];
+                    bestLowerBound = currentNode.lowerBound;
+                }
+            }
+            matrixIndexes = currentNode.GetPreviouslyVisitedVertexes(new int [0,0]);
+            return BranchAndBound(currentNode.matrix, currentNode, nodeList, matrixIndexes);
         }
     }
 }

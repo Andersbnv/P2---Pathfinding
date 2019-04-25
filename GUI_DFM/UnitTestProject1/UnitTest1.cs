@@ -56,7 +56,7 @@ namespace UnitTest
                 { 17, 70, 12, Double.PositiveInfinity, 69 },
                 { 81, 28, 50, 69, Double.PositiveInfinity }
             };
-            BranchAndBoundAlgorithm testAlgorithm = new BranchAndBoundAlgorithm();
+            var testAlgorithm = new BranchAndBoundAlgorithm();
             var expected = new int[,]
             {
                 { 0, 1 },
@@ -66,7 +66,7 @@ namespace UnitTest
                 { 4, 2 }
             };
 
-            var actual = testAlgorithm.BranchAndBound(testMatrix, null, null, null);
+            var actual = testAlgorithm.BranchAndBound(testMatrix, new TopNode(testMatrix), new List<Node>(), new int[0,0]);
 
             CollectionAssert.AreEqual(expected, actual);
         }
@@ -91,21 +91,6 @@ namespace UnitTest
         }
 
         [TestMethod]
-        public void ReduceEmptyMatrixTest()
-        {
-            var testMatrix = new double[,] { };
-            int rowToBeRemoved = 0;
-            int columnToBeRemoved = 0;
-            var expected = new double[,] {};
-            var testParent = new TopNode(testMatrix);
-            var testNode = new LowerNode(testParent, rowToBeRemoved, columnToBeRemoved);
-
-            var actual = testNode.ReduceMatrix(testMatrix, rowToBeRemoved, columnToBeRemoved);
-
-            CollectionAssert.AreEqual(expected, actual);
-        }
-
-        [TestMethod]
         public void ReduceOneByOneMatrixTest()
         {
             var testMatrix = new double[,] { { 1 } };
@@ -119,6 +104,8 @@ namespace UnitTest
 
             CollectionAssert.AreEqual(expected, actual);
         }
+
+
     }
 
 }

@@ -12,6 +12,7 @@ namespace GUI_DFM.Route_Sorting_Algorithms.BranchAndBound
         public double[,] matrix;
         public double lowerBound;
         public Node parentNode;
+        public int levelsDeep;
 
         public double GetLowerBound()
         {
@@ -35,5 +36,7 @@ namespace GUI_DFM.Route_Sorting_Algorithms.BranchAndBound
             return lowerBound;
         }
         public abstract double GetElementsValue();
+        public abstract int [,] GetPreviouslyVisitedVertexes(int [,] alreadyKnown);
+        public abstract int GetOriginalMatrixElementColumnIndex(int columnRemoved);
     }
 }
