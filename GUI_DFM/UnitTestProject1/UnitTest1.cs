@@ -30,15 +30,15 @@ namespace UnitTest
             RouteAlgorithm testAlgorithm = new NearestNeighbour();
             double[,] actual = testAlgorithm.ListToMatrix(testList);
 
-            double[,] expected = new double[3, 3] 
-            { 
-                { Double.PositiveInfinity, 5, 10 }, 
-                { 5, Double.PositiveInfinity, 5 }, 
+            double[,] expected = new double[3, 3]
+            {
+                { Double.PositiveInfinity, 5, 10 },
+                { 5, Double.PositiveInfinity, 5 },
                 { 10, 5, Double.PositiveInfinity }
             };
 
             CollectionAssert.AreEqual(expected, actual);
-            
+
         }
     }
 
@@ -57,8 +57,8 @@ namespace UnitTest
                 { 81, 28, 50, 69, Double.PositiveInfinity }
             };
             BranchAndBoundAlgorithm testAlgorithm = new BranchAndBoundAlgorithm();
-            var expected = new int[,] 
-            { 
+            var expected = new int[,]
+            {
                 { 0, 1 },
                 { 1, 4 },
                 { 2, 3 },
@@ -66,12 +66,12 @@ namespace UnitTest
                 { 4, 2 }
             };
 
-            var actual = testAlgorithm.BranchAndBound(testMatrix, null, null);
+            var actual = testAlgorithm.BranchAndBound(testMatrix, null, null, null);
 
             CollectionAssert.AreEqual(expected, actual);
         }
     }
-    
+
     [TestClass]
     public class NodeTest
     {
@@ -81,13 +81,43 @@ namespace UnitTest
             var testMatrix = new double[,] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
             int rowToBeRemoved = 0;
             int columnToBeRemoved = 1;
-            var expected = new double[,] { { Double.PositiveInfinity, 6 },{ 7, 9 } };
-            var testNode = new Node(null, 0, 0) ;
+            var expected = new double[,] { { Double.PositiveInfinity, 6 }, { 7, 9 } };
+            var testParent = new TopNode(testMatrix);
+            var testNode = new LowerNode(testParent, rowToBeRemoved, columnToBeRemoved);
+
+            var actual = testNode.matrix;
+
+            CollectionAssert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void ReduceEmptyMatrixTest()
+        {
+            var testMatrix = new double[,] { };
+            int rowToBeRemoved = 0;
+            int columnToBeRemoved = 0;
+            var expected = new double[,] {};
+            var testNode = new LowerNode(null, 0, 0);
 
             var actual = testNode.ReduceMatrix(testMatrix, rowToBeRemoved, columnToBeRemoved);
 
             CollectionAssert.AreEqual(expected, actual);
         }
 
+        [TestMethod]
+        public void ReduceOneByOneMatrixTest()
+        {
+            var testMatrix = new double[,] { { 1 } };
+            int rowToBeRemoved = 0;
+            int columnToBeRemoved = 0;
+            var expected = new double[,] { };
+            var testNode = new LowerNode(null, 0, 0);
+
+            var actual = testNode.ReduceMatrix(testMatrix, rowToBeRemoved, columnToBeRemoved);
+
+            CollectionAssert.AreEqual(expected, actual);
+        }
     }
+
+}
 

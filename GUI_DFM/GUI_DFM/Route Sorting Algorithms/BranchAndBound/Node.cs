@@ -6,57 +6,34 @@ using System.Threading.Tasks;
 
 namespace GUI_DFM.Route_Sorting_Algorithms.BranchAndBound
 {
-    public class Node
+    abstract public class Node
     {
-        public Node parentNode; 
-        public List<Node> childNotes;
+        public List<LowerNode> childNodes;
         public double[,] matrix;
-        public int elementRow;
-        public int elementColumn;
-        public Node(Node parentNode, int elementRow, int elementColumn)
-        {
-            this.parentNode = parentNode;
-            if (parentNode != null)
-            {
-                parentNode.childNotes.Add(this);
-                matrix = ReduceMatrix(parentNode.matrix, elementRow, elementColumn);
-            }
-            this.elementRow = elementRow;
-            this.elementColumn = elementColumn;
-        }
+        public double lowerBound;
+        public Node parentNode;
 
-        public double [,] ReduceMatrix(double[,] originalMatrix, int rowToBeRemoved, int columnToBeRemoved)
+        public double GetLowerBound()
         {
-            var reducedMatrix = new double[originalMatrix.GetLength(0)-1, originalMatrix.GetLength(1)-1];
-            var rowRemoved = false;
-
-            for (int i = 0; i < originalMatrix.GetLength(0); i++)
+            double lowerBound = 0;
+            if (matrix != null)
             {
-                var columnRemoved = false;
-                if (i == rowToBeRemoved)
+                for (int i = 0; i < matrix.GetLength(0); i++)
                 {
-                    i++;
-                    rowRemoved = true;
-                }
-                for (int j = 0; j < originalMatrix.GetLongLength(1); j++)
-                {
-                    
-                    if (j == columnToBeRemoved)
+                    double minRowValue = matrix[i, 0];
+                    for (int j = 1; j < matrix.GetLength(1); j++)
                     {
-                        j++;
-                        columnRemoved = true;
+                        if (matrix[i, j] < minRowValue)
+                        {
+                            minRowValue = matrix[i, j];
+                        }
                     }
-                    if (i == columnToBeRemoved && j == rowToBeRemoved)
-                    {
-                        reducedMatrix[rowRemoved ? i - 1 : i, columnRemoved ? j - 1 : j] = Double.PositiveInfinity;
-                    }
-                    else
-                    {
-                        reducedMatrix[rowRemoved ? i - 1 : i, columnRemoved ? j - 1 : j] = originalMatrix[i, j];
-                    }
+                    lowerBound += minRowValue;
                 }
             }
-            return reducedMatrix;
+            lowerBound += GetElementsValue();
+            return lowerBound;
         }
+        public abstract double GetElementsValue();
     }
 }

@@ -13,8 +13,12 @@ namespace GUI_DFM.Route_Sorting_Algorithms.BranchAndBound
             throw new NotImplementedException();
         }
 
-        public int [,] BranchAndBound(double[,] matrix, Node currentNode, List<Node> nodeList)
+        public int [,] BranchAndBound(double[,] matrix, LowerNode currentNode, List<LowerNode> nodeList, int [,] matrixIndexes)
         {
+            if (matrix.GetLength(0) == 0 && matrix.GetLength(1) == 0)
+            {
+                throw new NotImplementedException();
+            }
             throw new NotImplementedException();
         }
     }
