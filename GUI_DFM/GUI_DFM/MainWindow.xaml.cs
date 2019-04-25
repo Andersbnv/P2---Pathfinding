@@ -28,7 +28,7 @@ namespace GUI_DFM
         {
             InitializeComponent();
             InitializeTimer();
-            string filePath = @"C:\Users\Nikif\source\repos\Andersbnv\P2---Pathfinding\GUI_DFM\GUI_DFM\test.txt";
+            string filePath = String.Concat(Environment.CurrentDirectory, "\\test.txt");
             graph = new Graph(filePath);
             InitializeRoute(graph.VertexList);
             
