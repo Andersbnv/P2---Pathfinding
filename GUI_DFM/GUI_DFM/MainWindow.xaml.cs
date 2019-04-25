@@ -23,12 +23,11 @@ namespace GUI_DFM
     public partial class MainWindow : Window
     {
         public Graph graph;
-        public string filePath = @"C:\Users\Nikif\source\repos\Andersbnv\P2---Pathfinding\GUI_DFM\GUI_DFM\test.txt";
         public MainWindow()
         {
             InitializeComponent();
             InitializeTimer();
-            string filePath = String.Concat(Environment.CurrentDirectory, "\\test.txt");
+            string filePath = @"..\..\test.txt";
             graph = new Graph(filePath);
             InitializeRoute(graph.VertexList);
             
