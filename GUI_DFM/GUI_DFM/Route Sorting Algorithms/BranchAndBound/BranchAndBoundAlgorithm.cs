@@ -17,9 +17,30 @@ namespace GUI_DFM.Route_Sorting_Algorithms.BranchAndBound
         {
             if (matrix.GetLength(0) == 0 && matrix.GetLength(1) == 0)
             {
-                throw new NotImplementedException();
+                foreach (var node in nodeList)
+                {
+                    if (node.childNodes.Count == 0 && currentNode.lowerBound > node.lowerBound)
+                    {
+                        currentNode = node;
+                    }
+                    else return matrixIndexes;
+                }
+                matrixIndexes = UpdateMatrixIndexes(new int[0, 0], currentNode);
+                BranchAndBound(currentNode.matrix, currentNode, nodeList, matrixIndexes);
             }
             throw new NotImplementedException();
+        }
+
+        public int [,] UpdateMatrixIndexes(int [,] indexesToBeUpdated, Node currentNode)
+        {
+            if (currentNode.parentNode == null)
+            {
+                return indexesToBeUpdated;
+            }
+
+            int[,] newIndexes = new int[indexesToBeUpdated.GetLength(0)+1, 2];
+
+            return UpdateMatrixIndexes(newIndexes, currentNode.parentNode);
         }
     }
 }

@@ -10,6 +10,7 @@ namespace GUI_DFM.Route_Sorting_Algorithms.BranchAndBound
     {
         public int elementRow;
         public int elementColumn;
+
         public LowerNode(Node parentNode, int elementRow, int elementColumn)
         {
             this.parentNode = parentNode;

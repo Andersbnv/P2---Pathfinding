@@ -97,7 +97,8 @@ namespace UnitTest
             int rowToBeRemoved = 0;
             int columnToBeRemoved = 0;
             var expected = new double[,] {};
-            var testNode = new LowerNode(null, 0, 0);
+            var testParent = new TopNode(testMatrix);
+            var testNode = new LowerNode(testParent, rowToBeRemoved, columnToBeRemoved);
 
             var actual = testNode.ReduceMatrix(testMatrix, rowToBeRemoved, columnToBeRemoved);
 
@@ -111,7 +112,8 @@ namespace UnitTest
             int rowToBeRemoved = 0;
             int columnToBeRemoved = 0;
             var expected = new double[,] { };
-            var testNode = new LowerNode(null, 0, 0);
+            var testParent = new TopNode(testMatrix);
+            var testNode = new LowerNode(testParent, rowToBeRemoved, columnToBeRemoved);
 
             var actual = testNode.ReduceMatrix(testMatrix, rowToBeRemoved, columnToBeRemoved);
 

@@ -8,7 +8,7 @@ namespace GUI_DFM.Route_Sorting_Algorithms.BranchAndBound
 {
     abstract public class Node
     {
-        public List<LowerNode> childNodes;
+        public List<LowerNode> childNodes = new List<LowerNode>();
         public double[,] matrix;
         public double lowerBound;
         public Node parentNode;
