@@ -60,13 +60,19 @@ namespace UnitTest
             var expected = new int[,]
             {
                 { 0, 1 },
-                { 1, 0 },
+                { 1, 4 },
                 { 2, 3 },
-                { 3, 4 },
+                { 3, 0 },
                 { 4, 2 }
             };
 
             var actual = testAlgorithm.BranchAndBound(testMatrix, new TopNode(testMatrix), new List<Node>(), new int[0,0]);
+            double distance = 0;
+
+            for (int i = 0; i < actual.GetLength(0); i++)
+            {
+                distance += testMatrix[i, actual[i,1]];
+            }
 
             CollectionAssert.AreEqual(expected, actual);
         }

@@ -17,20 +17,17 @@ namespace GUI_DFM.Route_Sorting_Algorithms.BranchAndBound
         public double GetLowerBound()
         {
             double lowerBound = 0;
-            if (matrix != null)
+            for (int i = 0; i < matrix.GetLength(0); i++)
             {
-                for (int i = 0; i < matrix.GetLength(0); i++)
+                double minRowValue = matrix[i, 0];
+                for (int j = 1; j < matrix.GetLength(1); j++)
                 {
-                    double minRowValue = matrix[i, 0];
-                    for (int j = 1; j < matrix.GetLength(1); j++)
+                    if (matrix[i, j] < minRowValue)
                     {
-                        if (matrix[i, j] < minRowValue)
-                        {
-                            minRowValue = matrix[i, j];
-                        }
+                        minRowValue = matrix[i, j];
                     }
-                    lowerBound += minRowValue;
                 }
+                lowerBound += minRowValue;
             }
             lowerBound += GetElementsValue();
             return lowerBound;

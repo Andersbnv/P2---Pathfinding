@@ -28,11 +28,12 @@ namespace GUI_DFM.Route_Sorting_Algorithms.BranchAndBound
                 }
                 if (!foundBetterNode)
                 {
-                    return currentNode.GetPreviouslyVisitedVertexes(new int[0,0]);
+                    return currentNode.GetPreviouslyVisitedVertexes(new int[0, 0]);
                 }
-
-                matrixIndexes = currentNode.GetPreviouslyVisitedVertexes(new int[0,0]);
-                return BranchAndBound(currentNode.matrix, currentNode, nodeList, matrixIndexes);
+                else
+                {
+                    return BranchAndBound(currentNode.matrix, currentNode, nodeList, matrixIndexes);
+                }
             }
             for (int i = 0; i < matrix.GetLength(0); i++)
             {
@@ -53,7 +54,6 @@ namespace GUI_DFM.Route_Sorting_Algorithms.BranchAndBound
                     bestLowerBound = currentNode.lowerBound;
                 }
             }
-            matrixIndexes = currentNode.GetPreviouslyVisitedVertexes(new int [0,0]);
             return BranchAndBound(currentNode.matrix, currentNode, nodeList, matrixIndexes);
         }
     }
