@@ -60,9 +60,9 @@ namespace UnitTest
             var expected = new int[,]
             {
                 { 0, 1 },
-                { 1, 4 },
+                { 1, 0 },
                 { 2, 3 },
-                { 3, 0 },
+                { 3, 4 },
                 { 4, 2 }
             };
 
