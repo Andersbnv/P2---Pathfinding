@@ -87,7 +87,7 @@ namespace GUI_DFM.Route_Sorting_Algorithms.BranchAndBound
                 }
             }
 
-            return parentNode.GetPreviouslyVisitedVertexes(alreadyKnown);
+            return parentNode.GetPreviouslyVisitedVertexes(updatedVisited);
         }
 
         public override int GetOriginalMatrixElementColumnIndex(int columnRemoved)

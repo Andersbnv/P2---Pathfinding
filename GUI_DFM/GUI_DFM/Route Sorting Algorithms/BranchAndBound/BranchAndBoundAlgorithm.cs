@@ -17,20 +17,20 @@ namespace GUI_DFM.Route_Sorting_Algorithms.BranchAndBound
         {
             if (matrix.GetLength(0) == 0 && matrix.GetLength(1) == 0)
             {
+                bool foundBetterNode = false;
                 foreach (var node in nodeList)
                 {
                     if (node.childNodes.Count == 0 && currentNode.lowerBound > node.lowerBound)
                     {
                         currentNode = node;
-
+                        foundBetterNode = true;
                     }
-                    else
-                    {
-                        matrixIndexes = currentNode.GetPreviouslyVisitedVertexes(new int[0, 0]);
-                        return matrixIndexes;
-                    }
-
                 }
+                if (!foundBetterNode)
+                {
+                    return currentNode.GetPreviouslyVisitedVertexes(new int[0,0]);
+                }
+
                 matrixIndexes = currentNode.GetPreviouslyVisitedVertexes(new int[0,0]);
                 return BranchAndBound(currentNode.matrix, currentNode, nodeList, matrixIndexes);
             }
