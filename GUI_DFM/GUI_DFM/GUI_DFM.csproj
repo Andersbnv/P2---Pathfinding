@@ -64,7 +64,6 @@
     <Compile Include="Route Sorting Algorithms\BranchAndBound\BranchAndBoundAlgorithm.cs" />
     <Compile Include="Route Sorting Algorithms\BranchAndBound\Node.cs" />
     <Compile Include="Route.cs" />
-    <Compile Include="RouteList.cs" />
     <Compile Include="Route Sorting Algorithms\NearestNeightbour.cs" />
     <Compile Include="Route Sorting Algorithms\RouteAlgorithm.cs" />
     <Compile Include="TextFile.cs" />

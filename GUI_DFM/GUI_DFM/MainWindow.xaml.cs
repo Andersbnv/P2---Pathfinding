@@ -23,32 +23,24 @@ namespace GUI_DFM
     public partial class MainWindow : Window
     {
         public Graph graph;
+        public Route route;
         public MainWindow()
         {
             InitializeComponent();
             InitializeTimer();
             string filePath = @"..\..\test.txt";
             graph = new Graph(filePath);
-            InitializeRoute(graph.VertexList);
-            
+            route = new Route(graph.VertexList, graph.VertexList.ElementAt(1));
+            lstRoute.ItemsSource = route.RouteList;
+        }
+        private void UpdateListBox()
+        {
+            lstRoute.ItemsSource = route.RouteList;
         }
 
-        private void InitializeRoute(List<Vertex> sortedVertexList)
+        private void ClearListBox()
         {
-
-            foreach(Vertex vertex in sortedVertexList)
-            {
-                routeListElements.Add(vertex);
-            }
-            lstRoute.ItemsSource = routeListElements;
-        }
-        private void UpdateRouteList(List<Vertex> VertexList)
-        {
-            routeListElements.Clear();
-            foreach (Vertex vertex in VertexList)
-            {
-                routeListElements.Add(vertex);
-            }
+            lstRoute.ItemsSource = null;
         }
 
         private void BtnAddPoint_Click(object sender, RoutedEventArgs e)
@@ -58,9 +50,9 @@ namespace GUI_DFM
             if(hasInput)
             {
                 var vertexToBeAdded = new Vertex(txtAddress.Text, int.Parse(txtXCoordinate.Text), int.Parse(txtYCoordinate.Text));
-                graph.AddVertex(vertexToBeAdded);
-                graph.AddEdge(vertexToBeAdded);
-                UpdateRouteList(graph.VertexList);
+                ClearListBox();
+                route.AddToList(vertexToBeAdded);
+                UpdateListBox();
 
                 txtAddress.Text = "";
                 txtXCoordinate.Text = "";
@@ -82,29 +74,52 @@ namespace GUI_DFM
             }
             else
             {
-                routeListElements.RemoveAt(selectedIndex);
+                ClearListBox();
+                route.RemoveFromList(selectedIndex);
+                UpdateListBox();
             }
         }
 
         private void BtnCalculateRoute_Click(object sender, RoutedEventArgs e)
         {
-            RouteAlgorithm algorithNearestNeighbour = new NearestNeighbour();
-            Route calculatedRoute = new Route(algorithNearestNeighbour, graph.VertexList.ElementAt(0), graph.VertexList);
-            UpdateRouteList(calculatedRoute.SortedRoute);
+            RouteAlgorithm nearestNeighbour = new NearestNeighbour();
+            route.CalculateRoute(nearestNeighbour);
+            lstRoute.ItemsSource = route.RouteList;
         }
 
-        private void Route_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void BtnMoveDown_Click(object sender, RoutedEventArgs e)
         {
+            int selectedIndex = lstRoute.Items.IndexOf(lstRoute.SelectedItem);
+            int listCount = lstRoute.Items.Count;
+            ClearListBox();
+            route.MoveDownElement(selectedIndex, listCount);
+            UpdateListBox();
+            if (selectedIndex == lstRoute.Items.Count-1)
+            {
+                lstRoute.SelectedItem = lstRoute.Items.GetItemAt(0);
+            }
+            else
+            {
+                lstRoute.SelectedItem = lstRoute.Items.GetItemAt(selectedIndex + 1);
 
+            }
+            
         }
-
-        private void Route_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        private void BtnMoveUp_Click(object sender, RoutedEventArgs e)
         {
+            int selectedIndex = lstRoute.Items.IndexOf(lstRoute.SelectedItem);
+            ClearListBox();
+            route.MoveUpElement(selectedIndex);
+            UpdateListBox();
+            if (selectedIndex == 0)
+            {
+                lstRoute.SelectedItem = lstRoute.Items.GetItemAt(lstRoute.Items.Count-1);
+            }
+            else
+            {
+                lstRoute.SelectedItem = lstRoute.Items.GetItemAt(selectedIndex - 1);
 
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
+            }
 
         }
     }

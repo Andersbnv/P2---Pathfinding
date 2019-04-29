@@ -7,11 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="1400">
     <Grid Background="#FFCECECE">
-        <ListBox Name="lstRoute" AllowDrop="True" PreviewMouseMove="route_PreviewMouseMove" HorizontalAlignment="Left" Height="771" Margin="1000,0,-1.667,-0.333" VerticalAlignment="Top" Width="395"  SelectionChanged="Route_SelectionChanged_1" Background="#FFEAEAEA">
+        <ListBox Name="lstRoute" HorizontalAlignment="Left" Height="701" Margin="994,0,-0.4,0" VerticalAlignment="Top" Width="400" Background="#FFEAEAEA">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="{x:Type ListBoxItem}">
-                    <EventSetter Event="PreviewMouseLeftButtonDown" Handler="routeItem_PreviewMouseLeftButtonDown"/>
-                    <EventSetter Event="Drop" Handler="routeItem_Drop"/>
                     <Setter Property="Background" Value="white"/>
                     <Setter Property="BorderBrush" Value="#FFCBCBCB"/>
                     <Setter Property="BorderThickness" Value="0,0,0,2"/>
@@ -20,19 +18,19 @@
                     <Setter Property="Cursor" Value="Hand"/>
                 </Style>
             </ListBox.ItemContainerStyle>
-            
+
         </ListBox>
 
 
-        <Canvas HorizontalAlignment="Left" Height="772" VerticalAlignment="Top" Width="1000" Background="#FF009ADA" Panel.ZIndex="-1">
+        <Canvas HorizontalAlignment="Left" Height="772" VerticalAlignment="Top" Width="994" Background="#FF009ADA" Panel.ZIndex="-1" Margin="0,0,0,-1.6">
             <Label x:Name="lblDriverName" Content="Alan Pedersen" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalAlignment="Top" Height="50" Width="400" FontSize="40" Foreground="White" FontFamily="Microsoft Sans Serif" FontWeight="Bold" Canvas.Left="300" Canvas.Top="97"/>
             <Label x:Name="lblRouteName" Content="Rute 17, Aalborg Øst" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalAlignment="Top" Height="47" Width="400" FontSize="20" FontWeight="Bold" Canvas.Left="300" Canvas.Top="152" Foreground="White"/>
             <Label x:Name="lblDate" Content="Date" HorizontalContentAlignment="Center" VerticalAlignment="Top" Height="41" Width="179" FontSize="20" Canvas.Top="285" Foreground="White" Canvas.Left="410" FontFamily="Microsoft Sans Serif" HorizontalAlignment="Center"/>
             <Label x:Name="lblAdress" Content="Adresse" HorizontalContentAlignment="Center" VerticalAlignment="Top" Height="41" Width="179" FontSize="20" FontWeight="Bold" Canvas.Left="184" Canvas.Top="454" Foreground="White"/>
             <Label x:Name="lblTime" Content="Time" HorizontalContentAlignment="Center" VerticalAlignment="Top" Height="50" Width="178" FontSize="20" Canvas.Left="410" Canvas.Top="317" Foreground="White" RenderTransformOrigin="0.488,0.453" FontFamily="Microsoft Sans Serif"/>
-            <TextBox x:Name="txtAddress" Height="29" Canvas.Left="184" TextWrapping="Wrap" Text="" Canvas.Top="520" Width="179" TextChanged="TextBox_TextChanged" Background="#FF009ADA" BorderBrush="White" HorizontalContentAlignment="Center" FontFamily="Microsoft Sans Serif" FontSize="20" Foreground="White" BorderThickness="0,0,0,4" Cursor="IBeam"/>
-            <TextBox x:Name="txtXCoordinate" Height="32" Canvas.Left="409" TextWrapping="Wrap" Text="" Canvas.Top="520" Width="179" TextChanged="TextBox_TextChanged" Background="#FF009ADA" BorderBrush="White" HorizontalContentAlignment="Center" FontFamily="Microsoft Sans Serif" FontSize="20" Foreground="White" BorderThickness="0,0,0,4" Cursor="IBeam"/>
-            <TextBox x:Name="txtYCoordinate" Height="44" Canvas.Left="638" TextWrapping="Wrap" Text="" Canvas.Top="511" Width="179" TextChanged="TextBox_TextChanged" Background="#FF009ADA" BorderBrush="White" HorizontalContentAlignment="Center" FontFamily="Microsoft Sans Serif" FontSize="20" Foreground="White" BorderThickness="0,0,0,4" Cursor="IBeam"/>
+            <TextBox x:Name="txtAddress" Height="29" Canvas.Left="184" TextWrapping="Wrap" Text="" Canvas.Top="520" Width="179" Background="#FF009ADA" BorderBrush="White" HorizontalContentAlignment="Center" FontFamily="Microsoft Sans Serif" FontSize="20" Foreground="White" BorderThickness="0,0,0,4" Cursor="IBeam"/>
+            <TextBox x:Name="txtXCoordinate" Height="32" Canvas.Left="409" TextWrapping="Wrap" Text="" Canvas.Top="520" Width="179" Background="#FF009ADA" BorderBrush="White" HorizontalContentAlignment="Center" FontFamily="Microsoft Sans Serif" FontSize="20" Foreground="White" BorderThickness="0,0,0,4" Cursor="IBeam"/>
+            <TextBox x:Name="txtYCoordinate" Height="44" Canvas.Left="638" TextWrapping="Wrap" Text="" Canvas.Top="511" Width="179" Background="#FF009ADA" BorderBrush="White" HorizontalContentAlignment="Center" FontFamily="Microsoft Sans Serif" FontSize="20" Foreground="White" BorderThickness="0,0,0,4" Cursor="IBeam"/>
             <Label x:Name="lblXCoordinate" Content="X-koordinat" HorizontalContentAlignment="Center" VerticalAlignment="Top" Height="45" Width="178" FontSize="20" FontWeight="Bold" Canvas.Left="410" Canvas.Top="450" Foreground="White"/>
             <Label x:Name="lblYCoordinate" Content="Y-koordinat" HorizontalContentAlignment="Center" VerticalAlignment="Top" Height="63" Width="179" FontSize="20" FontWeight="Bold" Canvas.Left="638" Canvas.Top="441" Foreground="White"/>
             <Button x:Name="btnRemovePoint" Content="Fjern punkt" HorizontalAlignment="Left" VerticalAlignment="Top" Width="179" Click="BtnRemovePoint_Click" Height="60" Canvas.Right="250" Canvas.Top="603" Foreground="White" BorderBrush="White" Background="#FF009ADA" FontSize="20" BorderThickness="4" FontWeight="Bold" Canvas.Left="638" Cursor="Hand">
@@ -107,7 +105,9 @@
                     </Style>
                 </Button.Style>
             </Button>
-                
+
         </Canvas>
+        <Button Name ="btnMoveDown" Width="200" Content="Flyt Punkt Ned" Canvas.Left="1003" Canvas.Top="701" Click="BtnMoveDown_Click" Margin="994,706,199.6,0.4"/>
+        <Button x:Name ="btnMoveUp" Width="200" Content="Flyt Punkt Op" Click="BtnMoveUp_Click" Margin="1195,706,-1.4,0.4"/>
     </Grid>
 </Window>
