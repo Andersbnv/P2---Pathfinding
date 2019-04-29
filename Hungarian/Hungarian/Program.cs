@@ -20,6 +20,7 @@ namespace Hungarian
             }
             return locations;
         }
+
         public void ReduceMatrix(double[,] Matrix)
         {
             int rowLength = Matrix.GetLength(0);
@@ -138,22 +139,79 @@ namespace Hungarian
             outputArray[1] = maxIndexColumn;
             return outputArray;
         }
+        public double[] FindRoute2(double[,] Matrix, double[,] cost)
+        {
+            double[] outputArray = new double[2];
+            int rowLength = Matrix.GetLength(0);
+            int columnLength = Matrix.GetLength(1);
+            double maxCost = double.NegativeInfinity;
+            double inf = double.PositiveInfinity;
+            int maxIndexRow = 0;
+            int maxIndexColumn = 0;
+            bool zeroInColumn = false;
+            bool zeroInRow = false;
+
+            for (int i = 0; i < columnLength; i++)
+            {
+                for (int j = 0; j < rowLength; j++)
+                {
+                    if (Matrix[i, j] != inf)
+                    {
+                        for (int k = 0; k < columnLength; k++)
+                        {
+                            if (Matrix[k, j] == 0 && k != i)
+                            {
+                                zeroInRow = true;
+                            }
+                        }
+                        for (int k = 0; k < rowLength; k++)
+                        {
+                            if (Matrix[i, k] == 0 && k != j)
+                            {
+                                zeroInColumn = true;
+                            }
+                        }
+                        if (true)
+                        {
+
+                        }
+                    }
+                }
+            }
+            for (int i = 0; i < columnLength; i++)
+            {
+                Matrix[i, maxIndexColumn] = inf;
+            }
+
+            for (int j = 0; j < rowLength; j++)
+            {
+                Matrix[maxIndexRow, j] = inf;
+            }
+            Matrix[maxIndexColumn, maxIndexRow] = inf;
+            outputArray[1] = maxIndexRow;
+            outputArray[0] = maxIndexColumn;
+            return outputArray;
+        }
 
         public void FindVertex(double[] inputArray, List<Vertex> unsortedRoute, string[] locations)
         {
             double val = inputArray[1];
             double val2 = inputArray[0];
-            Vertex first = unsortedRoute[0];
-            sortedRoute.Add(first);
 
             foreach (var Vertex in unsortedRoute)
             {
+                if (locations[(int)val2] == Vertex.Address)
+                {
+                    sortedRoute.Add(Vertex);
+                    Console.WriteLine(locations[(int)val2]);
+                }
                 if (locations[(int)val] == Vertex.Address)
                 {
-                    Console.WriteLine(locations[(int)val]);
                     sortedRoute.Add(Vertex);
+                    Console.WriteLine(locations[(int)val]);
                 }
             }
+
         }
 
         public List<Vertex> Algorithm(Vertex startingPoint, List<Vertex> unsortedRoute)
@@ -166,7 +224,8 @@ namespace Hungarian
             {
                 ReduceMatrix(Matrix);
                 var cost = AssignCost(Matrix);
-                FindVertex(FindRoute(Matrix, cost), unsortedRoute, locations);
+                var route = FindRoute(Matrix, cost);
+                FindVertex(route, unsortedRoute, locations);
                 count++;
             }
             return sortedRoute;
@@ -196,13 +255,19 @@ namespace Hungarian
         {
             int listSize = route.Count;
             double distance = 0;
+            int count = 0;
 
-            for (int i = 1; i < listSize; i++)
+            for (int i = 0; i < listSize; i++)
             {
-                double xDistance = route[i].XCoordinate - route[i-1].XCoordinate;
-                double yDistance = route[i].YCoordinate - route[i-1].YCoordinate;
-                distance += Math.Sqrt(xDistance * xDistance + yDistance * yDistance);
+                count++;
+                if (count % 2 == 0)
+                {
+                    double xDistance = route[i].XCoordinate - route[i - 1].XCoordinate;
+                    double yDistance = route[i].YCoordinate - route[i - 1].YCoordinate;
+                    distance += Math.Sqrt(xDistance * xDistance + yDistance * yDistance);
+                }
             }
+
 
             return distance;
         }
@@ -346,21 +411,27 @@ namespace Hungarian
     {
         static void Main(string[] args)
         {
-            string filePath = @"\\vmware-host\Shared Folders\Desktop\pr76.tsp";
+            string filePath = @"C:\Users\arexy\Dropbox\AAU\Code\pr76.tsp";
             Graph graph = new Graph(filePath);
 
             Hungarian H = new Hungarian();
             var route = H.Algorithm(graph.VertexList.ElementAt(0), graph.VertexList);
 
-            foreach (var item in route)
-            {
-                //Console.WriteLine(item);
-            }
+            /* int i = 0;
+             foreach (var item in route)
+             {
+                 i++;
+                 Console.WriteLine(item);
+                 if(i % 2 == 0)
+                 {
+                     Console.WriteLine("\n");
+                 }                             
+             }*/
+
+
 
             Console.WriteLine(H.DistanceBetweenVertices(route));
-
-
-            Console.WriteLine();
+            Console.ReadKey();
         }
     }
 }
