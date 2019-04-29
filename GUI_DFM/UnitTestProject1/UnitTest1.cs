@@ -67,6 +67,12 @@ namespace UnitTest
             };
 
             var actual = testAlgorithm.BranchAndBound(testMatrix, new TopNode(testMatrix), new List<Node>(), new int[0,0]);
+            double distance = 0;
+
+            for (int i = 0; i < actual.GetLength(0); i++)
+            {
+                distance += testMatrix[i, actual[i,1]];
+            }
 
             CollectionAssert.AreEqual(expected, actual);
         }
