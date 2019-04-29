@@ -346,7 +346,7 @@ namespace Hungarian
     {
         static void Main(string[] args)
         {
-            string filePath = @"\\vmware-host\Shared Folders\Desktop\brd14051.tsp";
+            string filePath = @"\\vmware-host\Shared Folders\Desktop\pr76.tsp";
             Graph graph = new Graph(filePath);
 
             Hungarian H = new Hungarian();
