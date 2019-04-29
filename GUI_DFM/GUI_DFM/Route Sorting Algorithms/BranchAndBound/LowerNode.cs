@@ -74,17 +74,12 @@ namespace GUI_DFM.Route_Sorting_Algorithms.BranchAndBound
         public override int[,] GetPreviouslyVisitedVertexes(int[,] alreadyKnown)
         {
             var updatedVisited = new int[alreadyKnown.GetLength(0)+1, 2];
-            for (int i = 0; i < updatedVisited.GetLength(0); i++)
+            updatedVisited[0, 0] = 0;
+            updatedVisited[0, 1] = GetOriginalMatrixElementColumnIndex(elementColumnRemoved);
+            for (int i = 1; i < updatedVisited.GetLength(0); i++)
             {
                 updatedVisited[i, 0] = i;
-                if (i == (updatedVisited.GetLength(0) - 1))
-                {
-                    updatedVisited[i, 1] = GetOriginalMatrixElementColumnIndex(elementColumnRemoved);
-                }
-                else
-                {
-                    updatedVisited[i, 1] = alreadyKnown[i, 1];
-                }
+                updatedVisited[i, 1] = alreadyKnown[i-1, 1];
             }
 
             return parentNode.GetPreviouslyVisitedVertexes(updatedVisited);

@@ -8,6 +8,12 @@ namespace GUI_DFM.Route_Sorting_Algorithms.BranchAndBound
 {
     public class BranchAndBoundAlgorithm : RouteAlgorithm
     {
+        /*public double distance()
+        {
+
+            return distance
+        }
+        */
         public override List<Vertex> Algorithm(Vertex startingPoint, List<Vertex> unsortedList)
         {
             throw new NotImplementedException();
@@ -37,10 +43,7 @@ namespace GUI_DFM.Route_Sorting_Algorithms.BranchAndBound
             }
             for (int i = 0; i < matrix.GetLength(0); i++)
             {
-                if (Double.IsPositiveInfinity(matrix[0,i]))
-                {
-                }
-                else
+                if (!Double.IsPositiveInfinity(matrix[0, i]))
                 {
                     nodeList.Add(new LowerNode(currentNode, 0, i));
                 }

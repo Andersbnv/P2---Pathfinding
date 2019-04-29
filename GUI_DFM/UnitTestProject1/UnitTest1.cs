@@ -67,11 +67,16 @@ namespace UnitTest
             };
 
             var actual = testAlgorithm.BranchAndBound(testMatrix, new TopNode(testMatrix), new List<Node>(), new int[0,0]);
-            double distance = 0;
+            double distanceActual = 0;
+            double distanceExpected = 0;
 
             for (int i = 0; i < actual.GetLength(0); i++)
             {
-                distance += testMatrix[i, actual[i,1]];
+                distanceActual += testMatrix[i, actual[i,1]];
+            }
+            for (int i = 0; i < expected.GetLength(0); i++)
+            {
+                distanceExpected += testMatrix[i, expected[i, 1]];
             }
 
             CollectionAssert.AreEqual(expected, actual);
@@ -147,7 +152,42 @@ namespace UnitTest
             CollectionAssert.AreEqual(expected, actual);
         }
         [TestMethod]
-        public void GetOriginalColumnIndexTest()
+        public void GetPreviouslyVisitedVertexesTest()
+        {
+            var testMatrix = new double[,]
+{
+                { Double.PositiveInfinity, 52, 44, 17, 81 },
+                { 52, Double.PositiveInfinity, 43, 70, 28 },
+                { 44, 43, Double.PositiveInfinity, 12, 50 },
+                { 17, 70, 12, Double.PositiveInfinity, 69 },
+                { 81, 28, 50, 69, Double.PositiveInfinity }
+};
+            var nodeList = new List<Node>();
+            var testNode = new TopNode(testMatrix);
+            var testNode1 = new LowerNode(testNode, 0, 1);
+            var testNode2 = new LowerNode(testNode1, 0, 3);
+            var testNode3 = new LowerNode(testNode2, 0, 2);
+            var testNode4 = new LowerNode(testNode3, 0, 0);
+            var testNode5 = new LowerNode(testNode4, 0, 0);
+            nodeList.Add(testNode);
+            nodeList.Add(testNode1);
+            nodeList.Add(testNode2);
+            nodeList.Add(testNode3);
+            nodeList.Add(testNode4);
+            nodeList.Add(testNode5);
+            var expected = new int[,]
+            {
+                { 0, 1 },
+                { 1, 4 },
+                { 2, 3 },
+                { 3, 0 },
+                { 4, 2 }
+            };
+
+            var actual = nodeList[5].GetPreviouslyVisitedVertexes(new int[0, 0]);
+
+            CollectionAssert.AreEqual(expected, actual);
+        }
 
     }
 
