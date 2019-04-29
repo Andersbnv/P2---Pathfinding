@@ -145,8 +145,9 @@ namespace UnitTest
             }
 
             CollectionAssert.AreEqual(expected, actual);
-
         }
+        [TestMethod]
+        public void GetOriginalColumnIndexTest()
 
     }
 
