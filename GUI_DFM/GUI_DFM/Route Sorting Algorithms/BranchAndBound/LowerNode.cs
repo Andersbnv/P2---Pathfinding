@@ -98,9 +98,9 @@ namespace GUI_DFM.Route_Sorting_Algorithms.BranchAndBound
             }
             else
             {
-                return ((LowerNode)parentNode).elementColumnRemoved < elementColumnRemoved ?
-                        parentNode.GetOriginalMatrixElementColumnIndex(elementColumnRemoved) : 
-                        parentNode.GetOriginalMatrixElementColumnIndex(elementColumnRemoved + 1);
+                return ((LowerNode)parentNode).elementColumnRemoved <= elementColumnRemoved ?
+                        parentNode.GetOriginalMatrixElementColumnIndex(elementColumnRemoved + 1) : 
+                        parentNode.GetOriginalMatrixElementColumnIndex(elementColumnRemoved);
             }
 
         }
