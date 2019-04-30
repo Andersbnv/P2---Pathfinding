@@ -11,19 +11,24 @@ namespace Hungarian
     {
         static void Main(string[] args)
         {
-            string filePath = @"\\vmware-host\Shared Folders\Desktop\Test5_436.tsp";
-            Graph graph = new Graph(filePath);
+            var listInt = new List<int>() { 1,2,3,4,5};
+            var list = new List<Vertex>();
+            var tal = Enumerable.Range(1, 100).ToArray();
+            var random = new Random();
+            for (int i = 0; i < 100; i++)
+            {
+                list.Add(new Vertex($"{tal[i]}", random.Next(150), random.Next(150)));
+            }
+            Console.WriteLine("Done");
+
             Stopwatch Timer = new Stopwatch();
-
-
-            Hungarian H = new Hungarian();
             Timer.Start();
-            var route = H.Algorithm(graph.VertexList.ElementAt(0), graph.VertexList);
+            var route = BruteForce.Algorithm(listInt, listInt[0]);
             Timer.Stop();
 
             Console.WriteLine("Time taken = " + Timer.Elapsed);
 
-            Console.WriteLine(H.DistanceBetweenVertices(route));
+            Console.WriteLine(route.TotalWeight());
             Console.ReadKey();
         }
     }
