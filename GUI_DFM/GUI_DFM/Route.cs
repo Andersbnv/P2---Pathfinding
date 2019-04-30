@@ -15,29 +15,10 @@ namespace GUI_DFM
             this.RouteList = RouteList;
             this.StartingPoint = StartingPoint;
         }
-
         public void CalculateRoute(RouteAlgorithm algorithm)
         {
             RouteList = algorithm.Algorithm(StartingPoint, RouteList);
         }
-
-        public override string ToString()
-        {
-            string listString = "";
-            string distanceStandardString = "Distance from previous: ";
-            for (int i = 1; i < RouteList.Count; i++)
-            {
-                listString += "\nCity: " + RouteList[i].Address + "\t";
-                listString += distanceStandardString + RouteList[i].DistanceToVertex(RouteList[i - 1]);
-            }
-            if (RouteList.Count != 0)
-            {
-                listString += "\nCity: " + RouteList[0].Address + "\t";
-                listString += distanceStandardString + RouteList[0].DistanceToVertex(RouteList[RouteList.Count - 1]) + "\n";
-            }
-            return "Starting point: " + StartingPoint.Address + listString + "\nTotal distance: " + RouteDistance();
-        }
-
         public double RouteDistance()
         {
             double totalDistance = 0;
@@ -50,11 +31,10 @@ namespace GUI_DFM
                 totalDistance += RouteList[RouteList.Count - 1].DistanceToVertex(RouteList[0]);
             }
             return totalDistance;
-        }
-        
+        } 
         public void AddToList(Vertex vertexToBeAdded)
         {
-            RouteList.Insert(2,vertexToBeAdded);
+            RouteList.Add(vertexToBeAdded);
         }
         public void RemoveFromList(int index)
         {

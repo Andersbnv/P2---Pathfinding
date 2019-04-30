@@ -55,23 +55,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AddVertexWindow.xaml.cs">
-      <DependentUpon>AddVertexWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Graph Objects\Edge.cs" />
     <Compile Include="Graph Objects\Graph.cs" />
     <Compile Include="Graph Objects\Vertex.cs" />
-    <Compile Include="Route Sorting Algorithms\BranchAndBound\BranchAndBoundAlgorithm.cs" />
-    <Compile Include="Route Sorting Algorithms\BranchAndBound\Node.cs" />
     <Compile Include="Route.cs" />
     <Compile Include="Route Sorting Algorithms\NearestNeightbour.cs" />
     <Compile Include="Route Sorting Algorithms\RouteAlgorithm.cs" />
-    <Compile Include="TextFile.cs" />
     <Compile Include="Timer.cs" />
-    <Page Include="AddVertexWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

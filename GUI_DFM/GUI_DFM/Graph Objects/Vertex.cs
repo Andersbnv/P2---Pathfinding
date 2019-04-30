@@ -52,6 +52,5 @@ namespace GUI_DFM
             double yDistance = vertex.YCoordinate - this.YCoordinate;
             return Math.Sqrt(xDistance * xDistance + yDistance * yDistance);
         }
-
     }
 }
