@@ -48,6 +48,7 @@
     <Compile Include="Hungarian.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SomeExtensions.cs" />
     <Compile Include="Vertex.cs" />
   </ItemGroup>
   <ItemGroup>
