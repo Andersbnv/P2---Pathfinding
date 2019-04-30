@@ -13,7 +13,7 @@ namespace Hungarian
                 .Select(Factorial)
                 .ToArray();
 
-            for (var i = -1; i < factorials[array.Length]; i++)
+            for (var i = 0L; i < factorials[array.Length]; i++)
             {
                 var sequence = GenerateSequence(i, array.Length - 1, factorials);
 
@@ -68,3 +68,4 @@ namespace Hungarian
         }
     }
 }
+
