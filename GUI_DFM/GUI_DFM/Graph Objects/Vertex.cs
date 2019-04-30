@@ -27,17 +27,6 @@ namespace GUI_DFM
             return $"{Address} X:{XCoordinate} Y:{YCoordinate}";
         }
 
-        public string ConnectionListToString()
-        {
-            string listString = "";
-            foreach (var edge in ConnectionList)
-            {
-                listString += $"\t{edge.SecondLocation} Weight:{edge.Weight}\n";
-            }
-
-            return $"{Address} X:{XCoordinate} Y:{YCoordinate}\n{listString}";
-        }
-
         public void InitializeConnectionList(List<Vertex> vertexList)
         {
             foreach (var vertex in vertexList)

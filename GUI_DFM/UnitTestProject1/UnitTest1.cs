@@ -374,6 +374,28 @@ namespace UnitTest
 
             Assert.AreEqual(expected, actual);
         }
+        [TestMethod]
+        public void InitializeConnectionListTest()
+        {
+
+            List<Vertex> vertexList = new List<Vertex>
+            {
+                new Vertex("address1", 1, 2),
+                new Vertex("address2", 2, 3),
+                new Vertex("address3", 6, 5),
+                new Vertex("address4", 7, 5),
+                new Vertex("address5", 10, 5)
+            };
+            var edge = new Edge(vertexList[0].Address, vertexList[0].DistanceToVertex(vertexList[3]), vertexList[3].Address);
+            
+            vertexList[0].InitializeConnectionList(vertexList);
+            var actual = vertexList.ElementAt(0).ConnectionList.ElementAt(3);
+            var expected = edge;
+            
+            Assert.AreEqual(actual, expected);
+        }
+
     }
+  
 
 }
