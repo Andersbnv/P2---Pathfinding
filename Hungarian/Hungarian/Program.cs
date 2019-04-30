@@ -265,6 +265,7 @@ namespace Hungarian
                     double xDistance = route[i].XCoordinate - route[i - 1].XCoordinate;
                     double yDistance = route[i].YCoordinate - route[i - 1].YCoordinate;
                     distance += Math.Sqrt(xDistance * xDistance + yDistance * yDistance);
+                    Console.WriteLine(distance);
                 }
             }
 
@@ -411,7 +412,7 @@ namespace Hungarian
     {
         static void Main(string[] args)
         {
-            string filePath = @"C:\Users\arexy\Dropbox\AAU\Code\pr76.tsp";
+            string filePath = @"\\vmware-host\Shared Folders\Desktop\5.tsp";
             Graph graph = new Graph(filePath);
 
             Hungarian H = new Hungarian();
