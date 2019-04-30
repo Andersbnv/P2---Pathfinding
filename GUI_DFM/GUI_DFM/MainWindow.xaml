@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:GUI_DFM"
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="1400">
+
     <Grid Background="#FFCECECE">
         <ListBox Name="lstRoute" HorizontalAlignment="Left" Height="701" Margin="994,0,-0.4,0" VerticalAlignment="Top" Width="400" Background="#FFEAEAEA" SelectionChanged="LstRoute_SelectionChanged">
             <ListBox.ItemContainerStyle>
@@ -29,6 +30,10 @@
             <Label x:Name="lblAdress" Content="Adresse" HorizontalContentAlignment="Center" VerticalAlignment="Top" Height="41" Width="179" FontSize="20" FontWeight="Bold" Canvas.Left="184" Canvas.Top="454" Foreground="White"/>
             <Label x:Name="lblTime" Content="Time" HorizontalContentAlignment="Center" VerticalAlignment="Top" Height="50" Width="178" FontSize="20" Canvas.Left="410" Canvas.Top="317" Foreground="White" RenderTransformOrigin="0.488,0.453" FontFamily="Microsoft Sans Serif"/>
             <TextBox x:Name="txtAddress" Height="29" Canvas.Left="184" TextWrapping="Wrap" Text="" Canvas.Top="520" Width="179" Background="#FF009ADA" BorderBrush="White" HorizontalContentAlignment="Center" FontFamily="Microsoft Sans Serif" FontSize="20" Foreground="White" BorderThickness="0,0,0,4" Cursor="IBeam"/>
+
+
+
+
             <TextBox x:Name="txtXCoordinate" Height="32" Canvas.Left="409" TextWrapping="Wrap" Text="" Canvas.Top="520" Width="179" Background="#FF009ADA" BorderBrush="White" HorizontalContentAlignment="Center" FontFamily="Microsoft Sans Serif" FontSize="20" Foreground="White" BorderThickness="0,0,0,4" Cursor="IBeam"/>
             <TextBox x:Name="txtYCoordinate" Height="44" Canvas.Left="638" TextWrapping="Wrap" Text="" Canvas.Top="511" Width="179" Background="#FF009ADA" BorderBrush="White" HorizontalContentAlignment="Center" FontFamily="Microsoft Sans Serif" FontSize="20" Foreground="White" BorderThickness="0,0,0,4" Cursor="IBeam"/>
             <Label x:Name="lblXCoordinate" Content="X-koordinat" HorizontalContentAlignment="Center" VerticalAlignment="Top" Height="45" Width="178" FontSize="20" FontWeight="Bold" Canvas.Left="410" Canvas.Top="450" Foreground="White"/>

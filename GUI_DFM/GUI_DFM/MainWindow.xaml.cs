@@ -14,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Collections.ObjectModel;
 using System.Windows.Shapes;
+using System.Text.RegularExpressions;
+
 
 namespace GUI_DFM
 {
@@ -41,20 +43,47 @@ namespace GUI_DFM
         {
             lstRoute.ItemsSource = null;
         }
+        public void Regex()
+        {
+            
+
+        }
         private void BtnAddPoint_Click(object sender, RoutedEventArgs e)
         {
             bool hasInput = (txtAddress.Text.Length > 0) && (txtXCoordinate.Text.Length > 0) && (txtYCoordinate.Text.Length > 0);
 
-            if(hasInput)
-            {
-                var vertexToBeAdded = new Vertex(txtAddress.Text, int.Parse(txtXCoordinate.Text), int.Parse(txtYCoordinate.Text));
-                ClearListBox();
-                route.AddToList(vertexToBeAdded);
-                UpdateListBox();
+            var adressRegex = new Regex(@"^[A-Za-z]$");
+            var coordinateRegex = new Regex(@"^[0-9]");
+            bool validInputAdress = adressRegex.IsMatch(txtAddress.Text);
+            bool validInputCoordinate = (coordinateRegex.IsMatch(txtXCoordinate.Text) && coordinateRegex.IsMatch(txtYCoordinate.Text));
 
-                txtAddress.Text = "";
-                txtXCoordinate.Text = "";
-                txtYCoordinate.Text = "";
+            if (hasInput)
+            {
+                if(!validInputAdress && !validInputCoordinate)
+                {
+                    MessageBox.Show("Ugyldigt input! \nAdresser kan kun indeholde bogstaver. \nKoordinater kan kun indeholde tal.");
+                }
+                else if (!validInputAdress)
+                {
+                    MessageBox.Show("Ugyldigt input! \nAdresser kan kun indeholde bogstaver.");
+                }
+                else if (!validInputCoordinate)
+                {
+                    MessageBox.Show("Ugyldigt input! \nKoordinater kan kun indeholde tal.");
+                }
+                else
+                {
+                    var vertexToBeAdded = new Vertex(txtAddress.Text, int.Parse(txtXCoordinate.Text), int.Parse(txtYCoordinate.Text));
+                    ClearListBox();
+                    route.AddToList(vertexToBeAdded);
+                    UpdateListBox();
+
+                    txtAddress.Text = "";
+                    txtXCoordinate.Text = "";
+                    txtYCoordinate.Text = "";
+                }
+
+               
             }
             else
             {
@@ -86,36 +115,47 @@ namespace GUI_DFM
         {
             int selectedIndex = lstRoute.Items.IndexOf(lstRoute.SelectedItem);
             int listCount = lstRoute.Items.Count;
-            ClearListBox();
-            route.MoveDownElement(selectedIndex, listCount);
-            UpdateListBox();
-            if (selectedIndex == lstRoute.Items.Count-1)
+            if (selectedIndex < 0)
             {
-                lstRoute.SelectedItem = lstRoute.Items.GetItemAt(0);
+                MessageBox.Show("Marker venligst et punkt");
             }
             else
             {
-                lstRoute.SelectedItem = lstRoute.Items.GetItemAt(selectedIndex + 1);
+                ClearListBox();
+                route.MoveDownElement(selectedIndex, listCount);
+                UpdateListBox();
+                if (selectedIndex == lstRoute.Items.Count - 1)
+                {
+                    lstRoute.SelectedItem = lstRoute.Items.GetItemAt(0);
+                }
+                else
+                {
+                    lstRoute.SelectedItem = lstRoute.Items.GetItemAt(selectedIndex + 1);
 
+                }
             }
-            
         }
         private void BtnMoveUp_Click(object sender, RoutedEventArgs e)
         {
-            int selectedIndex = lstRoute.Items.IndexOf(lstRoute.SelectedItem);
-            ClearListBox();
-            route.MoveUpElement(selectedIndex);
-            UpdateListBox();
-            if (selectedIndex == 0)
+            int selectedIndex = lstRoute.Items.IndexOf(lstRoute.SelectedItem); 
+            if (selectedIndex < 0)
             {
-                lstRoute.SelectedItem = lstRoute.Items.GetItemAt(lstRoute.Items.Count-1);
+                MessageBox.Show("Marker venligst et punkt");
             }
             else
             {
-                lstRoute.SelectedItem = lstRoute.Items.GetItemAt(selectedIndex - 1);
-
+                ClearListBox();
+                route.MoveUpElement(selectedIndex);
+                UpdateListBox();
+                if (selectedIndex == 0)
+                {
+                    lstRoute.SelectedItem = lstRoute.Items.GetItemAt(lstRoute.Items.Count - 1);
+                }
+                else
+                {
+                    lstRoute.SelectedItem = lstRoute.Items.GetItemAt(selectedIndex - 1);
+                }
             }
-
         }
 
         private void LstRoute_SelectionChanged(object sender, SelectionChangedEventArgs e)

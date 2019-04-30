@@ -60,21 +60,6 @@ namespace GUI_DFM
         {
             RouteList.RemoveAt(index);
         }
-        public void ChangeOrderOfList(int index, int destinationIndex)
-        {
-            Vertex buffer = this.RouteList.ElementAt(index);
-            if (index < destinationIndex)
-            {
-                this.RouteList.Insert(destinationIndex, buffer);
-                this.RouteList.Remove(this.RouteList.ElementAt(index));
-            }
-            else
-            {
-                this.RouteList.Remove(this.RouteList.ElementAt(index));
-                this.RouteList.Insert(destinationIndex, buffer);
-            }
-        }
-
         public void MoveUpElement(int index)
         {
             if(index == 0)
@@ -88,9 +73,6 @@ namespace GUI_DFM
                 Vertex buffer = RouteList.ElementAt(index);
                 RemoveFromList(index);
                 RouteList.Insert((index-1), buffer);
-                
-                
-                // RouteList.ElementAt(index - 1) = RouteList.ElementAt(index);
             }
         }
         public void MoveDownElement(int index, int listCount)
