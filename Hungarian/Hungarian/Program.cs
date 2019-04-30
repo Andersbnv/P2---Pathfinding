@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -139,59 +140,6 @@ namespace Hungarian
             outputArray[1] = maxIndexColumn;
             return outputArray;
         }
-        public double[] FindRoute2(double[,] Matrix, double[,] cost)
-        {
-            double[] outputArray = new double[2];
-            int rowLength = Matrix.GetLength(0);
-            int columnLength = Matrix.GetLength(1);
-            double maxCost = double.NegativeInfinity;
-            double inf = double.PositiveInfinity;
-            int maxIndexRow = 0;
-            int maxIndexColumn = 0;
-            bool zeroInColumn = false;
-            bool zeroInRow = false;
-
-            for (int i = 0; i < columnLength; i++)
-            {
-                for (int j = 0; j < rowLength; j++)
-                {
-                    if (Matrix[i, j] != inf)
-                    {
-                        for (int k = 0; k < columnLength; k++)
-                        {
-                            if (Matrix[k, j] == 0 && k != i)
-                            {
-                                zeroInRow = true;
-                            }
-                        }
-                        for (int k = 0; k < rowLength; k++)
-                        {
-                            if (Matrix[i, k] == 0 && k != j)
-                            {
-                                zeroInColumn = true;
-                            }
-                        }
-                        if (true)
-                        {
-
-                        }
-                    }
-                }
-            }
-            for (int i = 0; i < columnLength; i++)
-            {
-                Matrix[i, maxIndexColumn] = inf;
-            }
-
-            for (int j = 0; j < rowLength; j++)
-            {
-                Matrix[maxIndexRow, j] = inf;
-            }
-            Matrix[maxIndexColumn, maxIndexRow] = inf;
-            outputArray[1] = maxIndexRow;
-            outputArray[0] = maxIndexColumn;
-            return outputArray;
-        }
 
         public void FindVertex(double[] inputArray, List<Vertex> unsortedRoute, string[] locations)
         {
@@ -203,12 +151,10 @@ namespace Hungarian
                 if (locations[(int)val2] == Vertex.Address)
                 {
                     sortedRoute.Add(Vertex);
-                    Console.WriteLine(locations[(int)val2]);
                 }
                 if (locations[(int)val] == Vertex.Address)
                 {
                     sortedRoute.Add(Vertex);
-                    Console.WriteLine(locations[(int)val]);
                 }
             }
 
@@ -265,7 +211,6 @@ namespace Hungarian
                     double xDistance = route[i].XCoordinate - route[i - 1].XCoordinate;
                     double yDistance = route[i].YCoordinate - route[i - 1].YCoordinate;
                     distance += Math.Sqrt(xDistance * xDistance + yDistance * yDistance);
-                    Console.WriteLine(distance);
                 }
             }
 
@@ -412,24 +357,17 @@ namespace Hungarian
     {
         static void Main(string[] args)
         {
-            string filePath = @"\\vmware-host\Shared Folders\Desktop\5.tsp";
+            string filePath = @"\\vmware-host\Shared Folders\Desktop\Test5_436.tsp";
             Graph graph = new Graph(filePath);
+            Stopwatch Timer = new Stopwatch();
+
 
             Hungarian H = new Hungarian();
+            Timer.Start();
             var route = H.Algorithm(graph.VertexList.ElementAt(0), graph.VertexList);
+            Timer.Stop();
 
-            /* int i = 0;
-             foreach (var item in route)
-             {
-                 i++;
-                 Console.WriteLine(item);
-                 if(i % 2 == 0)
-                 {
-                     Console.WriteLine("\n");
-                 }                             
-             }*/
-
-
+            Console.WriteLine("Time taken = " + Timer.Elapsed);
 
             Console.WriteLine(H.DistanceBetweenVertices(route));
             Console.ReadKey();
