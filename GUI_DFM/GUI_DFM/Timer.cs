@@ -10,7 +10,7 @@ namespace GUI_DFM
 {
     partial class MainWindow : Window
     {
-        public void InitializeTimer()
+        private void InitializeTimer()
         {
             lblTime.Content = DateTime.Now.ToLongTimeString();
             lblDate.Content = DateTime.Now.ToLongDateString();
@@ -20,7 +20,7 @@ namespace GUI_DFM
             timer.Start();
         }
 
-        void timer_Tick(object sender, EventArgs e)
+        private void timer_Tick(object sender, EventArgs e)
         {
             lblTime.Content = DateTime.Now.ToLongTimeString();
             lblDate.Content = DateTime.Now.ToLongDateString();

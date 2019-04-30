@@ -77,7 +77,7 @@ namespace GUI_DFM
 
         public void MoveUpElement(int index)
         {
-            if(index <= 0)
+            if(index == 0)
             {
                 Vertex buffer = RouteList.ElementAt(index);
                 RemoveFromList(index);

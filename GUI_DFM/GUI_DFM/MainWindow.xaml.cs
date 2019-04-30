@@ -37,12 +37,10 @@ namespace GUI_DFM
         {
             lstRoute.ItemsSource = route.RouteList;
         }
-
         private void ClearListBox()
         {
             lstRoute.ItemsSource = null;
         }
-
         private void BtnAddPoint_Click(object sender, RoutedEventArgs e)
         {
             bool hasInput = (txtAddress.Text.Length > 0) && (txtXCoordinate.Text.Length > 0) && (txtYCoordinate.Text.Length > 0);
@@ -63,7 +61,6 @@ namespace GUI_DFM
                 MessageBox.Show("Indskriv venligst det punkt, som ønskes tilføjet til listen.");
             }
         }
-
         private void BtnRemovePoint_Click(object sender, RoutedEventArgs e)
         {
             int selectedIndex = lstRoute.Items.IndexOf(lstRoute.SelectedItem);
@@ -79,14 +76,12 @@ namespace GUI_DFM
                 UpdateListBox();
             }
         }
-
         private void BtnCalculateRoute_Click(object sender, RoutedEventArgs e)
         {
             RouteAlgorithm nearestNeighbour = new NearestNeighbour();
             route.CalculateRoute(nearestNeighbour);
             lstRoute.ItemsSource = route.RouteList;
         }
-
         private void BtnMoveDown_Click(object sender, RoutedEventArgs e)
         {
             int selectedIndex = lstRoute.Items.IndexOf(lstRoute.SelectedItem);
@@ -120,6 +115,11 @@ namespace GUI_DFM
                 lstRoute.SelectedItem = lstRoute.Items.GetItemAt(selectedIndex - 1);
 
             }
+
+        }
+
+        private void LstRoute_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
 
         }
     }
