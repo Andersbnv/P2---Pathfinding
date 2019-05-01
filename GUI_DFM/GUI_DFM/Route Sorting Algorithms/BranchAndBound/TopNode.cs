@@ -8,12 +8,14 @@ namespace GUI_DFM.Route_Sorting_Algorithms.BranchAndBound
 {
     public class TopNode : Node
     {
+        public double[,] matrix;
         public TopNode(double[,] matrix)
         {
             this.matrix = matrix;
             parentNode = null;
             lowerBound = GetLowerBound();
             levelsDeep = 0;
+            upperNode = this;
         }
         public override double GetElementsValue()
         {

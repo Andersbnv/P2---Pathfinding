@@ -21,12 +21,12 @@ namespace GUI_DFM.Route_Sorting_Algorithms.BranchAndBound
             double[,] matrix = ListToMatrix(unsortedList);
 
             int [,] matrixIndexes = BranchAndBound(new TopNode(matrix), new List<Node>());
-            List<Vertex> sortedRoute = matrixIndexToList( matrixIndexes, unsortedList);
+            List<Vertex> sortedRoute = MatrixIndexToList( matrixIndexes, unsortedList);
 
             return sortedRoute;
         }
 
-        public List<Vertex> matrixIndexToList(int [,] indexes, List<Vertex> unsortedList)
+        public List<Vertex> MatrixIndexToList(int [,] indexes, List<Vertex> unsortedList)
         {
             int i = 0;
             var sortedList = new List<Vertex>();
@@ -41,12 +41,12 @@ namespace GUI_DFM.Route_Sorting_Algorithms.BranchAndBound
 
         public int [,] BranchAndBound(Node currentNode, List<Node> nodeList)
         {
-            if (currentNode.levelsDeep == currentNode.matrix.GetLength(0))
+            if (currentNode.levelsDeep == currentNode.upperNode.matrix.GetLength(0))
             {
                 bool foundBetterNode = false;
                 foreach (var node in nodeList)
                 {
-                    if (node.childNodes.Count == 0 && currentNode.lowerBound > node.lowerBound && node.validMatrix)
+                    if (node.childNodes.Count == 0 && currentNode.lowerBound > node.lowerBound && node.ValidateMatrix())
                     {
                         currentNode = node;
                         foundBetterNode = true;
@@ -62,16 +62,21 @@ namespace GUI_DFM.Route_Sorting_Algorithms.BranchAndBound
                 }
             }
 
+            double[,] nodeMatrix;
             int rowIndexToBranchFrom = 0;
             if (currentNode is LowerNode)
             {
                 rowIndexToBranchFrom = ((LowerNode)currentNode).elementRowRemoved + 1;
+                nodeMatrix = ((LowerNode)currentNode).GetMatrix(currentNode.upperNode.matrix);
+            }
+            else
+            {
+                nodeMatrix = ((TopNode)currentNode).matrix;
             }
 
-            for (int i = 0; i < currentNode.matrix.GetLength(0); i++)
+            for (int i = 0; i < currentNode.upperNode.matrix.GetLength(0); i++)
             {
-
-                if (!Double.IsPositiveInfinity(currentNode.matrix[rowIndexToBranchFrom, i]))
+                if (!Double.IsPositiveInfinity(nodeMatrix[rowIndexToBranchFrom, i]))
                 {
                     nodeList.Add(new LowerNode(currentNode, rowIndexToBranchFrom, i));
                 }
@@ -81,7 +86,7 @@ namespace GUI_DFM.Route_Sorting_Algorithms.BranchAndBound
             for (int i = 1; i < nodeList.Count; i++)
             {
                 if (nodeList[i].childNodes.Count == 0 && nodeList[i].lowerBound < bestLowerBound &&
-                    nodeList[i].validMatrix)
+                    nodeList[i].ValidateMatrix())
                 {
                     currentNode = nodeList[i];
                     bestLowerBound = currentNode.lowerBound;

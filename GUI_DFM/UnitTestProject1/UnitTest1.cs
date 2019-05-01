@@ -81,7 +81,51 @@ namespace UnitTest
 
             Assert.AreEqual(distanceExpected, distanceActual);
         }
+
+        [TestMethod]
+        public void BranchAndBoundTestBig()
+        {
+            var testMatrix = new double[,]
+            {
+                { Double.PositiveInfinity, 52, 44, 17, 81, 19, 52, 44, 17, 81 },
+                { 52, Double.PositiveInfinity, 43, 70, 28, 14, 52, 44, 17, 81 },
+                { 44, 43, Double.PositiveInfinity, 12, 50, 14, 52, 44, 17, 81 }, 
+                { 17, 70, 12, Double.PositiveInfinity, 69, 100, 52, 44, 17, 81},
+                { 81, 28, 50, 69, Double.PositiveInfinity, 21, 52, 44, 17, 81 },
+                { 81, 28, 50, 69, 41, Double.PositiveInfinity, 21, 52, 44, 17 },
+                { 81, 28, 50, 69, 41, 21, Double.PositiveInfinity, 52, 44, 17 },
+                { 81, 28, 50, 69, 41, 21, 52, Double.PositiveInfinity, 44, 17 },
+                { 81, 28, 50, 69, 41, 21, 52, 44, Double.PositiveInfinity, 17 },
+                { 81, 28, 50, 69, 41, 21, 42, 19, 52, Double.PositiveInfinity }
+            };
+            var testAlgorithm = new BranchAndBoundAlgorithm();
+            var expected = new int[,]
+            {
+                { 0, 1 },
+                { 1, 4 },
+                { 2, 3 },
+                { 3, 0 },
+                { 4, 2 }
+            };
+
+            var actual = testAlgorithm.BranchAndBound(new TopNode(testMatrix), new List<Node>());
+            double distanceActual = 0;
+            double distanceExpected = 0;
+
+            for (int i = 0; i < actual.GetLength(0); i++)
+            {
+                distanceActual += testMatrix[i, actual[i, 1]];
+            }
+            for (int i = 0; i < expected.GetLength(0); i++)
+            {
+                distanceExpected += testMatrix[i, expected[i, 1]];
+            }
+
+            Assert.AreEqual(distanceExpected, distanceActual);
+        }
     }
+
+
 
     [TestClass]
     public class NodeTest
@@ -106,7 +150,7 @@ namespace UnitTest
             var testParent = new TopNode(testMatrix);
             var testNode = new LowerNode(testParent, rowToBeRemoved, columnToBeRemoved);
 
-            var actual = testNode.matrix;
+            var actual = testNode.GetMatrix(testNode.upperNode.matrix);
 
             CollectionAssert.AreEqual(expected, actual);
         }

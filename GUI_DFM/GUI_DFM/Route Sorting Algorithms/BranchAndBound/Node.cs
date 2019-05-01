@@ -9,14 +9,22 @@ namespace GUI_DFM.Route_Sorting_Algorithms.BranchAndBound
     abstract public class Node
     {
         public List<LowerNode> childNodes = new List<LowerNode>();
-        public double[,] matrix;
         public double lowerBound;
         public Node parentNode;
         public int levelsDeep;
-        public bool validMatrix = true;
+        public TopNode upperNode;
 
         public double GetLowerBound()
         {
+            double[,] matrix;
+            if (this is LowerNode)
+            {
+                matrix = ((LowerNode)this).GetMatrix(upperNode.matrix);
+            }
+            else
+            {
+                matrix = ((TopNode)this).matrix;
+            }
             double lowerBound = 0;
             for (int i = 0; i < matrix.GetLength(0); i++)
             {
@@ -41,6 +49,39 @@ namespace GUI_DFM.Route_Sorting_Algorithms.BranchAndBound
             }
             lowerBound += GetElementsValue();
             return lowerBound;
+        }
+        public bool ValidateMatrix()
+        {
+            bool matrixValid = true;
+            double[,] matrix;
+            int numberOfInf = 0;
+
+            if (this is LowerNode)
+            {
+                matrix = ((LowerNode)this).GetMatrix(upperNode.matrix);
+            }
+            else
+            {
+                matrix = ((TopNode)this).matrix;
+            }
+
+            for (int i = 0; i < matrix.GetLength(0); i++)
+            {
+                for (int j = 0; j < matrix.GetLength(1); j++)
+                {
+                    if (Double.IsPositiveInfinity(matrix[i, j]))
+                    {
+                        numberOfInf++;
+                    }
+                }
+            }
+
+            if (numberOfInf == matrix.Length && levelsDeep != matrix.GetLength(0))
+            {
+                matrixValid = false;
+            }
+            return matrixValid;
+
         }
         public abstract double GetElementsValue();
         public abstract int [,] GetPreviouslyVisitedVertexes(int [,] alreadyKnown);

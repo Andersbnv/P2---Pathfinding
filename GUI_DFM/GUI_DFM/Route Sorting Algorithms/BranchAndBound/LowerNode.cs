@@ -15,41 +15,38 @@ namespace GUI_DFM.Route_Sorting_Algorithms.BranchAndBound
         {
             this.parentNode = parentNode;
             levelsDeep = parentNode.levelsDeep + 1;
+            upperNode = parentNode.upperNode;
             if (parentNode != null)
             {
                 parentNode.childNodes.Add(this);
-                matrix = ReduceMatrix(parentNode.matrix, elementRowToBeRemoved, elementColumnToBeRemoved);
             }
             elementRowRemoved = elementRowToBeRemoved;
             elementColumnRemoved = elementColumnToBeRemoved;
             lowerBound = GetLowerBound();
-
         }
 
-        public double [,] ReduceMatrix(double [,] matrix, int rowToBeRemoved, int columnToBeRemoved)
+        public double [,] GetMatrix(double [,] matrix)
         {
-            int numberOfInf = 0;
             double[,] newMatrix = (double[,])matrix.Clone();
             for (int i=0; i < newMatrix.GetLength(0); i++)
             {
                 for (int j=0; j < newMatrix.GetLength(0); j++)
                 {
-                    if (i == rowToBeRemoved || j == columnToBeRemoved ||
-                        j == rowToBeRemoved && i == columnToBeRemoved)
+                    if (i == elementRowRemoved || j == elementColumnRemoved ||
+                        j == elementRowRemoved && i == elementColumnRemoved)
                     {
                         newMatrix[i, j] = Double.PositiveInfinity;
                     }
-                    if (Double.IsPositiveInfinity(newMatrix[i, j]))
-                    {
-                        numberOfInf++;
-                    }
                 }
             }
-            if(numberOfInf == matrix.Length && levelsDeep != matrix.GetLength(0))
+            if (levelsDeep == 1)
             {
-                validMatrix = false;
+                return newMatrix;
             }
-            return newMatrix;
+            else
+            {
+                return ((LowerNode)parentNode).GetMatrix(newMatrix);
+            }
         }
 
         /*public double [,] ReduceMatrix(double[,] originalMatrix, int rowToBeRemoved, int columnToBeRemoved)
@@ -106,7 +103,7 @@ namespace GUI_DFM.Route_Sorting_Algorithms.BranchAndBound
         */
         public override double GetElementsValue()
         {
-            return parentNode.matrix[elementRowRemoved, elementColumnRemoved] + parentNode.GetElementsValue();
+            return parentNode.upperNode.matrix[elementRowRemoved, elementColumnRemoved] + parentNode.GetElementsValue();
         }
         public override int[,] GetPreviouslyVisitedVertexes(int[,] alreadyKnown)
         {

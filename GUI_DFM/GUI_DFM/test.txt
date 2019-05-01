@@ -7,10 +7,3 @@ Vejle,44,65
 Odense,55,22
 Kolding,93,12
 Skagen,65,31
-Kobenhavn,44,145
-Gistrup,5,5
-Viborg,14,66
-Skalborg,32,55
-Herning,65,43
-Mariager,22,22
-Nimtofte, 99,12
