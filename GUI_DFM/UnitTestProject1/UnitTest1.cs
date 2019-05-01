@@ -375,5 +375,11 @@ namespace UnitTest
             Assert.AreEqual(expected, actual);
         }
     }
+    [TestClass]
+    public class GraphTest
+    {
+        [TestMethod]
+        public void AddEdge
+    }
 
 }

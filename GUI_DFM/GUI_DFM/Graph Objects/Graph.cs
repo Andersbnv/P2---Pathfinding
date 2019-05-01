@@ -30,30 +30,5 @@ namespace GUI_DFM
                 }
             }
         }
-
-        public void AddEdge(Vertex newVertex)
-        {
-            newVertex.InitializeConnectionList(VertexList);
-            foreach (Edge edge in newVertex.ConnectionList)
-            {
-                EdgeList.Add(edge);
-            }
-
-        }
-
-        public void AddVertex(Vertex newVertex)
-        {
-            VertexList.Add(newVertex);
-        }
-
-        public override string ToString()
-        {
-            string listString = "";
-            foreach (Vertex vertex in VertexList)
-            {
-                listString += "City: " + vertex.Address + " X: " + vertex.XCoordinate + " Y: " + vertex.YCoordinate + "\n";
-            }
-            return listString;
-        }
     }
 }
