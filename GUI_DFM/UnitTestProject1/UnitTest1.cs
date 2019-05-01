@@ -402,6 +402,29 @@ namespace UnitTest
         }
 
     }
+    [TestClass]
+    public class GraphTest
+    {
+        [TestMethod]
+        public void GraphConstructorTest()
+        {
+            string filePath = @"..\..\..\GUI_DFM\test.txt";
+            Graph testGraph = new Graph(filePath);
+
+            var expected_address_0 = "Aalborg";
+            var expected_xCoordinate_0 = 0;
+            var expected_yCoordinate_0 = 0;
+
+            var actual_address_0 = testGraph.VertexList.ElementAt(0).Address;
+            var actual_xCoordinate_0 = testGraph.VertexList.ElementAt(0).XCoordinate;
+            var actual_yCoordinate_0 = testGraph.VertexList.ElementAt(0).YCoordinate;
+
+            Assert.AreEqual(expected_address_0, actual_address_0);
+            Assert.AreEqual(expected_xCoordinate_0, actual_xCoordinate_0);
+            Assert.AreEqual(expected_yCoordinate_0, actual_yCoordinate_0);
+
+        }
+    }
   
 
 }

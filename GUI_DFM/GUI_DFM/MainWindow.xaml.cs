@@ -43,11 +43,6 @@ namespace GUI_DFM
         {
             lstRoute.ItemsSource = null;
         }
-        public void Regex()
-        {
-            
-
-        }
         private void BtnAddPoint_Click(object sender, RoutedEventArgs e)
         {
             bool hasInput = (txtAddress.Text.Length > 0) && (txtXCoordinate.Text.Length > 0) && (txtYCoordinate.Text.Length > 0);
@@ -157,7 +152,6 @@ namespace GUI_DFM
                 }
             }
         }
-
         private void LstRoute_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
