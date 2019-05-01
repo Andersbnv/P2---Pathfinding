@@ -18,5 +18,9 @@ namespace GUI_DFM
             Weight = weight;
             SecondLocation = secondLocation;
         }
+        public override string ToString()
+        {
+            return $"from: {FirstLocation} weight: {Weight} to: {SecondLocation}";
+        }
     }
 }

@@ -374,12 +374,34 @@ namespace UnitTest
 
             Assert.AreEqual(expected, actual);
         }
-    }
-    [TestClass]
-    public class GraphTest
-    {
         [TestMethod]
-        public void AddEdge
+        public void InitializeConnectionListTest()
+        {
+            List<Vertex> vertexList = new List<Vertex>
+            {
+                new Vertex("address1", 1, 2),
+                new Vertex("address2", 2, 3),
+                new Vertex("address3", 6, 5),
+                new Vertex("address4", 7, 5),
+                new Vertex("address5", 10, 5)
+            };
+            var edge = new Edge(vertexList[0].Address, vertexList[0].DistanceToVertex(vertexList[3]), vertexList[3].Address);
+            
+            vertexList[0].InitializeConnectionList(vertexList);
+            var actual1 = vertexList.ElementAt(0).ConnectionList.ElementAt(3).FirstLocation;
+            var actual2 = vertexList.ElementAt(0).ConnectionList.ElementAt(3).Weight;
+            var actual3 = vertexList.ElementAt(0).ConnectionList.ElementAt(3).SecondLocation;
+
+            var expected1 = edge.FirstLocation;
+            var expected2 = edge.Weight;
+            var expected3 = edge.SecondLocation;
+
+            Assert.AreEqual(expected1, actual1);
+            Assert.AreEqual(expected2, actual2);
+            Assert.AreEqual(expected3, actual3);
+        }
+
     }
+  
 
 }
