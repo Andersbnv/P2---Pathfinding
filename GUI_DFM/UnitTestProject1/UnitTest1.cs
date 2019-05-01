@@ -377,7 +377,6 @@ namespace UnitTest
         [TestMethod]
         public void InitializeConnectionListTest()
         {
-
             List<Vertex> vertexList = new List<Vertex>
             {
                 new Vertex("address1", 1, 2),
@@ -389,10 +388,17 @@ namespace UnitTest
             var edge = new Edge(vertexList[0].Address, vertexList[0].DistanceToVertex(vertexList[3]), vertexList[3].Address);
             
             vertexList[0].InitializeConnectionList(vertexList);
-            var actual = vertexList.ElementAt(0).ConnectionList.ElementAt(3);
-            var expected = edge;
-            
-            Assert.AreEqual(actual, expected);
+            var actual1 = vertexList.ElementAt(0).ConnectionList.ElementAt(3).FirstLocation;
+            var actual2 = vertexList.ElementAt(0).ConnectionList.ElementAt(3).Weight;
+            var actual3 = vertexList.ElementAt(0).ConnectionList.ElementAt(3).SecondLocation;
+
+            var expected1 = edge.FirstLocation;
+            var expected2 = edge.Weight;
+            var expected3 = edge.SecondLocation;
+
+            Assert.AreEqual(expected1, actual1);
+            Assert.AreEqual(expected2, actual2);
+            Assert.AreEqual(expected3, actual3);
         }
 
     }
