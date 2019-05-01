@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Collections.ObjectModel;
 using System.Windows.Shapes;
+using GUI_DFM.Route_Sorting_Algorithms.BranchAndBound;
 
 namespace GUI_DFM
 {
@@ -23,12 +24,12 @@ namespace GUI_DFM
     public partial class MainWindow : Window
     {
         public Graph graph;
-        public string filePath = @"C:\Users\Nikif\source\repos\Andersbnv\P2---Pathfinding\GUI_DFM\GUI_DFM\test.txt";
+        public string filePath = @"..\..\test.txt";
         public MainWindow()
         {
             InitializeComponent();
             InitializeTimer();
-            string filePath = @"C:\Users\Nikif\source\repos\Andersbnv\P2---Pathfinding\GUI_DFM\GUI_DFM\test.txt";
+            string filePath = @"..\..\test.txt";
             graph = new Graph(filePath);
             InitializeRoute(graph.VertexList);
             
@@ -89,8 +90,8 @@ namespace GUI_DFM
 
         private void BtnCalculateRoute_Click(object sender, RoutedEventArgs e)
         {
-            RouteAlgorithm algorithNearestNeighbour = new NearestNeighbour();
-            Route calculatedRoute = new Route(algorithNearestNeighbour, graph.VertexList.ElementAt(0), graph.VertexList);
+            RouteAlgorithm branchAndBound = new BranchAndBoundAlgorithm();
+            Route calculatedRoute = new Route(branchAndBound, graph.VertexList.ElementAt(0), graph.VertexList);
             UpdateRouteList(calculatedRoute.SortedRoute);
         }
 
