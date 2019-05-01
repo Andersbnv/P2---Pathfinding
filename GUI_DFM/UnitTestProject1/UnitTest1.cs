@@ -365,6 +365,67 @@ namespace UnitTest
     [TestClass]
     public class VertexTest
     {
+
+        [TestMethod]
+        public void VertexConstructorTest()
+        {
+            Vertex e = new Vertex("Aalborg", 1.1, 2.2);
+
+            var expected1 = "Aalborg";
+            var expected2 = 1.1;
+            var expected3 = 2.2;
+
+            var actual1 = e.Address;
+            var actual2 = e.XCoordinate;
+            var actual3 = e.YCoordinate;
+
+            Assert.AreEqual(expected1, actual1);
+            Assert.AreEqual(expected2, actual2);
+            Assert.AreEqual(expected3, actual3);
+        }
+
+        [TestMethod]
+        public void VertexDistanceTest_PossitiveCoordinates()
+        {
+            Vertex v = new Vertex("Aalborg", 1, 2);
+            Vertex k = new Vertex("Aarhus", 2, 1);
+
+
+            var expected = Math.Sqrt((2-1) * (2-1) + (1-2) * (1-2));
+
+            var actual = v.DistanceToVertex(k);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void VertexDistanceTest_NegativeCoordinates()
+        {
+            Vertex v = new Vertex("Aalborg", -1, -2);
+            Vertex k = new Vertex("Aarhus", -2, -1);
+
+
+            var expected = Math.Sqrt(((-2)-(-1)) * ((-2)-(-1)) + ((-1)-(-2)) * ((-1)-(-2)));
+
+            var actual = v.DistanceToVertex(k);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void VertexDistanceTest_ZeroCoordinates()
+        {
+            Vertex v = new Vertex("Aalborg", 0, 0);
+            Vertex k = new Vertex("Aarhus", 0, 0);
+
+
+            var expected = 0;
+
+            var actual = v.DistanceToVertex(k);
+
+            Assert.AreEqual(expected, actual);
+        }
+
         [TestMethod]
         public void ToStringTest()
         {
@@ -402,6 +463,39 @@ namespace UnitTest
         }
 
     }
-  
+    [TestClass]
+    public class EdgeTest
+    {
+        [TestMethod]
+        public void EdgeConstructorTest()
+        {
+            Edge e = new Edge("Aalborg", 1, "Aarhus");
 
+            var expected1 = "Aalborg";
+            var expected2 = 1;
+            var expected3 = "Aarhus";
+
+            var actual1 = e.FirstLocation;
+            var actual2 = e.Weight;
+            var actual3 = e.SecondLocation;
+
+            Assert.AreEqual(expected1, actual1);
+            Assert.AreEqual(expected2, actual2);
+            Assert.AreEqual(expected3, actual3);
+        }
+        
+        [TestMethod]
+        public void ToStringTest()
+        {
+            Edge e = new Edge("Aalborg", 1, "Aarhus");
+
+            var expected = "from: Aalborg weight: 1 to: Aarhus";
+            var actual = e.ToString();
+
+            Assert.AreEqual(expected, actual);
+        }
+
+    
+    }
+        
 }
