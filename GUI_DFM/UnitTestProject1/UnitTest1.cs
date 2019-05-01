@@ -66,7 +66,7 @@ namespace UnitTest
                 { 4, 2 }
             };
 
-            var actual = testAlgorithm.BranchAndBound(testMatrix, new TopNode(testMatrix), new List<Node>(), new int[0,0]);
+            var actual = testAlgorithm.BranchAndBound(new TopNode(testMatrix), new List<Node>());
             double distanceActual = 0;
             double distanceExpected = 0;
 
@@ -79,7 +79,7 @@ namespace UnitTest
                 distanceExpected += testMatrix[i, expected[i, 1]];
             }
 
-            CollectionAssert.AreEqual(expected, actual);
+            Assert.AreEqual(distanceExpected, distanceActual);
         }
     }
 
@@ -89,10 +89,20 @@ namespace UnitTest
         [TestMethod]
         public void ReduceMatrixTest()
         {
-            var testMatrix = new double[,] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
+            var testMatrix = new double[,] 
+            { 
+                { Double.PositiveInfinity, 2, 3 }, 
+                { 4, Double.PositiveInfinity, 6 }, 
+                { 7, 8, Double.PositiveInfinity }
+            };
             int rowToBeRemoved = 0;
             int columnToBeRemoved = 1;
-            var expected = new double[,] { { Double.PositiveInfinity, 6 }, { 7, 9 } };
+            var expected = new double[,] 
+            {
+                { Double.PositiveInfinity, Double.PositiveInfinity, Double.PositiveInfinity },
+                { Double.PositiveInfinity, Double.PositiveInfinity, 6 },
+                { 7, Double.PositiveInfinity, Double.PositiveInfinity }
+            };
             var testParent = new TopNode(testMatrix);
             var testNode = new LowerNode(testParent, rowToBeRemoved, columnToBeRemoved);
 
@@ -102,22 +112,7 @@ namespace UnitTest
         }
 
         [TestMethod]
-        public void ReduceOneByOneMatrixTest()
-        {
-            var testMatrix = new double[,] { { 1 } };
-            int rowToBeRemoved = 0;
-            int columnToBeRemoved = 0;
-            var expected = new double[,] { };
-            var testParent = new TopNode(testMatrix);
-            var testNode = new LowerNode(testParent, rowToBeRemoved, columnToBeRemoved);
-
-            var actual = testNode.ReduceMatrix(testMatrix, rowToBeRemoved, columnToBeRemoved);
-
-            CollectionAssert.AreEqual(expected, actual);
-        }
-
-        [TestMethod]
-        public void GetOriginalColumnIndexTest()
+        public void GetPreviouslyVisitedVertexesTest()
         {
             var testMatrix = new double[,]
             {
@@ -127,54 +122,12 @@ namespace UnitTest
                 { 17, 70, 12, Double.PositiveInfinity, 69 },
                 { 81, 28, 50, 69, Double.PositiveInfinity }
             };
-            var nodeList = new List<Node>();
             var testNode = new TopNode(testMatrix);
             var testNode1 = new LowerNode(testNode, 0, 1);
-            var testNode2 = new LowerNode(testNode1, 0, 3);
-            var testNode3 = new LowerNode(testNode2, 0, 2);
-            var testNode4 = new LowerNode(testNode3, 0, 0);
-            var testNode5 = new LowerNode(testNode4, 0, 0);
-            nodeList.Add(testNode);
-            nodeList.Add(testNode1);
-            nodeList.Add(testNode2);
-            nodeList.Add(testNode3);
-            nodeList.Add(testNode4);
-            nodeList.Add(testNode5);
-            var expected = new int[5] { 1, 4, 3, 0, 2 };
-
-            var actual = new int[5];
-            for (int i = 0; i < actual.Length; i++)
-            {
-                actual[i] = ((LowerNode)nodeList[i + 1]).
-                    GetOriginalMatrixElementColumnIndex(((LowerNode)nodeList[i + 1]).elementColumnRemoved);
-            }
-
-            CollectionAssert.AreEqual(expected, actual);
-        }
-        [TestMethod]
-        public void GetPreviouslyVisitedVertexesTest()
-        {
-            var testMatrix = new double[,]
-{
-                { Double.PositiveInfinity, 52, 44, 17, 81 },
-                { 52, Double.PositiveInfinity, 43, 70, 28 },
-                { 44, 43, Double.PositiveInfinity, 12, 50 },
-                { 17, 70, 12, Double.PositiveInfinity, 69 },
-                { 81, 28, 50, 69, Double.PositiveInfinity }
-};
-            var nodeList = new List<Node>();
-            var testNode = new TopNode(testMatrix);
-            var testNode1 = new LowerNode(testNode, 0, 1);
-            var testNode2 = new LowerNode(testNode1, 0, 3);
-            var testNode3 = new LowerNode(testNode2, 0, 2);
-            var testNode4 = new LowerNode(testNode3, 0, 0);
-            var testNode5 = new LowerNode(testNode4, 0, 0);
-            nodeList.Add(testNode);
-            nodeList.Add(testNode1);
-            nodeList.Add(testNode2);
-            nodeList.Add(testNode3);
-            nodeList.Add(testNode4);
-            nodeList.Add(testNode5);
+            var testNode2 = new LowerNode(testNode1, 1, 4);
+            var testNode3 = new LowerNode(testNode2, 2, 3);
+            var testNode4 = new LowerNode(testNode3, 3, 0);
+            var testNode5 = new LowerNode(testNode4, 4, 2);
             var expected = new int[,]
             {
                 { 0, 1 },
@@ -184,7 +137,7 @@ namespace UnitTest
                 { 4, 2 }
             };
 
-            var actual = nodeList[5].GetPreviouslyVisitedVertexes(new int[0, 0]);
+            var actual = testNode5.GetPreviouslyVisitedVertexes(new int[0, 0]);
 
             CollectionAssert.AreEqual(expected, actual);
         }

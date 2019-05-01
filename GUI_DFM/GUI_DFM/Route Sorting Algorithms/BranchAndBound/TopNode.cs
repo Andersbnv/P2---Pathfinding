@@ -24,9 +24,5 @@ namespace GUI_DFM.Route_Sorting_Algorithms.BranchAndBound
         {
             return alreadyKnown;
         }
-        public override int GetOriginalMatrixElementColumnIndex(int columnRemoved)
-        {
-            return columnRemoved;
-        }
     }
 }
