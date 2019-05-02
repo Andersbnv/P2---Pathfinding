@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddPointValidation.cs" />
     <Compile Include="Graph Objects\Edge.cs" />
     <Compile Include="Graph Objects\Graph.cs" />
     <Compile Include="Graph Objects\Vertex.cs" />

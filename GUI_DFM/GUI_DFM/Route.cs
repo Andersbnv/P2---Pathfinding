@@ -38,7 +38,10 @@ namespace GUI_DFM
         }
         public void RemoveFromList(int index)
         {
-            RouteList.RemoveAt(index);
+            if(RouteList.Count > 0)
+            {
+                RouteList.RemoveAt(index);
+            }  
         }
         public void MoveUpElement(int index)
         {

@@ -43,46 +43,23 @@ namespace GUI_DFM
         {
             lstRoute.ItemsSource = null;
         }
+
         private void BtnAddPoint_Click(object sender, RoutedEventArgs e)
         {
-            bool hasInput = (txtAddress.Text.Length > 0) && (txtXCoordinate.Text.Length > 0) && (txtYCoordinate.Text.Length > 0);
-
-            var adressRegex = new Regex(@"^[A-Za-z]$");
-            var coordinateRegex = new Regex(@"^[0-9]");
-            bool validInputAdress = adressRegex.IsMatch(txtAddress.Text);
-            bool validInputCoordinate = (coordinateRegex.IsMatch(txtXCoordinate.Text) && coordinateRegex.IsMatch(txtYCoordinate.Text));
-
-            if (hasInput)
+            var inputValidation = new AddPointValidation(txtAddress.Text, txtXCoordinate.Text, txtYCoordinate.Text);
+            if (inputValidation.HasErrors())
             {
-                if(!validInputAdress && !validInputCoordinate)
-                {
-                    MessageBox.Show("Ugyldigt input! \nAdresser kan kun indeholde bogstaver. \nKoordinater kan kun indeholde tal.");
-                }
-                else if (!validInputAdress)
-                {
-                    MessageBox.Show("Ugyldigt input! \nAdresser kan kun indeholde bogstaver.");
-                }
-                else if (!validInputCoordinate)
-                {
-                    MessageBox.Show("Ugyldigt input! \nKoordinater kan kun indeholde tal.");
-                }
-                else
-                {
-                    var vertexToBeAdded = new Vertex(txtAddress.Text, int.Parse(txtXCoordinate.Text), int.Parse(txtYCoordinate.Text));
-                    ClearListBox();
-                    route.AddToList(vertexToBeAdded);
-                    UpdateListBox();
-
-                    txtAddress.Text = "";
-                    txtXCoordinate.Text = "";
-                    txtYCoordinate.Text = "";
-                }
-
-               
+                MessageBox.Show(inputValidation.GetErrorMessage());
             }
             else
             {
-                MessageBox.Show("Indskriv venligst det punkt, som ønskes tilføjet til listen.");
+                var vertexToBeAdded = new Vertex(txtAddress.Text, int.Parse(txtXCoordinate.Text), int.Parse(txtYCoordinate.Text));
+                ClearListBox();
+                route.AddToList(vertexToBeAdded);
+                UpdateListBox();
+                txtAddress.Text = "";
+                txtXCoordinate.Text = "";
+                txtYCoordinate.Text = "";
             }
         }
         private void BtnRemovePoint_Click(object sender, RoutedEventArgs e)

@@ -103,20 +103,11 @@ namespace UnitTest
         {
             List<Vertex> testList = new List<Vertex>();
             Route testRoute = new Route(testList, new Vertex("startPoint", 2, 3));
-            bool caughtException = false;
-            try
-            {
-                testRoute.RemoveFromList(0);
-            }
-            catch
-            {
-                caughtException = true;
-            }
-
-            var expected = true;
-            var actual = caughtException;
-
+            testRoute.RemoveFromList(0);
+            var expected = 0;
+            var actual = testRoute.RouteList.Count;
             Assert.AreEqual(expected, actual);
+
         }
         [TestMethod]
         public void RemoveFromListTest_ListWithOneElement()
@@ -497,7 +488,6 @@ namespace UnitTest
 
     
     }
-        
     [TestClass]
     public class GraphTest
     {
@@ -521,6 +511,82 @@ namespace UnitTest
 
         }
     }
-  
+    [TestClass]
+    public class AddPointValidationTest
+    {
+        string emptyString = "", letterString = "Test", numberString = "123";
 
+        [TestMethod]
+        public void HasErrorsTest_and_GetErrorMessageTest_noInput()
+        {
+            var TestValidation = new AddPointValidation(emptyString, emptyString, emptyString);
+            var expectedMessage = "Indskriv venligst et bynavn (bogstaver).\nIndskriv venligst et x-koordinat (tal).\nIndskriv venligst et y-koordinat (tal).\n";
+            var actualMessage = TestValidation.GetErrorMessage();
+            Assert.IsTrue(TestValidation.HasErrors());
+            Assert.AreEqual(expectedMessage, actualMessage);
+        }
+        [TestMethod]
+        public void HasErrorsTest_and_GetErrorMessageTest_noAdress()
+        {
+            var TestValidation = new AddPointValidation(emptyString, numberString, numberString);
+            var expectedMessage = "Indskriv venligst et bynavn (bogstaver).\n";
+            var actualMessage = TestValidation.GetErrorMessage();
+            Assert.IsTrue(TestValidation.HasErrors());
+            Assert.AreEqual(expectedMessage, actualMessage);        
+        }
+        [TestMethod]
+        public void HasErrorsTest_and_GetErrorMessageTest_noXCoordinate()
+        {
+            var TestValidation = new AddPointValidation(letterString, emptyString, numberString);
+            var expectedMessage = "Indskriv venligst et x-koordinat (tal).\n";
+            var actualMessage = TestValidation.GetErrorMessage();
+            Assert.IsTrue(TestValidation.HasErrors());
+            Assert.AreEqual(expectedMessage, actualMessage);
+        }
+        [TestMethod]
+        public void HasErrorsTest_and_GetErrorMessageTest_noYCoordinate()
+        {
+            var TestValidation = new AddPointValidation(letterString, numberString, emptyString);
+            var expectedMessage = "Indskriv venligst et y-koordinat (tal).\n";
+            var actualMessage = TestValidation.GetErrorMessage();
+            Assert.IsTrue(TestValidation.HasErrors());
+            Assert.AreEqual(expectedMessage, actualMessage);
+        }
+        [TestMethod]
+        public void HasErrorsTest_and_GetErrorMessageTest_AdressNotLetters()
+        {
+            var TestValidation = new AddPointValidation(numberString, numberString, numberString);
+            var expectedMessage = "Bynavn må kun indeholde bogstaver.\n";
+            var actualMessage = TestValidation.GetErrorMessage();
+            Assert.IsTrue(TestValidation.HasErrors());
+            Assert.AreEqual(expectedMessage, actualMessage);
+        }
+        [TestMethod]
+        public void HasErrorsTest_and_GetErrorMessageTest_xCoordinateNotNumber()
+        {
+            var TestValidation = new AddPointValidation(letterString, letterString, numberString);
+            var expectedMessage = "X-koordinat må kun indeholde tal.\n";
+            var actualMessage = TestValidation.GetErrorMessage();
+            Assert.IsTrue(TestValidation.HasErrors());
+            Assert.AreEqual(expectedMessage, actualMessage);
+        }
+        [TestMethod]
+        public void HasErrorsTest_and_GetErrorMessageTest_yCoordinateNotNumber()
+        {
+            var TestValidation = new AddPointValidation(letterString, numberString, letterString);
+            var expectedMessage = "Y-koordinat må kun indeholde tal.\n";
+            var actualMessage = TestValidation.GetErrorMessage();
+            Assert.IsTrue(TestValidation.HasErrors());
+            Assert.AreEqual(expectedMessage, actualMessage);
+        }
+        [TestMethod]
+        public void HasErrorsTest_and_GetErrorMessageTest_allValidInput()
+        {
+            var TestValidation = new AddPointValidation(letterString, numberString, numberString);
+            var expectedMessage = "";
+            var actualMessage = TestValidation.GetErrorMessage();
+            Assert.IsFalse(TestValidation.HasErrors());
+            Assert.AreEqual(expectedMessage, actualMessage);
+        }
+    }
 }
