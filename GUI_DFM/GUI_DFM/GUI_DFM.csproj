@@ -59,6 +59,9 @@
     <Compile Include="Graph Objects\Edge.cs" />
     <Compile Include="Graph Objects\Graph.cs" />
     <Compile Include="Graph Objects\Vertex.cs" />
+    <Compile Include="GreedyTwoOpt\Core.cs" />
+    <Compile Include="GreedyTwoOpt\Tour.cs" />
+    <Compile Include="Route Sorting Algorithms\IRouteAlgorithm.cs" />
     <Compile Include="Route.cs" />
     <Compile Include="Route Sorting Algorithms\NearestNeightbour.cs" />
     <Compile Include="Route Sorting Algorithms\RouteAlgorithm.cs" />

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GUI_DFM.Route_Sorting_Algorithms;
 
 namespace GUI_DFM
 {
@@ -15,7 +16,7 @@ namespace GUI_DFM
             this.RouteList = RouteList;
             this.StartingPoint = StartingPoint;
         }
-        public void CalculateRoute(RouteAlgorithm algorithm)
+        public void CalculateRoute(IRouteAlgorithm algorithm)
         {
             RouteList = algorithm.Algorithm(StartingPoint, RouteList);
         }
