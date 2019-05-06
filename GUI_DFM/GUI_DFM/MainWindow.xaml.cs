@@ -15,7 +15,8 @@ using System.Windows.Navigation;
 using System.Collections.ObjectModel;
 using System.Windows.Shapes;
 using System.Text.RegularExpressions;
-
+using GUI_DFM.Route_Sorting_Algorithms;
+using GUI_DFM.GreedyTwoOpt;
 
 namespace GUI_DFM
 {
@@ -83,10 +84,8 @@ namespace GUI_DFM
         }
         private void BtnCalculateRoute_Click(object sender, RoutedEventArgs e)
         {
-            cnvsCalculating.Opacity = 1;
-            Panel.SetZIndex(cnvsCalculating, 1);
-            RouteAlgorithm nearestNeighbour = new NearestNeighbour();
-            route.CalculateRoute(nearestNeighbour);
+            IRouteAlgorithm routeAlgorithm = new Core();
+            route.CalculateRoute(routeAlgorithm);
             lstRoute.ItemsSource = route.RouteList;
 
         }
