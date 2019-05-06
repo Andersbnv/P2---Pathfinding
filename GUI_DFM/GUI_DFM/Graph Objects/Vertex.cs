@@ -31,14 +31,14 @@ namespace GUI_DFM
         {
             foreach (var vertex in vertexList)
             {
-                ConnectionList.Add(new Edge(this.Address, DistanceToVertex(vertex), vertex.Address));
+                ConnectionList.Add(new Edge(Address, DistanceToVertex(vertex), vertex.Address));
             }
         }
 
         public double DistanceToVertex(Vertex vertex)
         {
-            double xDistance = vertex.XCoordinate - this.XCoordinate;
-            double yDistance = vertex.YCoordinate - this.YCoordinate;
+            double xDistance = vertex.XCoordinate - XCoordinate;
+            double yDistance = vertex.YCoordinate - YCoordinate;
             return Math.Sqrt(xDistance * xDistance + yDistance * yDistance);
         }
     }
