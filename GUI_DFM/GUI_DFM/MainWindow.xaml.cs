@@ -135,21 +135,11 @@ namespace GUI_DFM
                 }
             }
         }
-        private void LstRoute_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
 
         private void TxtBox_GotFocus(object sender, RoutedEventArgs e)
         {
             TextBox target = (TextBox)sender;
             target.Clear();
-        }
-
-        private void Btn_MouseEnter(object sender, RoutedEventArgs e)
-        {
-            Button target = (Button)sender;
-            target.Background = new SolidColorBrush(Color.FromArgb(0xFF, 0xFF, 0, 0));
         }
 
     }
