@@ -51,11 +51,6 @@
                     </Style>
                 </Button.Style>
             </Button>
-            <Canvas x:Name="cnvsCalculating" Height="153" Width="234" Canvas.Left="276" Canvas.Top="359" Background="#FF009ADA" Panel.ZIndex="-1" Opacity="0">
-                <fa:ImageAwesome Icon="Cog" Spin="True" SpinDuration="4" Height="48" Foreground="White" Canvas.Left="94" Canvas.Top="36" Width="48"/>
-                <Label x:Name="lblCalculating" Content="Ruten beregnes..." HorizontalContentAlignment="Center" VerticalAlignment="Top" Height="32" Width="150" FontSize="17" FontWeight="Bold" Canvas.Left="45" Foreground="White" Canvas.Top="94" />
-            </Canvas>
-
         </Canvas>
         <Canvas HorizontalAlignment="Left" Height="107" VerticalAlignment="Top" Width="1050" Background="#FF4D4D4D" Panel.ZIndex="-1" Margin="0,652,0,0">
             <TextBox x:Name="txtAddress" Height="30" TextWrapping="Wrap" Text="Indtast navn" Width="180" Background="{x:Null}" BorderBrush="White" HorizontalContentAlignment="Center" FontFamily="Microsoft Sans Serif" FontSize="17" Foreground="#FFA8A8A8" BorderThickness="0,0,0,2" Cursor="IBeam" GotFocus="TxtBox_GotFocus" Canvas.Left="69" Canvas.Top="46" />
