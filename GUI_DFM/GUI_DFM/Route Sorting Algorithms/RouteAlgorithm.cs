@@ -12,6 +12,8 @@ namespace GUI_DFM
         {
             return inputList.GroupBy(c => c.Address).Select(c => c.First()).ToList();
         }
+        // Override this method where the actual algorithm is implemented
+        // for all classes who inherit from this class. 
         public abstract List<Vertex> Algorithm(Vertex startingPoint, List<Vertex> unsortedList);
 
         public double[,] ListToMatrix(List<Vertex> inputList)

@@ -32,7 +32,7 @@ namespace GUI_DFM
             InitializeTimer();
             string filePath = @"..\..\test.txt";
             graph = new Graph(filePath);
-            route = new Route(graph.VertexList, graph.VertexList.ElementAt(1));
+            route = new Route(graph.VertexList, graph.VertexList.ElementAt(0));
             lstRoute.ItemsSource = route.RouteList;
         }
         private void UpdateListBox()
