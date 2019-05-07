@@ -15,7 +15,8 @@ using System.Windows.Navigation;
 using System.Collections.ObjectModel;
 using System.Windows.Shapes;
 using System.Text.RegularExpressions;
-
+using GUI_DFM.Route_Sorting_Algorithms;
+using GUI_DFM.GreedyTwoOpt;
 
 namespace GUI_DFM
 {
@@ -46,6 +47,10 @@ namespace GUI_DFM
 
         private void BtnAddPoint_Click(object sender, RoutedEventArgs e)
         {
+            txtAddress.Text = txtAddress.Text == "Indtast navn" ? "" : txtAddress.Text;
+            txtXCoordinate.Text = txtXCoordinate.Text == "Indtast x" ? "" : txtXCoordinate.Text;
+            txtYCoordinate.Text = txtYCoordinate.Text == "Indtast y" ? "" : txtYCoordinate.Text;
+
             var inputValidation = new AddPointValidation(txtAddress.Text, txtXCoordinate.Text, txtYCoordinate.Text);
             if (inputValidation.HasErrors())
             {
@@ -57,10 +62,10 @@ namespace GUI_DFM
                 ClearListBox();
                 route.AddToList(vertexToBeAdded);
                 UpdateListBox();
-                txtAddress.Text = "";
-                txtXCoordinate.Text = "";
-                txtYCoordinate.Text = "";
             }
+            txtAddress.Text = "Indtast navn";
+            txtXCoordinate.Text = "Indtast x";
+            txtYCoordinate.Text = "Indtast y";
         }
         private void BtnRemovePoint_Click(object sender, RoutedEventArgs e)
         {
@@ -79,9 +84,10 @@ namespace GUI_DFM
         }
         private void BtnCalculateRoute_Click(object sender, RoutedEventArgs e)
         {
-            RouteAlgorithm nearestNeighbour = new NearestNeighbour();
-            route.CalculateRoute(nearestNeighbour);
+            IRouteAlgorithm routeAlgorithm = new Core();
+            route.CalculateRoute(routeAlgorithm);
             lstRoute.ItemsSource = route.RouteList;
+
         }
         private void BtnMoveDown_Click(object sender, RoutedEventArgs e)
         {
@@ -133,5 +139,18 @@ namespace GUI_DFM
         {
 
         }
+
+        private void TxtBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox target = (TextBox)sender;
+            target.Clear();
+        }
+
+        private void Btn_MouseEnter(object sender, RoutedEventArgs e)
+        {
+            Button target = (Button)sender;
+            target.Background = new SolidColorBrush(Color.FromArgb(0xFF, 0xFF, 0, 0));
+        }
+
     }
 }
