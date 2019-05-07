@@ -11,7 +11,7 @@ namespace GUI_DFM
         public override List<Vertex> Algorithm(Vertex startingPoint, List<Vertex> unsortedRoute)
         {
             List<Vertex> sortedRoute = new List<Vertex>();
-           //unsortedRoute.Insert(0, startingPoint);
+            unsortedRoute.Insert(0, startingPoint);
             unsortedRoute = RemoveDuplicates(unsortedRoute);
             int numberOfILoops = unsortedRoute.Count;
 

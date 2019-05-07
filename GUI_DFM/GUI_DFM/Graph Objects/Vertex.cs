@@ -14,19 +14,19 @@ namespace GUI_DFM
         public double YCoordinate { get; set; }
         // Make proper setter.
         public List<Edge> ConnectionList = new List<Edge>();
-
+        // Vertex constructor
         public Vertex(string address, double xCordinate, double yCordinate)
         {
             Address = address;
             XCoordinate = xCordinate;
             YCoordinate = yCordinate;
         }
-
+        // ToString overrite, which is used for displaying a Vertex in GUI
         public override string ToString()
         {
             return $"{Address} X:{XCoordinate} Y:{YCoordinate}";
         }
-
+        // Takes a list of Vertices, 
         public void InitializeConnectionList(List<Vertex> vertexList)
         {
             foreach (var vertex in vertexList)
@@ -34,7 +34,7 @@ namespace GUI_DFM
                 ConnectionList.Add(new Edge(Address, DistanceToVertex(vertex), vertex.Address));
             }
         }
-
+        
         public double DistanceToVertex(Vertex vertex)
         {
             double xDistance = vertex.XCoordinate - XCoordinate;

@@ -13,7 +13,7 @@ namespace GUI_DFM
         
         public AddPointValidation(string addressInput, string xCoordinateInput, string yCoordinateInput)
         {
-            var adressRegex = new Regex(@"^[A-Za-z]");
+            var adressRegex = new Regex(@"^[A-Za-zæøåÆØÅ]");
             var coordinateRegex = new Regex(@"^[0-9]");
 
             addressHasInput = (addressInput.Length > 0);
