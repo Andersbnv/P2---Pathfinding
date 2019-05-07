@@ -124,7 +124,7 @@
                     </Style>
                 </Button.Style>
             </Button>
-            <Button x:Name="btnRemovePoint" Click="BtnRemovePoint_Click" MouseEnter="Btn_MouseEnter" Height="50" Width="50" Cursor="Hand" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Canvas.Left="896" Canvas.Top="16">
+            <Button x:Name="btnRemovePoint" Click="BtnRemovePoint_Click" Height="50" Width="50" Cursor="Hand" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Canvas.Left="896" Canvas.Top="16">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Style.Setters>
