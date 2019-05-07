@@ -3,7 +3,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using GUI_DFM;
 using System.Collections.Generic;
 using System.Linq;
-
+using GUI_DFM.GreedyTwoOpt;
+using GUI_DFM.Route_Sorting_Algorithms;
 
 namespace UnitTest
 {
@@ -280,7 +281,7 @@ namespace UnitTest
             };
             Route route_0 = new Route(testList, testList.ElementAt(0));
             Route route_1 = new Route(testList, testList.ElementAt(0));
-            RouteAlgorithm testAlgorithm = new NearestNeighbour();
+            IRouteAlgorithm testAlgorithm = new NearestNeighbour();
             route_0.RouteList = testAlgorithm.Algorithm(testList.ElementAt(0), route_0.RouteList);
             route_1.CalculateRoute(testAlgorithm);
 
@@ -589,4 +590,76 @@ namespace UnitTest
             Assert.AreEqual(expectedMessage, actualMessage);
         }
     }
+    [TestClass]
+    public class Greedy2OptimizationAlgorithmTest
+    {
+        [TestMethod]
+        public void NearestNeighborTest()
+        {
+            Vertex Test1 = new Vertex("Aalborg", 1, 2);
+            Vertex Test2 = new Vertex("Aarhus", 2, 1);
+            Vertex Test3 = new Vertex("Koebenhavn", 10, 20);
+            int startingPointIndex = 0;
+
+            var unsortedList = new List<Vertex> { };
+            unsortedList.Add(Test2);
+            unsortedList.Add(Test1);
+            unsortedList.Add(Test3);
+            
+
+            var outputlist = new List<Vertex> { unsortedList[startingPointIndex] };
+            var expectedlist = new List<Vertex> { };
+            expectedlist.Add(Test1);
+            expectedlist.Add(Test2);
+            expectedlist.Add(Test3);
+
+            Core c = new Core();
+
+            var expected1 = expectedlist[0];
+            var expected2 = expectedlist[1];
+            var expected3 = expectedlist[2];
+            var actual = c.Algorithm(Test1,unsortedList);
+
+            Assert.AreEqual(expected1, actual[0]);
+            Assert.AreEqual(expected2, actual[1]);
+            Assert.AreEqual(expected3, actual[2]);
+        }
+
+        [TestMethod]
+        public void TwoOptTest()
+        {
+            Vertex Test1 = new Vertex("Test1", 1, 2);
+            Vertex Test2 = new Vertex("Test2", 2, 1);
+            Vertex Test3 = new Vertex("Test3", 15, 20);
+            Vertex Test4 = new Vertex("Test 4", 2, 4);
+            Vertex Test5 = new Vertex("Test 5", 4, 2);
+            int startingPointIndex = 0;
+
+            var unsortedList = new List<Vertex> { };
+            unsortedList.Add(Test2);
+            unsortedList.Add(Test1);
+            unsortedList.Add(Test3);
+            unsortedList.Add(Test4);
+            unsortedList.Add(Test5);
+
+
+            var outputlist = new List<Vertex> { unsortedList[startingPointIndex] };
+            var expectedlist = new List<Vertex> { };
+            expectedlist.Add(Test1);
+            expectedlist.Add(Test2);
+            expectedlist.Add(Test5);
+            expectedlist.Add(Test3);
+            expectedlist.Add(Test4);
+
+            Core c = new Core();
+            var actual = c.Algorithm(Test1, unsortedList);
+
+            Assert.AreEqual(expectedlist[0], actual[0]);
+            Assert.AreEqual(expectedlist[1], actual[1]);
+            Assert.AreEqual(expectedlist[2], actual[2]);
+            Assert.AreEqual(expectedlist[3], actual[3]);
+            Assert.AreEqual(expectedlist[4], actual[4]);
+        }
+    }
+        
 }
