@@ -1,28 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.IO;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Collections.ObjectModel;
-using System.Windows.Shapes;
-using System.Text.RegularExpressions;
 using GUI_DFM.Route_Sorting_Algorithms;
 using GUI_DFM.GreedyTwoOpt;
 
 namespace GUI_DFM
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public Graph graph;
@@ -33,24 +16,22 @@ namespace GUI_DFM
             InitializeTimer();
             string filePath = @"..\..\test.txt";
             graph = new Graph(filePath);
-            route = new Route(graph.VertexList, graph.VertexList.ElementAt(0));
-            lstRoute.ItemsSource = route.RouteList;
+            route = new Route(graph.vertexList, graph.vertexList.ElementAt(0));
+            lstRoute.ItemsSource = route.routeList;
         }
         private void UpdateListBox()
         {
-            lstRoute.ItemsSource = route.RouteList;
+            lstRoute.ItemsSource = route.routeList;
         }
         private void ClearListBox()
         {
             lstRoute.ItemsSource = null;
         }
-
         private void BtnAddPoint_Click(object sender, RoutedEventArgs e)
         {
             txtAddress.Text = txtAddress.Text == "Indtast navn" ? "" : txtAddress.Text;
             txtXCoordinate.Text = txtXCoordinate.Text == "Indtast x" ? "" : txtXCoordinate.Text;
             txtYCoordinate.Text = txtYCoordinate.Text == "Indtast y" ? "" : txtYCoordinate.Text;
-
             var inputValidation = new AddPointValidation(txtAddress.Text, txtXCoordinate.Text, txtYCoordinate.Text);
             if (inputValidation.HasErrors())
             {
@@ -70,7 +51,6 @@ namespace GUI_DFM
         private void BtnRemovePoint_Click(object sender, RoutedEventArgs e)
         {
             int selectedIndex = lstRoute.Items.IndexOf(lstRoute.SelectedItem);
-
             if (selectedIndex < 0)
             {
                 MessageBox.Show("Marker venligst det punkt i listen, som ønskes slettet.");
@@ -86,8 +66,7 @@ namespace GUI_DFM
         {
             IRouteAlgorithm routeAlgorithm = new Core();
             route.CalculateRoute(routeAlgorithm);
-            lstRoute.ItemsSource = route.RouteList;
-
+            lstRoute.ItemsSource = route.routeList;
         }
         private void BtnMoveDown_Click(object sender, RoutedEventArgs e)
         {
@@ -109,7 +88,6 @@ namespace GUI_DFM
                 else
                 {
                     lstRoute.SelectedItem = lstRoute.Items.GetItemAt(selectedIndex + 1);
-
                 }
             }
         }
@@ -135,12 +113,10 @@ namespace GUI_DFM
                 }
             }
         }
-
         private void TxtBox_GotFocus(object sender, RoutedEventArgs e)
         {
             TextBox target = (TextBox)sender;
             target.Clear();
         }
-
     }
 }

@@ -20,8 +20,6 @@
                 </Style>
             </ListBox.ItemContainerStyle>
         </ListBox>
-
-
         <Canvas HorizontalAlignment="Left" Height="608" VerticalAlignment="Top" Width="780" Background="#FF009ADA" Panel.ZIndex="-1">
             <Label x:Name="lblDriverName" Content="Anders Andersen" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalAlignment="Top" Height="50" Width="400" FontSize="40" Foreground="White" FontFamily="Microsoft Sans Serif" FontWeight="Bold" Canvas.Left="190" Canvas.Top="137"/>
             <Label x:Name="lblRouteName" Content="Rute 217, Aalborg Øst" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalAlignment="Top" Height="47" Width="400" FontSize="20" FontWeight="Bold" Canvas.Left="190" Canvas.Top="192" Foreground="White"/>
@@ -137,11 +135,9 @@
                 </Button.Style>
             </Button>
             <Border BorderBrush="#FF3A3A3A" BorderThickness="1,0,0,0" Height="147" Canvas.Left="780" Width="4" Canvas.Top="-27"/>
-            <Rectangle Fill="#FF6E6E6E" HorizontalAlignment="Left" Height="21" Stroke="#FF3A3A3A" VerticalAlignment="Top" Width="1068" Canvas.Top="-45"/>
+            <Rectangle Fill="#FF6E6E6E" HorizontalAlignment="Left" Height="21" Stroke="#FF3A3A3A" VerticalAlignment="Top" Width="1061" Canvas.Top="-45"/>
             <Label x:Name="lblAddPoint" Content="Tilføj punkt" HorizontalAlignment="Left" VerticalAlignment="Top" Width="71" Height="29" Background="{x:Null}" Foreground="#FF303030" Canvas.Left="350" Canvas.Top="-47" FontSize="10" FontWeight="Bold"/>
             <Label x:Name="lblEditPoint" Content="Fjern / flyt punkt" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="29" Background="{x:Null}" Foreground="#FF303030" Canvas.Left="872" Canvas.Top="-47" FontSize="10" FontWeight="Bold"/>
         </Canvas>
-
-
     </Grid>
 </Window>

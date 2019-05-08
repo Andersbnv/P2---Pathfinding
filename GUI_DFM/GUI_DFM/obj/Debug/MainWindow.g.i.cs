@@ -9,6 +9,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using FontAwesome.WPF;
+using FontAwesome.WPF.Converters;
 using GUI_DFM;
 using System;
 using System.Diagnostics;

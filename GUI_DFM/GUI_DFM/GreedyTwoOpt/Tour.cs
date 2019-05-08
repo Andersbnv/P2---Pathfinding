@@ -1,71 +1,62 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GUI_DFM.GreedyTwoOpt
 {
     public class Tour
     {
-        public double[,] WeightMatrix;
-        public int[] IndexRoute;
-
+        public double[,] weightMatrix;
+        public int[] indexRoute;
         public delegate void weightDelegate();
         public weightDelegate WeightUpdate;
         public double Weight { get; private set; }  // Weight from start to finish.
         public double TotalWeight                   // Weight from start and back to start.
         {
-            get => Weight + WeightMatrix[IndexRoute[IndexRoute.Length - 1], IndexRoute[0]];
+            get => Weight + weightMatrix[indexRoute[indexRoute.Length - 1], indexRoute[0]];
         }
-
         public Tour(List<Vertex> inputList)
         {
             var count = inputList.Count;
-            WeightMatrix = new double[count, count];
+            weightMatrix = new double[count, count];
             InitializeWeightMatrix(inputList);
-            IndexRoute = new int[count];
-            IndexRoute = Enumerable.Range(0, count).ToArray();
+            indexRoute = new int[count];
+            indexRoute = Enumerable.Range(0, count).ToArray();
             WeightUpdate += IndexRouteWeight;
             WeightUpdate();
         }
-
         public Tour(Tour input)
         {
 
-            IndexRoute = input.IndexRoute.Select(x => x).ToArray();
-            WeightMatrix = input.WeightMatrix;
+            indexRoute = input.indexRoute.Select(x => x).ToArray();
+            weightMatrix = input.weightMatrix;
 
             WeightUpdate += IndexRouteWeight;
             WeightUpdate();
         }
-
         private void InitializeWeightMatrix(List<Vertex> Vertices)
         {
-            int rowLenth = WeightMatrix.GetLength(0);
-            int columnLenth = WeightMatrix.GetLength(1);
-            for (int row = 0; row < rowLenth; row++)
+            int rowLength = weightMatrix.GetLength(0);
+            int columnLength = weightMatrix.GetLength(1);
+            for (int row = 0; row < rowLength; row++)
             {
-                for (int column = 0; column < columnLenth; column++)
+                for (int column = 0; column < columnLength; column++)
                 {
-                    WeightMatrix[row, column] = row != column ?
+                    weightMatrix[row, column] = row != column ?
                         Vertices[row].DistanceToVertex(Vertices[column]) : Double.PositiveInfinity;
                 }
             }
         }
-
         private void IndexRouteWeight()
         {
             double weight = 0;
-            for (int i = 0; i < IndexRoute.Length - 1; i++)
+            for (int i = 0; i < indexRoute.Length - 1; i++)
             {
-                var temp = WeightMatrix[IndexRoute[i], IndexRoute[i + 1]];
+                var temp = weightMatrix[indexRoute[i], indexRoute[i + 1]];
                 weight += temp;
             }
             Weight = weight;
         }
-
-
         public void TwoOpt()
         {
             double change;
@@ -73,16 +64,16 @@ namespace GUI_DFM.GreedyTwoOpt
             {
                 change = 0;
                 int iSwap = 0, jSwap = 0;
-                var indexLength = IndexRoute.Length;
+                var indexLength = indexRoute.Length;
                 for (int i = 0; i < indexLength - 3; i++)
                 {
                     for (int j = i + 2; j < indexLength - 1; j++)
                     {
                         double twoOptResult =
-                            WeightMatrix[IndexRoute[i], IndexRoute[j]] +
-                            WeightMatrix[IndexRoute[i + 1], IndexRoute[j + 1]] -
-                            WeightMatrix[IndexRoute[i], IndexRoute[i + 1]] -
-                            WeightMatrix[IndexRoute[j], IndexRoute[j + 1]];
+                            weightMatrix[indexRoute[i], indexRoute[j]] +
+                            weightMatrix[indexRoute[i + 1], indexRoute[j + 1]] -
+                            weightMatrix[indexRoute[i], indexRoute[i + 1]] -
+                            weightMatrix[indexRoute[j], indexRoute[j + 1]];
                         if (twoOptResult < change)
                         {
                             change = twoOptResult;
@@ -95,12 +86,11 @@ namespace GUI_DFM.GreedyTwoOpt
             } while (change < 0);
             WeightUpdate();
         }
-
         private void TwoOptSwap(int i, int j)
         {
-            var temp = IndexRoute[i + 1];
-            IndexRoute[i + 1] = IndexRoute[j];
-            IndexRoute[j] = temp;
+            var temp = indexRoute[i + 1];
+            indexRoute[i + 1] = indexRoute[j];
+            indexRoute[j] = temp;
         }
     }
 }

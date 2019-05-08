@@ -3,8 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GUI_DFM.GreedyTwoOpt
 {
@@ -14,7 +12,6 @@ namespace GUI_DFM.GreedyTwoOpt
         private Tour _currentImproveTour;
         private readonly Stopwatch _runtime = new Stopwatch();
         private List<Vertex> _vertices;
-
         public List<Vertex> Algorithm(Vertex startingPoint, List<Vertex> vertices)
         {
             _runtime.Restart();
@@ -25,23 +22,21 @@ namespace GUI_DFM.GreedyTwoOpt
             Improve();
             _runtime.Stop();
 
-            return ReturnMethod(_vertices, Array.IndexOf(Tour.IndexRoute, _vertices.IndexOf(startingPoint)));
+            return ReturnMethod(_vertices, Array.IndexOf(Tour.indexRoute, _vertices.IndexOf(startingPoint)));
         }
-
         private List<Vertex> ReturnMethod(List<Vertex> inputList, int startingpoint)
         {
             var returnList = new List<Vertex>();
             for (int i = startingpoint; i < inputList.Count; i++)
             {
-                returnList.Add(inputList[Tour.IndexRoute[i]]);
+                returnList.Add(inputList[Tour.indexRoute[i]]);
             }
             for (int i = 0; i < startingpoint; i++)
             {
-                returnList.Add(inputList[Tour.IndexRoute[i]]);
+                returnList.Add(inputList[Tour.indexRoute[i]]);
             }
             return returnList;
         }
-
         private void NearestNeighbor(int startingPointIndex)
         {
             var outputList = new List<Vertex> { _vertices[startingPointIndex] };
@@ -60,7 +55,6 @@ namespace GUI_DFM.GreedyTwoOpt
             }
             Tour = new Tour(outputList);
         }
-
         private void Improve()
         {
             Random number = new Random();
@@ -78,7 +72,6 @@ namespace GUI_DFM.GreedyTwoOpt
                 }
             }
         }
-
         private void GreedyStrat()
         {
             var oldPath = _currentImproveTour.Weight;
@@ -90,14 +83,13 @@ namespace GUI_DFM.GreedyTwoOpt
                 Replace();
             }
         }
-
         private void RandomStrat()
         {
             Random number = new Random();
 
             _currentImproveTour.WeightUpdate();
             var oldPath = _currentImproveTour.Weight;
-            _currentImproveTour.IndexRoute = _currentImproveTour.IndexRoute.OrderBy(x => number.Next()).ToArray();
+            _currentImproveTour.indexRoute = _currentImproveTour.indexRoute.OrderBy(x => number.Next()).ToArray();
 
             _currentImproveTour.WeightUpdate();
             if (oldPath > _currentImproveTour.Weight)
@@ -105,12 +97,11 @@ namespace GUI_DFM.GreedyTwoOpt
                 Replace();
             }
         }
-
         private void Replace()
         {
             if (_currentImproveTour.TotalWeight < Tour.TotalWeight)
             {
-                Tour.IndexRoute = _currentImproveTour.IndexRoute.Select(v => v).ToArray();
+                Tour.indexRoute = _currentImproveTour.indexRoute.Select(v => v).ToArray();
                 Tour.WeightUpdate();
             }
         }

@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Threading;
-using System.Threading.Tasks;
 
 namespace GUI_DFM
 {
@@ -19,7 +15,6 @@ namespace GUI_DFM
             timer.Tick += timer_Tick;
             timer.Start();
         }
-
         private void timer_Tick(object sender, EventArgs e)
         {
             lblTime.Content = DateTime.Now.ToLongTimeString();

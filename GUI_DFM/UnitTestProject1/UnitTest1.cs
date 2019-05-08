@@ -79,7 +79,7 @@ namespace UnitTest
             testRoute.AddToList(testVertex);
 
             var expected = testVertex;
-            var actual = testRoute.RouteList.ElementAt(1);
+            var actual = testRoute.routeList.ElementAt(1);
 
             Assert.AreEqual(expected, actual);
         }
@@ -95,7 +95,7 @@ namespace UnitTest
             testRoute.AddToList(testVertex);
 
             var expected = testVertex;
-            var actual = testRoute.RouteList.ElementAt(0);
+            var actual = testRoute.routeList.ElementAt(0);
 
             Assert.AreEqual(expected, actual);
         }
@@ -106,7 +106,7 @@ namespace UnitTest
             Route testRoute = new Route(testList, new Vertex("startPoint", 2, 3));
             testRoute.RemoveFromList(0);
             var expected = 0;
-            var actual = testRoute.RouteList.Count;
+            var actual = testRoute.routeList.Count;
             Assert.AreEqual(expected, actual);
 
         }
@@ -282,30 +282,30 @@ namespace UnitTest
             Route route_0 = new Route(testList, testList.ElementAt(0));
             Route route_1 = new Route(testList, testList.ElementAt(0));
             IRouteAlgorithm testAlgorithm = new NearestNeighbour();
-            route_0.RouteList = testAlgorithm.Algorithm(testList.ElementAt(0), route_0.RouteList);
+            route_0.routeList = testAlgorithm.Algorithm(testList.ElementAt(0), route_0.routeList);
             route_1.CalculateRoute(testAlgorithm);
 
-            var expected_0 = route_0.RouteList.ElementAt(0);
-            var expected_1 = route_0.RouteList.ElementAt(1);
-            var expected_2 = route_0.RouteList.ElementAt(2);
-            var expected_3 = route_0.RouteList.ElementAt(3);
-            var expected_4 = route_0.RouteList.ElementAt(4);
-            var expected_5 = route_0.RouteList.ElementAt(5);
-            var expected_6 = route_0.RouteList.ElementAt(6);
-            var expected_7 = route_0.RouteList.ElementAt(7);
-            var expected_8 = route_0.RouteList.ElementAt(8);
-            var expected_9 = route_0.RouteList.ElementAt(9);            
+            var expected_0 = route_0.routeList.ElementAt(0);
+            var expected_1 = route_0.routeList.ElementAt(1);
+            var expected_2 = route_0.routeList.ElementAt(2);
+            var expected_3 = route_0.routeList.ElementAt(3);
+            var expected_4 = route_0.routeList.ElementAt(4);
+            var expected_5 = route_0.routeList.ElementAt(5);
+            var expected_6 = route_0.routeList.ElementAt(6);
+            var expected_7 = route_0.routeList.ElementAt(7);
+            var expected_8 = route_0.routeList.ElementAt(8);
+            var expected_9 = route_0.routeList.ElementAt(9);            
 
-            var actual_0 = route_1.RouteList.ElementAt(0);
-            var actual_1 = route_1.RouteList.ElementAt(1);
-            var actual_2 = route_1.RouteList.ElementAt(2);
-            var actual_3 = route_1.RouteList.ElementAt(3);
-            var actual_4 = route_1.RouteList.ElementAt(4);
-            var actual_5 = route_1.RouteList.ElementAt(5);
-            var actual_6 = route_1.RouteList.ElementAt(6);
-            var actual_7 = route_1.RouteList.ElementAt(7);
-            var actual_8 = route_1.RouteList.ElementAt(8);
-            var actual_9 = route_1.RouteList.ElementAt(9);
+            var actual_0 = route_1.routeList.ElementAt(0);
+            var actual_1 = route_1.routeList.ElementAt(1);
+            var actual_2 = route_1.routeList.ElementAt(2);
+            var actual_3 = route_1.routeList.ElementAt(3);
+            var actual_4 = route_1.routeList.ElementAt(4);
+            var actual_5 = route_1.routeList.ElementAt(5);
+            var actual_6 = route_1.routeList.ElementAt(6);
+            var actual_7 = route_1.routeList.ElementAt(7);
+            var actual_8 = route_1.routeList.ElementAt(8);
+            var actual_9 = route_1.routeList.ElementAt(9);
 
             Assert.AreEqual(expected_0, actual_0);
             Assert.AreEqual(expected_1, actual_1);
@@ -333,11 +333,11 @@ namespace UnitTest
             };
             for (int i = 0; i < testList.Count; i++)
             {
-                testList[i].ConnectionList = new List<Edge>
+                testList[i].connectionList = new List<Edge>
                 {
-                    new Edge(testList[i].Address, i*5, "Adress1"),
-                    new Edge(testList[i].Address, i==1 ? 0 : 5, "Adress2"),
-                    new Edge(testList[i].Address, 10-5*i, "Adress3")
+                    new Edge(testList[i].address, i*5, "Adress1"),
+                    new Edge(testList[i].address, i==1 ? 0 : 5, "Adress2"),
+                    new Edge(testList[i].address, 10-5*i, "Adress3")
                 };
             }
             RouteAlgorithm testAlgorithm = new NearestNeighbour();
@@ -367,9 +367,9 @@ namespace UnitTest
             var expected2 = 1.1;
             var expected3 = 2.2;
 
-            var actual1 = e.Address;
-            var actual2 = e.XCoordinate;
-            var actual3 = e.YCoordinate;
+            var actual1 = e.address;
+            var actual2 = e.xCoordinate;
+            var actual3 = e.yCoordinate;
 
             Assert.AreEqual(expected1, actual1);
             Assert.AreEqual(expected2, actual2);
@@ -438,16 +438,16 @@ namespace UnitTest
                 new Vertex("address4", 7, 5),
                 new Vertex("address5", 10, 5)
             };
-            var edge = new Edge(vertexList[0].Address, vertexList[0].DistanceToVertex(vertexList[3]), vertexList[3].Address);
+            var edge = new Edge(vertexList[0].address, vertexList[0].DistanceToVertex(vertexList[3]), vertexList[3].address);
             
             vertexList[0].InitializeConnectionList(vertexList);
-            var actual1 = vertexList.ElementAt(0).ConnectionList.ElementAt(3).FirstLocation;
-            var actual2 = vertexList.ElementAt(0).ConnectionList.ElementAt(3).Weight;
-            var actual3 = vertexList.ElementAt(0).ConnectionList.ElementAt(3).SecondLocation;
+            var actual1 = vertexList.ElementAt(0).connectionList.ElementAt(3).firstLocation;
+            var actual2 = vertexList.ElementAt(0).connectionList.ElementAt(3).weight;
+            var actual3 = vertexList.ElementAt(0).connectionList.ElementAt(3).secondLocation;
 
-            var expected1 = edge.FirstLocation;
-            var expected2 = edge.Weight;
-            var expected3 = edge.SecondLocation;
+            var expected1 = edge.firstLocation;
+            var expected2 = edge.weight;
+            var expected3 = edge.secondLocation;
 
             Assert.AreEqual(expected1, actual1);
             Assert.AreEqual(expected2, actual2);
@@ -467,9 +467,9 @@ namespace UnitTest
             var expected2 = 1;
             var expected3 = "Aarhus";
 
-            var actual1 = e.FirstLocation;
-            var actual2 = e.Weight;
-            var actual3 = e.SecondLocation;
+            var actual1 = e.firstLocation;
+            var actual2 = e.weight;
+            var actual3 = e.secondLocation;
 
             Assert.AreEqual(expected1, actual1);
             Assert.AreEqual(expected2, actual2);
@@ -502,9 +502,9 @@ namespace UnitTest
             var expected_xCoordinate_0 = 0;
             var expected_yCoordinate_0 = 0;
 
-            var actual_address_0 = testGraph.VertexList.ElementAt(0).Address;
-            var actual_xCoordinate_0 = testGraph.VertexList.ElementAt(0).XCoordinate;
-            var actual_yCoordinate_0 = testGraph.VertexList.ElementAt(0).YCoordinate;
+            var actual_address_0 = testGraph.vertexList.ElementAt(0).address;
+            var actual_xCoordinate_0 = testGraph.vertexList.ElementAt(0).xCoordinate;
+            var actual_yCoordinate_0 = testGraph.vertexList.ElementAt(0).yCoordinate;
 
             Assert.AreEqual(expected_address_0, actual_address_0);
             Assert.AreEqual(expected_xCoordinate_0, actual_xCoordinate_0);
