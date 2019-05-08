@@ -76,21 +76,21 @@ namespace Hungarian
                     cost[column, row] = double.NegativeInfinity;
                 }
             }
-            
+
+
             for (int row = 0; row < NumberOfRows; row++)
             {
-                double minRow = double.PositiveInfinity;
-                double minColumn = double.PositiveInfinity;
-               
                 for (int column = 0; column < NumberOfColumns; column++)
                 {
+                    double minRow = double.PositiveInfinity;
+                    double minColumn = double.PositiveInfinity;
                     if (Matrix[column, row] == 0)
                     {
                         int columnIndex = column; // c1
                         int rowIndex = row;       // r0
                         for (int columnCost = 0; columnCost < NumberOfColumns; columnCost++)
                         {
-                            if (columnIndex != columnCost && Matrix[columnCost, rowIndex] < minRow && Matrix[columnCost, rowIndex] != double.PositiveInfinity)
+                            if (columnIndex != columnCost && Matrix[columnCost, rowIndex] < minRow && !double.IsPositiveInfinity(Matrix[columnCost, rowIndex]))
                             {
                                 minRow = Matrix[columnCost, rowIndex]; // 0
                             }
@@ -98,7 +98,7 @@ namespace Hungarian
 
                         for (int rowCost = 0; rowCost < NumberOfRows; rowCost++)
                         {
-                            if (rowIndex != rowCost && Matrix[columnIndex, rowCost] < minColumn && Matrix[columnIndex, rowCost] != double.PositiveInfinity)
+                            if (rowIndex != rowCost && Matrix[columnIndex, rowCost] < minColumn && !double.IsPositiveInfinity(Matrix[columnIndex, rowCost]))
                             {
                                 minColumn = Matrix[columnIndex, rowCost]; // 6
                             }
@@ -119,7 +119,7 @@ namespace Hungarian
                             cost[columnIndex, rowIndex] = Double.NegativeInfinity;
                         }
                         */
-                        cost[columnIndex, rowIndex] = minRow + minColumn; // [c1,r0] = 0 + 6                        
+                        cost[columnIndex, rowIndex] = minRow + minColumn; // [c1,r0] = 0 + 6 
                     }
                 }
             }
