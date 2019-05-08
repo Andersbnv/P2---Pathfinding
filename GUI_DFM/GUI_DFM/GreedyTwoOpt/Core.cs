@@ -10,50 +10,46 @@ namespace GUI_DFM.GreedyTwoOpt
 {
     public class Core : IRouteAlgorithm
     {
-        private Tour Cycle { get; set; }
-        private Tour compareCycle;
-        private List<Tour> _currentSubPaths;
-        private Stopwatch _runtime = new Stopwatch();
-        // arv fra IRouteAlgorithm
-        public Core()
-        {
-            _runtime.Start();
-        }
+        private Tour Tour { get; set; }
+        private Tour _currentImproveTour;
+        private readonly Stopwatch _runtime = new Stopwatch();
+        private List<Vertex> _vertices;
 
-        public List<Vertex> Algorithm(Vertex startingPoint, List<Vertex> unsortedList)
+        public List<Vertex> Algorithm(Vertex startingPoint, List<Vertex> vertices)
         {
-            NearestNeighbor(unsortedList, unsortedList.IndexOf(startingPoint));
-            //Console.WriteLine("NN: -> " + Cycle.TotalWeight +" Time: " + _runtime.Elapsed); // Kald kun TwoOpt, hvis der minimum 4 punkter
-            Cycle.TwoOpt();
-            //Console.WriteLine("2Opt: -> " + Cycle.TotalWeight + " Time: " + _runtime.Elapsed);
-            compareCycle = new Tour(Cycle);
+            _runtime.Restart();
+            _vertices = vertices;
+
+            NearestNeighbor(vertices.IndexOf(startingPoint));
+            Tour.TwoOpt();
             Improve();
             _runtime.Stop();
-            //Console.WriteLine("Improve: -> " + Cycle.TotalWeight + " Time: " + _runtime.Elapsed);
 
-            return ReturnMethod(unsortedList); // fix
+            return ReturnMethod(_vertices, Array.IndexOf(Tour.IndexRoute, _vertices.IndexOf(startingPoint)));
         }
 
-        private List<Vertex> ReturnMethod(List<Vertex> inputList)
+        private List<Vertex> ReturnMethod(List<Vertex> inputList, int startingpoint)
         {
             var returnList = new List<Vertex>();
-            foreach (var item in Cycle.IndexRoute)
+            for (int i = startingpoint; i < inputList.Count; i++)
             {
-                returnList.Add(inputList[item]);
+                returnList.Add(inputList[Tour.IndexRoute[i]]);
+            }
+            for (int i = 0; i < startingpoint; i++)
+            {
+                returnList.Add(inputList[Tour.IndexRoute[i]]);
             }
             return returnList;
         }
 
-        private void NearestNeighbor(List<Vertex> inputList, int startingPointIndex)
+        private void NearestNeighbor(int startingPointIndex)
         {
-
-            var outputList = new List<Vertex> { inputList[startingPointIndex] };
-            var tempList = new List<Vertex>();
-            tempList.AddRange(inputList);
+            var outputList = new List<Vertex> { _vertices[startingPointIndex] };
+            var tempList = new List<Vertex>(_vertices);
             tempList.Remove(outputList.First());
-            var count = tempList.Count;
 
-            for (var i = 0; i < count; i++)
+            var count = tempList.Count;
+            for (int i = 0; i < count; i++)
             {
                 tempList.Sort
                 (
@@ -62,72 +58,60 @@ namespace GUI_DFM.GreedyTwoOpt
                 outputList.Add(tempList.First());
                 tempList.RemoveAt(0);
             }
-            Cycle = new Tour(outputList);
+            Tour = new Tour(outputList);
         }
-
 
         private void Improve()
         {
             Random number = new Random();
-            _currentSubPaths = Cycle.DivideIntoSubpaths(10);
+            _currentImproveTour = new Tour(Tour);
 
-            while (_runtime.ElapsedMilliseconds < 1000)
+            while (_runtime.ElapsedMilliseconds < 11500)
             {
-                if (number.Next(99) < 10)
+                if (number.Next(100) > 15)
                 {
-                    RandomStrat();
+                    GreedyStrat();
                 }
                 else
                 {
-                    GreedyStrat();
+                    RandomStrat();
                 }
             }
         }
 
         private void GreedyStrat()
         {
-            var m = _currentSubPaths.Max(x => x.Weight);
-            int worstSubPathIndex = _currentSubPaths.FindIndex(x => x.Weight == m);
-            var worstSubPath = _currentSubPaths[worstSubPathIndex];
+            var oldPath = _currentImproveTour.Weight;
+            _currentImproveTour.TwoOpt();
+            _currentImproveTour.WeightUpdate();
 
-            var oldPath = worstSubPath.Weight; //skal have lavet så det ikker det samme hvergang
-            worstSubPath.TwoOpt();
-            worstSubPath.WeightDelegate();
-            if (worstSubPath.Weight < oldPath)
+            if (_currentImproveTour.Weight < oldPath)
             {
                 Replace();
             }
-
         }
 
-        public void RandomStrat()
+        private void RandomStrat()
         {
             Random number = new Random();
 
+            _currentImproveTour.WeightUpdate();
+            var oldPath = _currentImproveTour.Weight;
+            _currentImproveTour.IndexRoute = _currentImproveTour.IndexRoute.OrderBy(x => number.Next()).ToArray();
 
-            var randomTour = _currentSubPaths[number.Next(_currentSubPaths.Count - 1)];
-            randomTour.WeightDelegate();
-            var oldPath = randomTour.Weight;
-
-            randomTour.IndexRoute = randomTour.IndexRoute.OrderBy(x => number.Next()).ToArray();
-            randomTour.WeightDelegate();
+            _currentImproveTour.WeightUpdate();
+            if (oldPath > _currentImproveTour.Weight)
+            {
+                Replace();
+            }
         }
 
-        public void Replace()
+        private void Replace()
         {
-            for (int tour = 0; tour < _currentSubPaths.Count; tour++)
+            if (_currentImproveTour.TotalWeight < Tour.TotalWeight)
             {
-                for (int index = 0; index < _currentSubPaths[tour].IndexRoute.Length; index++)
-                {
-                    compareCycle.IndexRoute[tour * _currentSubPaths[tour].IndexRoute.Length + index] = _currentSubPaths[tour].IndexRoute[index];
-                }
-            }
-            compareCycle.WeightDelegate();
-
-            if (compareCycle.TotalWeight < Cycle.TotalWeight)
-            {
-                Cycle.IndexRoute = compareCycle.IndexRoute.Select(v => v).ToArray();
-                Cycle.WeightDelegate();
+                Tour.IndexRoute = _currentImproveTour.IndexRoute.Select(v => v).ToArray();
+                Tour.WeightUpdate();
             }
         }
     }
