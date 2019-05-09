@@ -53,6 +53,7 @@ namespace GUI_DFM.GreedyTwoOpt
                 outputList.Add(tempList.First());
                 tempList.RemoveAt(0);
             }
+            _vertices = outputList;
             Tour = new Tour(outputList);
         }
         private void Improve()

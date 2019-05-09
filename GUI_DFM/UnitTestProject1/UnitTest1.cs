@@ -475,18 +475,6 @@ namespace UnitTest
             Assert.AreEqual(expected2, actual2);
             Assert.AreEqual(expected3, actual3);
         }
-        
-        [TestMethod]
-        public void ToStringTest()
-        {
-            Edge e = new Edge("Aalborg", 1, "Aarhus");
-
-            var expected = "from: Aalborg weight: 1 to: Aarhus";
-            var actual = e.ToString();
-
-            Assert.AreEqual(expected, actual);
-        }
-
     
     }
     [TestClass]
@@ -495,7 +483,7 @@ namespace UnitTest
         [TestMethod]
         public void GraphConstructorTest()
         {
-            string filePath = @"..\..\..\GUI_DFM\test.txt";
+            string filePath = @"..\..\..\GUI_DFM\addresses.txt";
             Graph testGraph = new Graph(filePath);
 
             var expected_address_0 = "Aalborg";
@@ -594,38 +582,6 @@ namespace UnitTest
     public class Greedy2OptimizationAlgorithmTest
     {
         [TestMethod]
-        public void NearestNeighborTest()
-        {
-            Vertex Test1 = new Vertex("Aalborg", 1, 2);
-            Vertex Test2 = new Vertex("Aarhus", 2, 1);
-            Vertex Test3 = new Vertex("Koebenhavn", 10, 20);
-            int startingPointIndex = 0;
-
-            var unsortedList = new List<Vertex> { };
-            unsortedList.Add(Test2);
-            unsortedList.Add(Test1);
-            unsortedList.Add(Test3);
-            
-
-            var outputlist = new List<Vertex> { unsortedList[startingPointIndex] };
-            var expectedlist = new List<Vertex> { };
-            expectedlist.Add(Test1);
-            expectedlist.Add(Test2);
-            expectedlist.Add(Test3);
-
-            GreedyTwoOpt c = new GreedyTwoOpt();
-
-            var expected1 = expectedlist[0];
-            var expected2 = expectedlist[1];
-            var expected3 = expectedlist[2];
-            var actual = c.Algorithm(Test1,unsortedList);
-
-            Assert.AreEqual(expected1, actual[0]);
-            Assert.AreEqual(expected2, actual[1]);
-            Assert.AreEqual(expected3, actual[2]);
-        }
-
-        [TestMethod]
         public void TwoOptTest()
         {
             Vertex Test1 = new Vertex("Test1", 1, 2);
@@ -633,7 +589,8 @@ namespace UnitTest
             Vertex Test3 = new Vertex("Test3", 15, 20);
             Vertex Test4 = new Vertex("Test 4", 2, 4);
             Vertex Test5 = new Vertex("Test 5", 4, 2);
-            int startingPointIndex = 0;
+            Vertex Test6 = new Vertex("Test 6", 12, 8);
+            Vertex Test7 = new Vertex("Test 7", -10, 6);
 
             var unsortedList = new List<Vertex> { };
             unsortedList.Add(Test2);
@@ -641,24 +598,22 @@ namespace UnitTest
             unsortedList.Add(Test3);
             unsortedList.Add(Test4);
             unsortedList.Add(Test5);
+            unsortedList.Add(Test7);
+            unsortedList.Add(Test6);
 
-
-            var outputlist = new List<Vertex> { unsortedList[startingPointIndex] };
-            var expectedlist = new List<Vertex> { };
-            expectedlist.Add(Test1);
-            expectedlist.Add(Test2);
-            expectedlist.Add(Test5);
-            expectedlist.Add(Test3);
-            expectedlist.Add(Test4);
 
             GreedyTwoOpt c = new GreedyTwoOpt();
             var actual = c.Algorithm(Test1, unsortedList);
 
-            Assert.AreEqual(expectedlist[0], actual[0]);
-            Assert.AreEqual(expectedlist[1], actual[1]);
-            Assert.AreEqual(expectedlist[2], actual[2]);
-            Assert.AreEqual(expectedlist[3], actual[3]);
-            Assert.AreEqual(expectedlist[4], actual[4]);
+            var expectedOptimalWeight = 69.07;
+            double actualWeight = 0;
+            for (int i = 0; i < actual.Count - 1; i++)
+            {
+                actualWeight += actual[i].DistanceToVertex(actual[i + 1]);
+            }
+            actualWeight += actual.Last().DistanceToVertex(actual.First());
+
+            Assert.IsTrue(actualWeight < expectedOptimalWeight * 1.1);
         }
     }
         
