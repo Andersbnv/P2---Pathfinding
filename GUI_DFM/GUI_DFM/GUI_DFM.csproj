@@ -35,7 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>r_alph__256.ico</ApplicationIcon>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FontAwesome.WPF, Version=4.7.0.37774, Culture=neutral, PublicKeyToken=0758b07a11a4f466, processorArchitecture=MSIL">
@@ -65,7 +65,7 @@
     <Compile Include="Graph Objects\Edge.cs" />
     <Compile Include="Graph Objects\Graph.cs" />
     <Compile Include="Graph Objects\Vertex.cs" />
-    <Compile Include="GreedyTwoOpt\Core.cs" />
+    <Compile Include="GreedyTwoOpt\GreedyTwoOpt.cs" />
     <Compile Include="GreedyTwoOpt\Tour.cs" />
     <Compile Include="Route Sorting Algorithms\IRouteAlgorithm.cs" />
     <Compile Include="Route.cs" />
@@ -121,7 +121,10 @@
     <Resource Include="icons\up_48px.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="r_alph__256.ico" />
+    <Resource Include="icons\icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

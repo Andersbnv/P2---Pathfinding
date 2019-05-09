@@ -613,7 +613,7 @@ namespace UnitTest
             expectedlist.Add(Test2);
             expectedlist.Add(Test3);
 
-            Core c = new Core();
+            GreedyTwoOpt c = new GreedyTwoOpt();
 
             var expected1 = expectedlist[0];
             var expected2 = expectedlist[1];
@@ -651,7 +651,7 @@ namespace UnitTest
             expectedlist.Add(Test3);
             expectedlist.Add(Test4);
 
-            Core c = new Core();
+            GreedyTwoOpt c = new GreedyTwoOpt();
             var actual = c.Algorithm(Test1, unsortedList);
 
             Assert.AreEqual(expectedlist[0], actual[0]);

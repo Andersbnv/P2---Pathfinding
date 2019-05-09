@@ -14,7 +14,7 @@ namespace GUI_DFM
         {
             InitializeComponent();
             InitializeTimer();
-            string filePath = @"..\..\test.txt";
+            string filePath = @"..\..\addresses.txt";
             graph = new Graph(filePath);
             route = new Route(graph.vertexList, graph.vertexList.ElementAt(0));
             lstRoute.ItemsSource = route.routeList;
@@ -64,7 +64,7 @@ namespace GUI_DFM
         }
         private void BtnCalculateRoute_Click(object sender, RoutedEventArgs e)
         {
-            IRouteAlgorithm routeAlgorithm = new Core();
+            IRouteAlgorithm routeAlgorithm = new GreedyTwoOpt.GreedyTwoOpt();
             route.CalculateRoute(routeAlgorithm);
             lstRoute.ItemsSource = route.routeList;
         }

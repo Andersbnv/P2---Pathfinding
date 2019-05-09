@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace GUI_DFM.GreedyTwoOpt
 {
-    public class Core : IRouteAlgorithm
+    public class GreedyTwoOpt : IRouteAlgorithm
     {
         private Tour Tour { get; set; }
         private Tour _currentImproveTour;
