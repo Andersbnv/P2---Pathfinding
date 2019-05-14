@@ -62,15 +62,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AddPointValidation.cs" />
-    <Compile Include="Graph Objects\Edge.cs" />
+    <Compile Include="HandyMethods.cs" />
     <Compile Include="Graph Objects\Graph.cs" />
     <Compile Include="Graph Objects\Vertex.cs" />
-    <Compile Include="GreedyTwoOpt\GreedyTwoOpt.cs" />
-    <Compile Include="GreedyTwoOpt\Tour.cs" />
-    <Compile Include="Route Sorting Algorithms\IRouteAlgorithm.cs" />
+    <Compile Include="RouteAlgorithm\GreedyTwoOpt.cs" />
+    <Compile Include="RouteAlgorithm\AlgorithmTour.cs" />
+    <Compile Include="RouteAlgorithm\IRouteAlgorithm.cs" />
     <Compile Include="Route.cs" />
-    <Compile Include="Route Sorting Algorithms\NearestNeightbour.cs" />
-    <Compile Include="Route Sorting Algorithms\RouteAlgorithm.cs" />
     <Compile Include="Timer.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -126,5 +124,6 @@
   <ItemGroup>
     <Resource Include="icon.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

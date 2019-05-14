@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GUI_DFM.Route_Sorting_Algorithms
+namespace GUI_DFM
 {
     public interface IRouteAlgorithm
     {

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System;
 using System.Linq;
 using System.IO;
 
@@ -6,22 +7,18 @@ namespace GUI_DFM
 {
     public class Graph
     {
-        public List<Vertex> vertexList = new List<Vertex>();
-        public List<Edge> edgeList = new List<Edge>();
-        public Graph(string filePath)
+        public double[,] weightMatrix;
+        public double Weight { get; protected set; }  // Weight from start to finish.
+        protected void InitializeWeightMatrix(List<Vertex> Vertices)
         {
-            List<string> fileLines = File.ReadAllLines(filePath).ToList();
-            foreach (string line in fileLines)
+            int rowLength = weightMatrix.GetLength(0);
+            int columnLength = weightMatrix.GetLength(1);
+            for (int row = 0; row < rowLength; row++)
             {
-                string[] lineElements = line.Split(',');
-                vertexList.Add(new Vertex((lineElements)[0], double.Parse(lineElements[1]), double.Parse(lineElements[2])));
-            }
-            foreach (Vertex vertex in vertexList)
-            {
-                vertex.InitializeConnectionList(vertexList);
-                foreach (Edge edge in vertex.connectionList)
+                for (int column = 0; column < columnLength; column++)
                 {
-                    edgeList.Add(edge);
+                    weightMatrix[row, column] = row != column ?
+                        Vertices[row].DistanceToVertex(Vertices[column]) : Double.PositiveInfinity;
                 }
             }
         }

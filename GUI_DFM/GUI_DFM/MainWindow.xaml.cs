@@ -1,22 +1,19 @@
 ﻿using System.Linq;
 using System.Windows;
+using System.Collections.Generic;
 using System.Windows.Controls;
-using GUI_DFM.Route_Sorting_Algorithms;
-using GUI_DFM.GreedyTwoOpt;
 
 namespace GUI_DFM
 {
     public partial class MainWindow : Window
     {
-        public Graph graph;
         public Route route;
         public MainWindow()
         {
             InitializeComponent();
             InitializeTimer();
-            string filePath = @"..\..\addresses.txt";
-            graph = new Graph(filePath);
-            route = new Route(graph.vertexList, graph.vertexList.ElementAt(0));
+            List<Vertex> vertexList = HandyMethods.FileToVertexList(@"..\..\addresses.txt");
+            route = new Route(vertexList, vertexList.ElementAt(0));
             lstRoute.ItemsSource = route.routeList;
         }
         private void UpdateListBox()
@@ -64,7 +61,7 @@ namespace GUI_DFM
         }
         private void BtnCalculateRoute_Click(object sender, RoutedEventArgs e)
         {
-            IRouteAlgorithm routeAlgorithm = new GreedyTwoOpt.GreedyTwoOpt();
+            IRouteAlgorithm routeAlgorithm = new GreedyTwoOpt();
             route.CalculateRoute(routeAlgorithm);
             lstRoute.ItemsSource = route.routeList;
         }

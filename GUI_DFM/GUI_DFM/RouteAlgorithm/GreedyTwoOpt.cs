@@ -1,15 +1,14 @@
-﻿using GUI_DFM.Route_Sorting_Algorithms;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-namespace GUI_DFM.GreedyTwoOpt
+namespace GUI_DFM
 {
     public class GreedyTwoOpt : IRouteAlgorithm
     {
-        private Tour Tour { get; set; }
-        private Tour _currentImproveTour;
+        private AlgorithmTour Tour { get; set; }
+        private AlgorithmTour _currentImproveTour;
         private readonly Stopwatch _runtime = new Stopwatch();
         private List<Vertex> _vertices;
         public List<Vertex> Algorithm(Vertex startingPoint, List<Vertex> vertices)
@@ -53,12 +52,12 @@ namespace GUI_DFM.GreedyTwoOpt
                 outputList.Add(tempList.First());
                 tempList.RemoveAt(0);
             }
-            Tour = new Tour(outputList);
+            Tour = new AlgorithmTour(outputList);
         }
         private void Improve()
         {
             Random number = new Random();
-            _currentImproveTour = new Tour(Tour);
+            _currentImproveTour = new AlgorithmTour(Tour);
 
             while (_runtime.ElapsedMilliseconds < 11500)
             {

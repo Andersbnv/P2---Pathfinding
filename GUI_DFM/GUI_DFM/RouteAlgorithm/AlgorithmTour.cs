@@ -2,30 +2,28 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace GUI_DFM.GreedyTwoOpt
+namespace GUI_DFM
 {
-    public class Tour
-    {
-        public double[,] weightMatrix;
+    public class AlgorithmTour : Graph
+    {   
         public int[] indexRoute;
-        public delegate void weightDelegate();
-        public weightDelegate WeightUpdate;
-        public double Weight { get; private set; }  // Weight from start to finish.
         public double TotalWeight                   // Weight from start and back to start.
         {
             get => Weight + weightMatrix[indexRoute[indexRoute.Length - 1], indexRoute[0]];
         }
-        public Tour(List<Vertex> inputList)
+        public delegate void weightDelegate();
+        public weightDelegate WeightUpdate;
+        public AlgorithmTour(List<Vertex> inputList)
         {
             var count = inputList.Count;
             weightMatrix = new double[count, count];
-            InitializeWeightMatrix(inputList);
+            base.InitializeWeightMatrix(inputList);
             indexRoute = new int[count];
             indexRoute = Enumerable.Range(0, count).ToArray();
             WeightUpdate += IndexRouteWeight;
             WeightUpdate();
         }
-        public Tour(Tour input)
+        public AlgorithmTour(AlgorithmTour input)
         {
 
             indexRoute = input.indexRoute.Select(x => x).ToArray();
@@ -33,19 +31,6 @@ namespace GUI_DFM.GreedyTwoOpt
 
             WeightUpdate += IndexRouteWeight;
             WeightUpdate();
-        }
-        private void InitializeWeightMatrix(List<Vertex> Vertices)
-        {
-            int rowLength = weightMatrix.GetLength(0);
-            int columnLength = weightMatrix.GetLength(1);
-            for (int row = 0; row < rowLength; row++)
-            {
-                for (int column = 0; column < columnLength; column++)
-                {
-                    weightMatrix[row, column] = row != column ?
-                        Vertices[row].DistanceToVertex(Vertices[column]) : Double.PositiveInfinity;
-                }
-            }
         }
         private void IndexRouteWeight()
         {
