@@ -5,9 +5,9 @@ Name: Routeoptimization for Danske Fragtmænd
 
 Version: 1.0
 
-Desciption: This program solves the Traveling Salesman Problem using a customized algorithm called greedy 2-opt. The algorithm finds a solution to 0.00005% of the optimal, in a given set of 38 destinations. The algorithm is hard-coded to only run 12 seconds, but the user is able to change this in the source code.   
+Desciption: This program finds a solution to the Traveling Salesman Problem using a customized algorithm called greedy 2-opt. The algorithm finds a solution with a diviation of 0.0005% from the optimal solution, given the test set DJ_38 containing 38 destinations. The algorithm is hard-coded to only run 12 seconds, but the user is able to change this in the source code.   
 
-Features: The program executes a interactable UI. The interface has the options to create new locations, delete locations, move locations and calculate a route. The algorithm to calculate the route uses a interface implementation, so its easy to change. The program is able to read all comma seperated files, with list of locations in EUC-2D. 
+Features: The program executes a interactive UI. The interface has the options: create new location, delete location, move location and calculate route. The algorithm to calculate the route uses an interface implementation, making it easy to replace. The program is able to read all comma seperated files, with list of locations in EUC-2D. 
 
 System reqiurements: Able to run a .Net solution in Visual Studio. 
 
