@@ -1,6 +1,8 @@
 # P2---Pathfinding
 P2 projekt - B2-28
+
 Name: Routeoptimization for Danske Fragtmænd
+
 Version: 1.0
 
 Desciption: This program solves the Traveling Salesman Problem using a customized algorithm called greedy 2-opt. The algorithm finds an approximate solution given a set of 33 destinations, which is Danske Fragtmænd's maximum truck capacity.  
