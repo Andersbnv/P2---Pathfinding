@@ -1,0 +1,5 @@
+﻿Aalborg,1,5
+Esbjerg,5,7
+Frederikshavn,7,9
+Herning,3,10
+Tilst,9,33
