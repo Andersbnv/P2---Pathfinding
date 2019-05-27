@@ -25,7 +25,7 @@ Files:
        
        \GUI_DFM\GUI_DFM\RouteAlgoritmh - Contains the cs files for the main algorithm including the IRouteAlgorithm interface
        
-Known bugs: If the same location occurs twice in the readfile or a duplicate location is created in the program, the TwoOptAlgorithm enters an infinite loop. 
+Known bugs: If the same location occurs twice in the readfile or a duplicate location is created in the program, the TwoOptAlgorithm enters an infinite loop and it wont be able to calculate the route. If this happens close the program and run it again. 
 
 
 
