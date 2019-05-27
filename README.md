@@ -21,7 +21,7 @@ Files:
        
        \GUI_DFM\GUI_DFM\bin\Debug - Contains the .exe file for running the program
        
-       \GUI_DFM\GUI_DFM\addresses.txt - contains text file with locations and points
+       \GUI_DFM\GUI_DFM\addresses.txt - Contains text file with locations and points
        
        \GUI_DFM\GUI_DFM\RouteAlgoritmh - Contains the cs files for the main algorithm including the IRouteAlgorithm interface
        
