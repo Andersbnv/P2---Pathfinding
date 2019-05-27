@@ -9,7 +9,7 @@ Desciption: This program finds a solution to the Traveling Salesman Problem usin
 
 Features: The program executes a interactive UI. The userinterface has the options: create new location, delete location, move location and calculate route. The algorithm to calculate the route uses an interface implementation, making it easy to replace. The program is able to read all comma seperated files, with list of locations in EUC-2D. 
 
-System reqiurements: Able to run a .NET Framework in Visual Studio. 
+System reqiurements: Able to run a .NET Framework. 
 
 Install: go to P2---Pathfinding-GUI-OPTIMIZED\GUI_DFM, and open the solution "GUI_DFM.sln" in Visual Studio, thereafter run the program. 
 
@@ -18,6 +18,8 @@ Files:
        \GUI_DFM - Contains the solution, unittest and packages
 
        \GUI_DFM\GUI_DFM - Contains folders for classes, and various classes
+       
+       \GUI_DFM\GUI_DFM\bin\Debug - Contains the .exe file for running the program
        
        \GUI_DFM\GUI_DFM\addresses.txt - contains text file with locations and points
        
