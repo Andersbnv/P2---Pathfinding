@@ -52,6 +52,7 @@ namespace GUI_DFM
                 outputList.Add(tempList.First());
                 tempList.RemoveAt(0);
             }
+            _vertices = outputList;
             Tour = new AlgorithmTour(outputList);
         }
         private void Improve()
@@ -61,19 +62,19 @@ namespace GUI_DFM
 
             while (_runtime.ElapsedMilliseconds < 11500)
             {
-                if (number.Next(100) > 15)
+                if (number.Next(99) >= 60)
                 {
-                    GreedyStrat();
+                    RandomStrat();
                 }
                 else
                 {
-                    RandomStrat();
+                    GreedyStrat();
                 }
             }
         }
         private void GreedyStrat()
         {
-            var oldPath = _currentImproveTour.Weight;
+            var oldPath = Tour.Weight;
             _currentImproveTour.TwoOpt();
             _currentImproveTour.WeightUpdate();
 
@@ -85,16 +86,7 @@ namespace GUI_DFM
         private void RandomStrat()
         {
             Random number = new Random();
-
-            _currentImproveTour.WeightUpdate();
-            var oldPath = _currentImproveTour.Weight;
             _currentImproveTour.indexRoute = _currentImproveTour.indexRoute.OrderBy(x => number.Next()).ToArray();
-
-            _currentImproveTour.WeightUpdate();
-            if (oldPath > _currentImproveTour.Weight)
-            {
-                Replace();
-            }
         }
         private void Replace()
         {

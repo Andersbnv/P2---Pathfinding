@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace GUI_DFM
 {
-    static class HandyMethods
+    public static class HandyMethods
     {
-        public static List<string> ReadFile(string filePath)
+        public static List<string> ReadFile(this string filePath)
         {
             return File.ReadAllLines(filePath).ToList();
         }
-        public static List<Vertex> FileToVertexList(string filePath)
+        public static List<Vertex> FileToVertexList(this string filePath)
         {
-            List<string> fileLines = ReadFile(filePath);
+            List<string> fileLines = filePath.ReadFile();
             List<Vertex> vertexList = new List<Vertex>();
             foreach (string line in fileLines)
             {

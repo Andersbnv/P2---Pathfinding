@@ -1,0 +1,2 @@
+﻿Aalborg,1,2
+Esbjerg,3,4

@@ -252,9 +252,42 @@ namespace UnitTest
         }
     }
     [TestClass]
-    public class RouteAlgorithmTest
+    public class HandyMethodsTest
     {
-      
+        [TestMethod]
+        public void ReadFileTest()
+        {
+            string filePath = @"..\..\HandyMethodsTestFile.txt";
+            List<string> fileLines = filePath.ReadFile();
+
+            string expected1 = "Aalborg,1,2";
+            string expected2 = "Esbjerg,3,4";
+
+            string actual1 = fileLines[0];
+            string actual2 = fileLines[1];
+
+            Assert.AreEqual(expected1, actual1);
+            Assert.AreEqual(expected2, actual2);
+        }
+
+        [TestMethod]
+        public void FileToVertexListTest()
+        {
+            string filePath = @"..\..\HandyMethodsTestFile.txt";
+            List<Vertex> vertexList = filePath.FileToVertexList();
+
+            string expected1 = "Aalborg";
+            string expected2 = "Esbjerg";
+
+            string actual1 = vertexList[0].address;
+            string actual2 = vertexList[1].address;
+
+            Assert.AreEqual(expected1, actual1);
+            Assert.AreEqual(expected2, actual2);
+        }
+
+        
+        
     }
     [TestClass]
     public class VertexTest
@@ -329,10 +362,6 @@ namespace UnitTest
 
             Assert.AreEqual(expected, actual);
         }
-    }
-    [TestClass]
-    public class GraphTest
-    {
     }
     [TestClass]
     public class AddPointValidationTest
