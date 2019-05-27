@@ -3,8 +3,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using GUI_DFM;
 using System.Collections.Generic;
 using System.Linq;
-using GUI_DFM.GreedyTwoOpt;
-using GUI_DFM.Route_Sorting_Algorithms;
 
 namespace UnitTest
 {
@@ -252,107 +250,11 @@ namespace UnitTest
             Assert.AreEqual(expected_1, actual_1);
             Assert.AreEqual(expected_2, actual_2);
         }
-        [TestMethod]
-        public void CalculateRouteTest()
-        {
-            Vertex testVertex0 = new Vertex("Adress0", 3, 4);
-            Vertex testVertex1 = new Vertex("Adress1", 8, 6);
-            Vertex testVertex2 = new Vertex("Adress2", 7, 9);
-            Vertex testVertex3 = new Vertex("Adress3", 1, 9);
-            Vertex testVertex4 = new Vertex("Adress4", 5, 2);
-            Vertex testVertex5 = new Vertex("Adress5", 2, 4);
-            Vertex testVertex6 = new Vertex("Adress6", 3, 3);
-            Vertex testVertex7 = new Vertex("Adress7", 8, 7);
-            Vertex testVertex8 = new Vertex("Adress8", 8, 6);
-            Vertex testVertex9 = new Vertex("Adress9", 4, 9);          
-
-            List<Vertex> testList = new List<Vertex>
-            {
-                testVertex0,
-                testVertex1,
-                testVertex2,
-                testVertex3,
-                testVertex4,
-                testVertex5,
-                testVertex6,
-                testVertex7,
-                testVertex8,
-                testVertex9
-            };
-            Route route_0 = new Route(testList, testList.ElementAt(0));
-            Route route_1 = new Route(testList, testList.ElementAt(0));
-            IRouteAlgorithm testAlgorithm = new NearestNeighbour();
-            route_0.routeList = testAlgorithm.Algorithm(testList.ElementAt(0), route_0.routeList);
-            route_1.CalculateRoute(testAlgorithm);
-
-            var expected_0 = route_0.routeList.ElementAt(0);
-            var expected_1 = route_0.routeList.ElementAt(1);
-            var expected_2 = route_0.routeList.ElementAt(2);
-            var expected_3 = route_0.routeList.ElementAt(3);
-            var expected_4 = route_0.routeList.ElementAt(4);
-            var expected_5 = route_0.routeList.ElementAt(5);
-            var expected_6 = route_0.routeList.ElementAt(6);
-            var expected_7 = route_0.routeList.ElementAt(7);
-            var expected_8 = route_0.routeList.ElementAt(8);
-            var expected_9 = route_0.routeList.ElementAt(9);            
-
-            var actual_0 = route_1.routeList.ElementAt(0);
-            var actual_1 = route_1.routeList.ElementAt(1);
-            var actual_2 = route_1.routeList.ElementAt(2);
-            var actual_3 = route_1.routeList.ElementAt(3);
-            var actual_4 = route_1.routeList.ElementAt(4);
-            var actual_5 = route_1.routeList.ElementAt(5);
-            var actual_6 = route_1.routeList.ElementAt(6);
-            var actual_7 = route_1.routeList.ElementAt(7);
-            var actual_8 = route_1.routeList.ElementAt(8);
-            var actual_9 = route_1.routeList.ElementAt(9);
-
-            Assert.AreEqual(expected_0, actual_0);
-            Assert.AreEqual(expected_1, actual_1);
-            Assert.AreEqual(expected_2, actual_2);
-            Assert.AreEqual(expected_3, actual_3);
-            Assert.AreEqual(expected_4, actual_4);
-            Assert.AreEqual(expected_5, actual_5);
-            Assert.AreEqual(expected_6, actual_6);
-            Assert.AreEqual(expected_7, actual_7);
-            Assert.AreEqual(expected_8, actual_8);
-            Assert.AreEqual(expected_9, actual_9);
-        }
     }
     [TestClass]
     public class RouteAlgorithmTest
     {
-        [TestMethod]
-        public void ListToMatrixTest()
-        {
-            List<Vertex> testList = new List<Vertex>
-            {
-                new Vertex("Adress1", 3, 4),
-                new Vertex("Adress2", 6, 8),
-                new Vertex("Adress3", 9, 12)
-            };
-            for (int i = 0; i < testList.Count; i++)
-            {
-                testList[i].connectionList = new List<Edge>
-                {
-                    new Edge(testList[i].address, i*5, "Adress1"),
-                    new Edge(testList[i].address, i==1 ? 0 : 5, "Adress2"),
-                    new Edge(testList[i].address, 10-5*i, "Adress3")
-                };
-            }
-            RouteAlgorithm testAlgorithm = new NearestNeighbour();
-            double[,] actual = testAlgorithm.ListToMatrix(testList);
-
-            double[,] expected = new double[3, 3]
-            {
-                { Double.PositiveInfinity, 5, 10 },
-                { 5, Double.PositiveInfinity, 5 },
-                { 10, 5, Double.PositiveInfinity }
-            };
-
-            CollectionAssert.AreEqual(expected, actual);
-
-        }
+      
     }
     [TestClass]
     public class VertexTest
@@ -427,90 +329,10 @@ namespace UnitTest
 
             Assert.AreEqual(expected, actual);
         }
-        [TestMethod]
-        public void InitializeConnectionListTest()
-        {
-            List<Vertex> vertexList = new List<Vertex>
-            {
-                new Vertex("address1", 1, 2),
-                new Vertex("address2", 2, 3),
-                new Vertex("address3", 6, 5),
-                new Vertex("address4", 7, 5),
-                new Vertex("address5", 10, 5)
-            };
-            var edge = new Edge(vertexList[0].address, vertexList[0].DistanceToVertex(vertexList[3]), vertexList[3].address);
-            
-            vertexList[0].InitializeConnectionList(vertexList);
-            var actual1 = vertexList.ElementAt(0).connectionList.ElementAt(3).firstLocation;
-            var actual2 = vertexList.ElementAt(0).connectionList.ElementAt(3).weight;
-            var actual3 = vertexList.ElementAt(0).connectionList.ElementAt(3).secondLocation;
-
-            var expected1 = edge.firstLocation;
-            var expected2 = edge.weight;
-            var expected3 = edge.secondLocation;
-
-            Assert.AreEqual(expected1, actual1);
-            Assert.AreEqual(expected2, actual2);
-            Assert.AreEqual(expected3, actual3);
-        }
-
-    }
-    [TestClass]
-    public class EdgeTest
-    {
-        [TestMethod]
-        public void EdgeConstructorTest()
-        {
-            Edge e = new Edge("Aalborg", 1, "Aarhus");
-
-            var expected1 = "Aalborg";
-            var expected2 = 1;
-            var expected3 = "Aarhus";
-
-            var actual1 = e.firstLocation;
-            var actual2 = e.weight;
-            var actual3 = e.secondLocation;
-
-            Assert.AreEqual(expected1, actual1);
-            Assert.AreEqual(expected2, actual2);
-            Assert.AreEqual(expected3, actual3);
-        }
-        
-        [TestMethod]
-        public void ToStringTest()
-        {
-            Edge e = new Edge("Aalborg", 1, "Aarhus");
-
-            var expected = "from: Aalborg weight: 1 to: Aarhus";
-            var actual = e.ToString();
-
-            Assert.AreEqual(expected, actual);
-        }
-
-    
     }
     [TestClass]
     public class GraphTest
     {
-        [TestMethod]
-        public void GraphConstructorTest()
-        {
-            string filePath = @"..\..\..\GUI_DFM\test.txt";
-            Graph testGraph = new Graph(filePath);
-
-            var expected_address_0 = "Aalborg";
-            var expected_xCoordinate_0 = 0;
-            var expected_yCoordinate_0 = 0;
-
-            var actual_address_0 = testGraph.vertexList.ElementAt(0).address;
-            var actual_xCoordinate_0 = testGraph.vertexList.ElementAt(0).xCoordinate;
-            var actual_yCoordinate_0 = testGraph.vertexList.ElementAt(0).yCoordinate;
-
-            Assert.AreEqual(expected_address_0, actual_address_0);
-            Assert.AreEqual(expected_xCoordinate_0, actual_xCoordinate_0);
-            Assert.AreEqual(expected_yCoordinate_0, actual_yCoordinate_0);
-
-        }
     }
     [TestClass]
     public class AddPointValidationTest
@@ -594,38 +416,6 @@ namespace UnitTest
     public class Greedy2OptimizationAlgorithmTest
     {
         [TestMethod]
-        public void NearestNeighborTest()
-        {
-            Vertex Test1 = new Vertex("Aalborg", 1, 2);
-            Vertex Test2 = new Vertex("Aarhus", 2, 1);
-            Vertex Test3 = new Vertex("Koebenhavn", 10, 20);
-            int startingPointIndex = 0;
-
-            var unsortedList = new List<Vertex> { };
-            unsortedList.Add(Test2);
-            unsortedList.Add(Test1);
-            unsortedList.Add(Test3);
-            
-
-            var outputlist = new List<Vertex> { unsortedList[startingPointIndex] };
-            var expectedlist = new List<Vertex> { };
-            expectedlist.Add(Test1);
-            expectedlist.Add(Test2);
-            expectedlist.Add(Test3);
-
-            GreedyTwoOpt c = new GreedyTwoOpt();
-
-            var expected1 = expectedlist[0];
-            var expected2 = expectedlist[1];
-            var expected3 = expectedlist[2];
-            var actual = c.Algorithm(Test1,unsortedList);
-
-            Assert.AreEqual(expected1, actual[0]);
-            Assert.AreEqual(expected2, actual[1]);
-            Assert.AreEqual(expected3, actual[2]);
-        }
-
-        [TestMethod]
         public void TwoOptTest()
         {
             Vertex Test1 = new Vertex("Test1", 1, 2);
@@ -633,7 +423,8 @@ namespace UnitTest
             Vertex Test3 = new Vertex("Test3", 15, 20);
             Vertex Test4 = new Vertex("Test 4", 2, 4);
             Vertex Test5 = new Vertex("Test 5", 4, 2);
-            int startingPointIndex = 0;
+            Vertex Test6 = new Vertex("Test 6", 12, 8);
+            Vertex Test7 = new Vertex("Test 7", -10, 6);
 
             var unsortedList = new List<Vertex> { };
             unsortedList.Add(Test2);
@@ -641,25 +432,24 @@ namespace UnitTest
             unsortedList.Add(Test3);
             unsortedList.Add(Test4);
             unsortedList.Add(Test5);
+            unsortedList.Add(Test7);
+            unsortedList.Add(Test6);
 
-
-            var outputlist = new List<Vertex> { unsortedList[startingPointIndex] };
-            var expectedlist = new List<Vertex> { };
-            expectedlist.Add(Test1);
-            expectedlist.Add(Test2);
-            expectedlist.Add(Test5);
-            expectedlist.Add(Test3);
-            expectedlist.Add(Test4);
 
             GreedyTwoOpt c = new GreedyTwoOpt();
             var actual = c.Algorithm(Test1, unsortedList);
 
-            Assert.AreEqual(expectedlist[0], actual[0]);
-            Assert.AreEqual(expectedlist[1], actual[1]);
-            Assert.AreEqual(expectedlist[2], actual[2]);
-            Assert.AreEqual(expectedlist[3], actual[3]);
-            Assert.AreEqual(expectedlist[4], actual[4]);
+            var expectedOptimalWeight = 69.07;
+            double actualWeight = 0;
+            for (int i = 0; i < actual.Count - 1; i++)
+            {
+                actualWeight += actual[i].DistanceToVertex(actual[i + 1]);
+            }
+            actualWeight += actual.Last().DistanceToVertex(actual.First());
+
+            Assert.IsTrue(actualWeight < expectedOptimalWeight * 1.01);
         }
     }
-        
+
+
 }
