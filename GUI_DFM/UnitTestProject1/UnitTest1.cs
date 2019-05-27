@@ -269,8 +269,7 @@ namespace UnitTest
             Assert.AreEqual(expected1, actual1);
             Assert.AreEqual(expected2, actual2);
         }
-
-        [TestMethod]
+        
         public void FileToVertexListTest()
         {
             string filePath = @"..\..\HandyMethodsTestFile.txt";
