@@ -7,7 +7,7 @@ Version: 1.0
 
 Desciption: This program finds a solution to the Traveling Salesman Problem using a customized algorithm called greedy 2-opt. The algorithm finds a solution with a diviation of 0.0005% from the optimal solution, given the test set DJ_38 containing 38 destinations. The algorithm is hard-coded to only run 12 seconds, but the user is able to change this in the source code.   
 
-Features: The program executes a interactive UI. The userinterface has the options: create new location, delete location, move location and calculate route. The algorithm to calculate the route uses an interface implementation, making it easy to replace. The program is able to read all comma seperated files, with list of locations in EUC-2D. 
+Features: The program executes a interactive UI. The userinterface has the options: create new location, delete location, move location and calculate route. The algorithm to calculate the route uses an interface implementation, making it easy to replace. The program is able to read all comma seperated files, with list of locations in EUC-2D. The text file with locations should be placed in GUI_DFM\GUI_DFM 
 
 System reqiurements: Able to run a .NET Framework. 
 
