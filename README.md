@@ -13,7 +13,9 @@ System reqiurements: Able to run a .Net solution in Visual Studio.
 
 Install: go to P2---Pathfinding-GUI-OPTIMIZED\GUI_DFM, and open the solution "GUI_DFM.sln" in Visual Studio, thereafter run the program. 
 
-Files: \GUI_DFM - Contains the solution, unittest and packages
+Files: 
+       
+       \GUI_DFM - Contains the solution, unittest and packages
 
        \GUI_DFM\GUI_DFM - Contains folders for classes, and various classes
        
