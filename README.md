@@ -11,7 +11,7 @@ Features: The program executes a interactive UI. The userinterface has the optio
 
 System reqiurements: Able to run a .NET Framework. 
 
-Install: go to P2---Pathfinding-GUI-OPTIMIZED\GUI_DFM, and open the solution "GUI_DFM.sln" in Visual Studio, thereafter run the program. 
+Run: go to P2---Pathfinding-GUI-OPTIMIZED\GUI_DFM\GUI_DFM\bin\Debug, and run GUI_DFM.exe 
 
 Files: 
        
